@@ -1,0 +1,12 @@
+.MuiPaper-root{
+    padding: 0 !important;
+    padding-bottom: 1rem !important;
+}
+
+.react-swipeable-view-container > div[aria-hidden="false"] {
+    height: 100%;
+}
+
+.react-swipeable-view-container > div[aria-hidden="true"] {
+    height: 0;
+}

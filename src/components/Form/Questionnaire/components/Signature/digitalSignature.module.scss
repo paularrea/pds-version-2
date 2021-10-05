@@ -1,0 +1,26 @@
+.signature_container{
+  padding: 2rem 0;
+  h4{
+    padding: 0 !important;
+  }
+  .signature_canvas{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .canvas{
+      border: 2px solid #a7a7a7 !important;
+      border-radius: 10px !important;
+    }
+    .clear{
+      cursor: pointer;
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      img{
+        width: 26px;
+      }
+    }
+  }
+}

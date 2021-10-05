@@ -1,0 +1,114 @@
+.container{
+    .title{
+        margin: 0 0 1rem 2rem;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .close{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        img{
+            cursor: pointer;
+            width: 16px;
+        }
+    }
+    .container_detalle{
+        padding: 1rem 2rem;
+        .user_flex{
+            display: flex;
+            margin-bottom: 1rem;
+            justify-content: flex-start;
+            align-items: center;
+            img{
+                width: 24px;
+                height: 24px;
+            }
+            h3{
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 18.4px;
+                margin-left: 1rem;
+                max-width: 250px;
+            }
+        }
+        .phone_flex{
+            display: flex;
+            margin: 1rem 0;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #2E83F8;
+            padding: 15px 0;
+            max-width: 300px;
+            border-radius: 100px;
+            img{
+                margin-left: .5rem;
+                width: 40px;
+                height: auto;
+            }
+            h3{
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 18.4px;
+                margin-left: 1rem;
+                color: white;
+            }
+        }
+        .actions_container{
+            margin-bottom: 2rem;
+            h3{
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 21px; 
+            }
+            .flex_actions{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: .5rem;
+            .number{
+                background-color: #B5C2D2;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 24px;
+                height: 24px;
+                border-radius: 100px;
+                color: white;
+                font-size: 12px;
+                font-weight: 700;
+            }
+            p{
+                margin-left: 1rem;
+                color: black;
+                font-size: 14px;
+                font-weight: 400;
+            }
+        }
+        }
+        .form_button_container{
+            a{
+                margin-bottom: 2rem;
+            }
+            h3{
+            margin-top: 2rem;
+               font-size: 16px;
+               font-weight: 700;
+               line-height: 18.4px; 
+            }
+        }
+        .text{
+            h3{
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 18.4px; 
+                margin-bottom: 1rem;
+             }
+             p{
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 21px; 
+             }
+        }
+    }
+}

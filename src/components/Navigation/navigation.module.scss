@@ -1,0 +1,17 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    img{
+        width: 35px;
+        height: auto;
+    }
+    .logout{
+        cursor: pointer;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}

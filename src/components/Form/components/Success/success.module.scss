@@ -1,0 +1,36 @@
+.success_container{
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    img{
+        width: 86px;
+    }
+    h3{
+        width: 80%;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 25.2px;
+    }
+    p{
+        width: 80%;
+        line-height: 25.6px;
+        font-size: 16px;
+    }
+    .close{
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        img{
+            cursor: pointer;
+            width: 16px;
+        }
+    }
+}
