@@ -1,0 +1,102 @@
+.navbar{
+    position: relative;
+    .page{
+        padding: 2rem;
+        padding-left: 25rem;
+       height: 100vh;
+       overflow-y: scroll;
+    }
+    .logo{
+        position: absolute;
+        z-index: 999;
+        top: 2rem;
+        left: 40px;
+        img{
+            width: 40px;
+            height: auto;
+        }
+    }
+}
+.nav_menu{
+    padding-top: 12rem;
+    background-color: #F3F8FF;
+    border-right: 2px solid rgba(0, 87, 255, .2);
+    width: 352px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    position: fixed;
+    top: 0;
+}
+.nav_text{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    list-style: none;
+    a, button{
+        border-top: 2px solid #0057ff33;
+        width: 312px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 66px;
+        div{
+            width: 250px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+           p{
+            font-size: 16px;
+            color: #2E83F8;
+            } 
+            img{
+            width: auto;
+            height: 7px;
+            transform: rotate(90deg);
+            }
+        }
+        &:hover{
+            border-right: 2px solid #0057FF;
+            font-weight: 700;
+            background-color: rgba(0, 85, 255, 0.2);
+        }
+        button .logout{
+            width: 140px;
+            &:hover{
+                border-right: none !important;
+                font-weight: 700;
+                background-color: none !important;
+            }
+        }
+        .logout{
+            justify-content: flex-start;
+            p{
+                color: gray;
+                margin-right: 2rem;
+            }
+            img{
+                height:18px;
+                filter: grayscale(100%) opacity(80%);
+            }
+        }
+    }
+    button{
+        p{
+         color: gray;   
+        }
+    }
+}
+
+.nav_menu_items{
+    width: 100%;
+}
+.navbar-toggle{
+    background-color: red;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

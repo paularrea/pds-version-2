@@ -1,0 +1,29 @@
+input[type=text], input[type=button], button {
+    -webkit-appearance: none !important;
+}
+.form_container{
+    margin: 0 auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 380px;
+    height: 100vh;
+    img{
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+    }
+    .input{
+        margin: 0 auto;
+        margin-top: 2rem;
+        width: 80%;
+        max-width: 380px;
+    }
+    .recuperar{
+        margin: 1rem 0 3rem 0;
+        text-align: justify;
+    }
+}

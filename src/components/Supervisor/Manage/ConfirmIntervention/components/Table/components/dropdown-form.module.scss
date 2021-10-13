@@ -1,0 +1,59 @@
+.blue_button{
+    background-color: #4284F3;
+    border-radius: 50px;
+    color: white;
+    outline: none;
+    padding: .8rem 1.5rem;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    &:hover{
+        background-color: #4283f39b;
+        color: white;
+    }
+}
+
+.dropdown_container{
+    border-top: 1px solid #d8d8d8 !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    .child{
+        width: auto;
+        margin: 1rem;
+        h3{
+            margin-bottom: 1rem;
+        }
+    }
+}
+section{
+    .flex_child{
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: .8rem;
+        p{
+            padding: 0;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .user_logo{
+            width: 24px;
+            height: 24px;
+            margin: 0 1rem 0 0;
+        }
+        .info_logo{
+            width: 16px;
+            height: auto;
+            margin: 0 1rem 0 0;
+        }
+    }
+    .info_section{
+        max-width: 300px;
+        p{
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+}

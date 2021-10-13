@@ -1,0 +1,28 @@
+.container{ 
+    width: 100%;
+    height: calc(100vh - 4rem);
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+    div{
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        img{
+            width: 60px;
+            height: 60px;
+        }
+        h2{
+            margin: 2rem 0;
+        }
+        p{
+            width: 70%;
+            line-height: 25px;
+            margin-bottom: 2rem;
+        }
+    }
+}

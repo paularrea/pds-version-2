@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 .button{
     cursor: pointer;
     color: white;
@@ -16,3 +18,34 @@
         height: auto;
     }
 }  
+
+.input_container{
+    margin-bottom: 2rem;
+    position: relative;
+    .edit{
+        cursor: pointer;
+        color: $pds-blue;
+        position: absolute;
+        right: 0;
+        top: -1.2rem;
+    }
+}
+
+.delete_button{
+    margin: 0 auto;
+    color: $pds-red;
+    font-size: 16px;
+    cursor: pointer;
+    &:hover{
+        opacity: .7; 
+    }
+}
+
+@media (min-width: 900px) {
+    .input_container{
+        margin-bottom: 1rem;
+        .edit{
+            top: 0rem;
+        }
+    }
+}

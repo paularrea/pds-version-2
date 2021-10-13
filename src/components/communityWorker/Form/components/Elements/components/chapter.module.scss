@@ -1,0 +1,28 @@
+@import "../../../../../../styles/variables.scss";
+
+.flex_dropdown{
+    padding: 1rem 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100;
+    color: $pds-blue;
+    h3{
+        font-weight: 300;
+    }
+    .icon_hide{
+        img{
+            width: 12px;
+            height: auto;
+        }
+    }
+    .icon_show{
+        img{
+            width: 12px;
+            height: auto;
+        }
+        -webkit-transform: rotateX(180deg);
+        transform: rotateX(180deg);
+    }
+}

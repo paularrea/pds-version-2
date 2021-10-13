@@ -1,0 +1,21 @@
+@import "../../../../../../styles/variables.scss";
+
+.container{
+    span{
+        color: $gray-text;
+        }
+    padding: 4rem 7rem;
+    width: 40%;
+    min-width: 550px;
+    .patient_info{
+        h2, a, p{
+        margin: 1rem 0;
+        }
+        p{
+            line-height: 25px;
+        }
+    } 
+    .form{
+        margin: 1rem 0;
+    } 
+}

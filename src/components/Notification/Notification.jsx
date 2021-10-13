@@ -15,9 +15,17 @@ const Notification = (props) => {
       }}
     >
       <p>{props.children}</p>
-      <button className='link' type="button" onClick={() => props.onRemove(props.notification.order)}>
-        Ok, entendido
-      </button>
+      {props.response && (
+        <button
+          style={{ marginTop: ".5rem" }}
+          className="link"
+          type="button"
+          onClick={() => props.onRemove(props.notification.order)}
+        >
+          {props.response}
+        </button>
+      )}
+
       <div className={icon}>
         <img src={props.bgColor === "red" ? bell : alert} alt="" />
       </div>
