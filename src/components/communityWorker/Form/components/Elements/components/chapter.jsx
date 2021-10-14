@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {flex_dropdown, icon_hide, icon_show} from "./chapter.module.scss";
+import {flex_dropdown, icon_hide, icon_show, chapter_section} from "./chapter.module.scss";
 import hide from "../../../../../../images/icons/arrow-up.png";
 import show from  "../../../../../../images/icons/arrow-up.png";
 
@@ -27,7 +27,7 @@ const Chapter = ({ questions }) => {
           </div>
         )}
       </div>
-      {open && <section>{questions}</section>}
+      {open && <section className={chapter_section}>{questions}</section>}
     </>
   );
 };

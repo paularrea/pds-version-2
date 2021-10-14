@@ -21,15 +21,15 @@ import EditWorker from "../components/Supervisor/Manage/Agenda/components/EditWo
 import "../styles/App.scss";
 import { SupervisorContext } from "../SupervisorContext";
 import supervisorData from "../data/dynamicSupervisorData";
-// import { CommunityWorkerContext } from "../CommunityWorkerContext";
-// import communityWorkerData from "../data/dynamicPDSData";
+import { CommunityWorkerContext } from "../CommunityWorkerContext";
+import communityWorkerData from "../data/dynamicPDSData";
 
 const Routes = () => {
-  // const [pdsData, setPdsData] = useState();
+  const [pdsData, setPdsData] = useState();
   const [contextData, setContextData] = useState();
   useEffect(() => {
     setContextData(supervisorData);
-    // setPdsData(communityWorkerData);
+    setPdsData(communityWorkerData);
   }, []);
   return (
     <BrowserRouter>
@@ -93,6 +93,11 @@ const Routes = () => {
           <RouteWrapper
             path="/gestionar-agenda/nueva-intervencion"
             component={CreateIntervention}
+            layout={SupervisorNavigation}
+          />
+                 <RouteWrapper
+            path="/gestionar-agenda/create-form-success"
+            component={SuccessPage}
             layout={SupervisorNavigation}
           />
         </SupervisorContext.Provider>

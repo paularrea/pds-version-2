@@ -49,6 +49,7 @@ a{
 
 .link{
     text-decoration: none;
+    cursor: pointer;
     color: $pds-blue;
         &:visited{
           text-decoration: none;

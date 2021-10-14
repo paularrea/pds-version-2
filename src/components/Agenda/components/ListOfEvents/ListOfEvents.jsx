@@ -1,36 +1,44 @@
 import React, { useContext } from "react";
-// import { CommunityWorkerContext } from "../../../../CommunityWorkerContext";
+import { CommunityWorkerContext } from "../../../../CommunityWorkerContext";
 import { SupervisorContext } from "../../../../SupervisorContext";
+import EditWorker from "../../../Supervisor/Manage/Agenda/components/EditWorker/EditWorker";
 import UserLink from "./components/UserLink";
+import SupervisorLink from "./components/SupervisorLink";
 
 const ListOfEvents = ({ list }) => {
   // const { pdsData } = useContext(CommunityWorkerContext);
   // const userType = pdsData && pdsData.user_type;
-
   const { contextData } = useContext(SupervisorContext);
   const userType = contextData && contextData.user_type;
+
   return (
-    <div>
+    <>
       {list &&
         list.map((intervention) => {
           return (
             <>
               {userType === "COMMUNITY_WORKER" && (
-                <UserLink
-                  intervention={intervention}
-                  path={`/pds-agenda/${intervention.agenda_event_id}`}
-                />
+                <>
+                  <UserLink
+                    intervention={intervention}
+                    path={`/pds-agenda/${intervention.agenda_event_id}`}
+                  />
+                  <hr color="whitesmoke" />
+                </>
               )}
               {userType === "SUPERVISOR" && (
-                <UserLink
-                  intervention={intervention}
-                  path={`/gestionar-agenda/edit/${intervention.agenda_event_id}`}
-                />
+                <>
+                  <SupervisorLink
+                    intervention={intervention}
+                    path={`/gestionar-agenda/agenda`}
+                  />
+                  <hr color="whitesmoke" />
+                </>
               )}
             </>
           );
         })}
-    </div>
+    </>
   );
 };
 

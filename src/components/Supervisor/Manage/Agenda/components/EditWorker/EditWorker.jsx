@@ -1,25 +1,29 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
-import { Form, Formik, Field } from "formik";
-import { DatePicker, TimePicker } from "formik-material-ui-pickers";
+import { Form, Formik } from "formik";
+import { blue_pds } from "../../../../../utils/InputColor";
+import DatePickerInput from "../../../components/Inputs/DatePickerInput";
+import SelectTimeInput from "../../../components/Inputs/SelectTimeInput";
 import Button from "../../../../../Button/Button";
-import { useLocation } from "react-router-dom";
-import { container, patient_info, form } from "./edit.module.scss";
+import {
+  container,
+  patient_info,
+  form,
+  close_container,
+} from "./edit.module.scss";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import EditInput from "../../../../../Button/EditInput";
 import CallButton from "../../../../../Button/CallButton";
-import DeleteButton from "../../../../../Button/DeleteButton";
+import TypeInput from "../../../components/Inputs/TypeInput";
+import { ThemeProvider } from "@material-ui/styles";
+import CloseButton from "../../../../../Button/CloseButton";
 
-const EditWorker = () => {
-  const history = useHistory();
-  const [date, setDate] = useState(null);
-  const [time, setTime] = useState(null);
+const EditWorker = ({ intervention, setShowDetails }) => {
+  const [editType, setEditType] = useState(false);
   const [editDate, setEditDate] = useState(false);
   const [editTime, setEditTime] = useState(false);
 
-  const location = useLocation();
-  const patient = location.state && location.state.intervention;
+  const patient = intervention && intervention;
 
   const onSubmit = async (values, bag) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -28,28 +32,24 @@ const EditWorker = () => {
       edit: values,
     });
   };
-  const initialValues = {
-    initialDate: date,
-    initialTime: time,
+
+  const onClick = () => {
+    setShowDetails(false);
   };
+
   return (
     <div className={container}>
       {patient && (
         <>
           <div className={patient_info}>
-            <h2>
+            <div className={close_container} onClick={onClick}>
+              <CloseButton />
+            </div>
+            <h3>
               {patient.patient_info.patient_first_name}{" "}
               {patient.patient_info.patient_middle_name}{" "}
               {patient.patient_info.patient_last_name}
-            </h2>
-            <CallButton
-              prefixNumber={patient.patient_info.patient_phone_country_code_num}
-              phoneNumber={patient.patient_info.patient_phone_num}
-            />
-            <p>
-              <span>Tipo de intervención:</span>{" "}
-              {patient.intervention_type === "CALL" ? "Llamada" : "Visita"}
-            </p>
+            </h3>
             <p>
               <span>Dirección:</span> {patient.patient_info.residence_address},{" "}
               {patient.patient_info.residence_postal_code}{" "}
@@ -57,9 +57,14 @@ const EditWorker = () => {
               {patient.patient_info.residence_country_name}
             </p>
           </div>
+          <CallButton
+            prefixNumber={patient.patient_info.patient_phone_country_code_num}
+            phoneNumber={patient.patient_info.patient_phone_num}
+          />
+          <br />
           <div className={form}>
             <Formik
-              initialValues={initialValues}
+              initialValues={{ type: "", time: "", date: "" }}
               enableReinitialize
               onSubmit={onSubmit}
             >
@@ -73,57 +78,54 @@ const EditWorker = () => {
               }) => (
                 <>
                   <Form onSubmit={handleSubmit}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <EditInput onClick={() => setEditDate(!editDate)}>
-                        <p>
-                          <span>Fecha de la intervención:</span> 22/09/1003
-                        </p>
-                      </EditInput>
-                      {editDate && (
-                        <Field
-                          component={DatePicker}
-                          style={{ width: "100%", marginBottom:'1rem' }}
-                          value={date}
-                          onChange={(newValue) => {
-                            setDate(newValue);
-                          }}
-                          inputVariant="outlined"
-                          format="dd/MM/yyyy"
-                          name="initialDate"
-                          label="Nueva fecha"
-                        />
-                      )}
-                      <EditInput onClick={() => setEditTime(!editTime)}>
-                        <p>
-                          <span>Hora de la intervención:</span> {patient.local_time_12h}
-                        </p>
-                      </EditInput>
-                      {editTime && (
-                        <Field
-                          component={TimePicker}
-                          style={{ width: "100%", marginBottom:'1rem' }}
-                          value={time}
-                          onChange={(newValue) => {
-                            setTime(newValue);
-                          }}
-                          inputVariant="outlined"
-                          format="HH:mm"
-                          name="initialTime"
-                          label="Nueva hora"
-                        />
-                      )}
-                    </MuiPickersUtilsProvider>
-                    <Button type="submit" bgColor="#00CB45">
-                      Guardar cambios
-                    </Button>
+                    <ThemeProvider theme={blue_pds}>
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <EditInput onClick={() => setEditType(!editType)}>
+                          <p>
+                            <span>Tipo de intervención:</span>{" "}
+                            {patient.intervention_type === "CALL"
+                              ? "Llamada"
+                              : "Visita"}
+                          </p>
+                        </EditInput>
+                        {editType && <TypeInput />}
+                        <EditInput onClick={() => setEditDate(!editDate)}>
+                          <p>
+                            <span>Fecha de la intervención:</span> 22/09/1003
+                          </p>
+                        </EditInput>
+                        {editDate && (
+                          <DatePickerInput
+                            label="Nueva fecha"
+                            setFieldValue={setFieldValue}
+                          />
+                        )}
+                        <EditInput onClick={() => setEditTime(!editTime)}>
+                          <p>
+                            <span>Hora de la intervención:</span>{" "}
+                            {patient.local_time_12h}
+                          </p>
+                        </EditInput>
+                        {editTime && (
+                          <SelectTimeInput
+                            label="Nueva fecha"
+                            setFieldValue={setFieldValue}
+                          />
+                        )}
+                      </MuiPickersUtilsProvider>
+                      <br />
+                      <Button type="submit" bgColor="green">
+                        Guardar cambios
+                      </Button>
+                    </ThemeProvider>
                   </Form>
                 </>
               )}
             </Formik>
           </div>
-          <DeleteButton onClick={() => history.goBack()}>
+          <Button bgColor="red" onClick={onClick}>
             Eliminar intervención
-          </DeleteButton>
+          </Button>
         </>
       )}
     </div>

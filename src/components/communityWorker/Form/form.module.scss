@@ -1,5 +1,5 @@
 .fixed_header{
-    position: sticky;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 999;
@@ -31,6 +31,7 @@
     margin: 1rem;
 }
 .step_container{
+    margin: 180px 1rem 80px;
     .question_title{
         font-weight: 300;
         padding-bottom: 0.5rem;
@@ -78,7 +79,7 @@
 }
 
 .fixed_container{
-    position: absolute;
+    position: fixed;
     width: 100%;
     bottom: 0;
     .go_back{
@@ -101,6 +102,20 @@
 }
 
 @media (min-width: 900px) {
+    .fixed_header{
+        position: sticky;
+        .header{
+            p,h2{
+                text-align: center;
+            }
+        }
+    }
+    .step_container{
+        margin: 1rem;
+    }
+    .fixed_container{
+        position: absolute;
+    }
     .swipable_component{
         height: 100%;
         margin: 2rem auto;

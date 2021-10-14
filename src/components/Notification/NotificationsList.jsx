@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Notification from "./Notification";
-import { no_notifications } from "./notification.module.scss";
+import { no_notifications, notification_list } from "./notification.module.scss";
 
 
 const NotificationsList = ({data}) => {
@@ -12,7 +12,7 @@ const NotificationsList = ({data}) => {
   }
 
   const List = ({ list, onRemove }) => (
-    <section style={{ margin: "2rem 1rem" }}>
+    <section className={notification_list}>
       {list &&
         list.map((notification, index) => {
           return (

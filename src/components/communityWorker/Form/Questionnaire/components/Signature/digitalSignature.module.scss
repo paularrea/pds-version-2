@@ -1,7 +1,9 @@
 .signature_container{
+  display: flex;
+  flex-direction: column;
   padding: 2rem 0;
   h4{
-    padding: 0 !important;
+    padding-bottom: 1rem;
   }
   .signature_canvas{
     position: relative;

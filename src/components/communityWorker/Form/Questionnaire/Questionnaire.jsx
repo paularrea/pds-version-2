@@ -197,6 +197,7 @@ const Questionnaire = () => {
           to={{
             pathname: "/success",
             state: {
+              intervention: patient,
               patientURL: location.state.patientURL,
             },
           }}

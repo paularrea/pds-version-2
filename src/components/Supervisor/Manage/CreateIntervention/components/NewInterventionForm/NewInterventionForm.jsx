@@ -5,40 +5,14 @@ import styles from "../../../../../communityWorker/Form/form.module.scss";
 import { Redirect } from "react-router-dom";
 import { Stepper } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core";
-
+import { ThemeProvider } from "@material-ui/core";
+import { blue_pds } from "../../../../../utils/InputColor.js";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import FormButtons from "./components/FormButtons";
 
 const steps = [Step1, Step2, Step3];
-
-const theme = createMuiTheme({
-  overrides: {
-    MuiStepIcon: {
-      root: {
-        "&$completed": {
-          color: "#0000009a",
-        },
-        "&$active": {
-          color: "#000000bc",
-        },
-      },
-    },
-  },
-});
-
-const blue_pds = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#4284F3",
-    },
-    error: {
-      main: "#FF2E79",
-    },
-  },
-});
 
 const NewInterventionForm = (props) => {
   const topRef = useRef(null);
@@ -102,7 +76,7 @@ const NewInterventionForm = (props) => {
               <div className={styles.fixed_header}>
                 <div className={styles.header}>
                   <div>
-                    <ThemeProvider theme={theme}>
+                    <ThemeProvider theme={blue_pds}>
                       <Stepper
                         style={{
                           height: "auto",

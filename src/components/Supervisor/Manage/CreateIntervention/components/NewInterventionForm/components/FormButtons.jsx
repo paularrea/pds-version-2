@@ -29,7 +29,7 @@ const FormButtons = ({ activeStep, isSubmitting, handlePrev }) => {
           </Link>
         )}
 
-        <Button bgColor="#00CB45" type="submit">
+        <Button bgColor="green" type="submit">
           {activeStep === 2 ? "Aceptar y enviar" : "Confirmar y seguir"}
         </Button>
       </div>

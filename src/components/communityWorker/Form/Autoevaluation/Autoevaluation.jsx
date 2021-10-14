@@ -21,6 +21,7 @@ const Autoevaluation = () => {
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
   const { geolocation } = useGeolocation();
+  const patient = location.state.patient;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -165,6 +166,7 @@ const Autoevaluation = () => {
           to={{
             pathname: "/success",
             state: {
+              intervention: patient,
               patientURL: location.state.patientURL,
             },
           }}

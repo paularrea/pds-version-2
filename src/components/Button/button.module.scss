@@ -41,6 +41,11 @@
     }
 }
 
+.close_button{
+    cursor: pointer;
+    width: 16px;
+}
+
 @media (min-width: 900px) {
     .input_container{
         margin-bottom: 1rem;

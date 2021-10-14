@@ -18,6 +18,7 @@ const UpcommingIntervention = () => {
   const [isSent, sendForm] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
+  const patient = location.state.patient;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -129,6 +130,7 @@ const UpcommingIntervention = () => {
           to={{
             pathname: "/success",
             state: {
+              intervention: patient,
               patientURL: location.state.patientURL,
             },
           }}

@@ -33,11 +33,11 @@ const FormButtons = ({ activeStep, setActiveStep, topRef, isSubmitting }) => {
           </button>
         )}
         {activeStep === 1 ? (
-          <Button type="submit" bgColor="#00CB45">
+          <Button type="submit" bgColor="green">
             Aceptar y enviar
           </Button>
         ) : (
-          <Button type="submit" bgColor="#00CB45">
+          <Button type="submit" bgColor="green">
             Confirmar y seguir
           </Button>
         )}

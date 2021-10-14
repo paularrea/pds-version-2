@@ -52,7 +52,7 @@ const GestionarAgenda = () => {
                     },
                   }}
                 >
-                  <Button bgColor="#2E83F8">{item.button}</Button>
+                  <Button bgColor="blue">{item.button}</Button>
                 </Link>
               </div>
             </div>

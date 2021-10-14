@@ -6,7 +6,7 @@ import CallButton from "../../../../../Button/CallButton";
 
 const PatientInfo = ({ data, selected }) => {
   return (
-    <section>
+    <>
       <div className={styles.flex_child}>
         <img className={styles.user_logo} src={userIcon} alt="" />
         <p>PDS: Andrea Vega</p>
@@ -20,7 +20,7 @@ const PatientInfo = ({ data, selected }) => {
           <CallButton prefixNumber={1} phoneNumber={1234567654}>Llamar al paciente</CallButton>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

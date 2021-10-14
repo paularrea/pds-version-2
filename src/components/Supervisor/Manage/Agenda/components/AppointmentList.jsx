@@ -3,6 +3,7 @@ import { agenda, no_user_selected } from "../../agenda.module.scss";
 import Agenda from "../../../../Agenda/Agenda";
 
 const AppointmentList = ({ isSelected, worker }) => {
+
   return (
     <div className={agenda}>
         {isSelected ? (

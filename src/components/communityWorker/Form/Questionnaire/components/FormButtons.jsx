@@ -40,7 +40,7 @@ const FormButtons = ({
           <Button
             type="submit"
             disabled={!isPDSSigned}
-            bgColor={isPDSSigned ? "#00CB45" : "gray"}
+            bgColor={isPDSSigned ? "green" : "gray"}
           >
             Firmar y seguir
           </Button>
@@ -49,18 +49,18 @@ const FormButtons = ({
           <Button
             type="submit"
             disabled={!isConfirmationSigned}
-            bgColor={isConfirmationSigned ? "#00CB45" : "gray"}
+            bgColor={isConfirmationSigned ? "green" : "gray"}
           >
             Firmar y seguir
           </Button>
         )}
         {(activeStep === 0 || activeStep === 2) && (
-          <Button type="submit" bgColor="#00CB45">
+          <Button type="submit" bgColor="green">
             Confirmar y seguir
           </Button>
         )}
         {activeStep === 4 && (
-          <Button type="submit" bgColor="#00CB45">
+          <Button type="submit" bgColor="green">
             Aceptar y enviar
           </Button>
         )}

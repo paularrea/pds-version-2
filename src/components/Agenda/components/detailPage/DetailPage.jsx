@@ -12,15 +12,15 @@ import {
   actions_container,
   form_button_container,
 } from "./detail.module.scss";
+import CallButton from "../../../Button/CallButton";
 import userIcon from "../../../../images/icons/User.png";
 import closeIcon from "../../../../images/icons/close.png";
-import phoneIcon from "../../../../images/icons/phone.png";
 import locationIcon from "../../../../images/icons/Place.png";
 import arrow from "../../../../images/icons/arrow-right.png";
 
 const DetailPage = () => {
   const location = useLocation();
-  const patient = location.state && location.state.data;
+  const patient = location.state && location.state.intervention;
 
   const history = useHistory();
   const handleBack = () => {
@@ -37,7 +37,7 @@ const DetailPage = () => {
     ));
 
   const patientURL = window.location.pathname;
-  const isVisit = patient.intervention_type === "VISIT";
+  const isVisit = patient && patient.intervention_type === "VISIT";
 
   return (
     <div className={container}>
@@ -85,19 +85,11 @@ const DetailPage = () => {
                 </div>
               </>
             )}
-            <a href={`tel:${patient.patient_info.patient_phone_num}`}>
-              <Button
-                width="100%"
-                bgColor="#2E83F8"
-                justifyContent="flex-start"
-              >
-                <img src={phoneIcon} alt="phone" />{" "}
-                <div style={{ marginLeft: "1rem" }}>
-                  {patient.patient_info.patient_phone_num}
-                </div>
-              </Button>
-            </a>
-
+            <CallButton
+              width="100%"
+              prefixNumber={patient.patient_info.patient_phone_country_code_num}
+              phoneNumber={patient.patient_info.patient_phone_num}
+            />
             <hr style={{ margin: "2rem 0", opacity: 0.2 }} />
 
             <div className={actions_container}>
@@ -117,7 +109,7 @@ const DetailPage = () => {
               >
                 <Button
                   width="100%"
-                  bgColor="#00CB45"
+                  bgColor="green"
                   justifyContent="space-between"
                 >
                   <div>Cuestionario</div> <img src={arrow} alt="arrow" />
@@ -135,7 +127,7 @@ const DetailPage = () => {
               >
                 <Button
                   width="100%"
-                  bgColor="#00CB45"
+                  bgColor="green"
                   justifyContent="space-between"
                 >
                   <div>Próximas intervenciones</div>{" "}
@@ -154,7 +146,7 @@ const DetailPage = () => {
               >
                 <Button
                   width="100%"
-                  bgColor="#00CB45"
+                  bgColor="green"
                   justifyContent="space-between"
                 >
                   <div>Autoevaluación</div> <img src={arrow} alt="arrow" />
@@ -163,7 +155,9 @@ const DetailPage = () => {
             </div>
           </div>
         </>
-      ) : 'no data'}
+      ) : (
+        "no data"
+      )}
     </div>
   );
 };

@@ -17,6 +17,11 @@ const NewInterventionStep1 = ({ refProp, setFieldValue, values, data }) => {
     setPdsAssigned(pdsAssigned);
   }, [pdsAssigned]);
 
+  const onChange = (e) => {
+    setFieldValue(e.target.name, e.target.value);
+    setPatientSelected(!patientSelected);
+  }
+
   const patientInfoVerification = (
     <>
       <div className={styles.swipable_component}>
@@ -25,18 +30,18 @@ const NewInterventionStep1 = ({ refProp, setFieldValue, values, data }) => {
             Selecciona un Paciente
           </InputLabel>
           <ErrorMessage
-            name="PacienteName"
+            name="pdsName"
             component="div"
             className={styles.error_message}
           />
           <Field
+            name="pdsName"
             type="select"
             variant="outlined"
             label="Selecciona un Paciente"
             style={{ width: "100%" }}
             component={Select}
-            name="PdsName"
-            onChange={() => setPatientSelected(true)}
+            onChange={onChange}
             MenuProps={{
               PaperProps: {
                 style: {

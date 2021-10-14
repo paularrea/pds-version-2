@@ -1,5 +1,8 @@
 @import "../../../../../../styles/variables.scss";
-
+.chapter_section{
+    display: flex;
+    flex-direction: column;
+}
 .flex_dropdown{
     padding: 1rem 0;
     cursor: pointer;

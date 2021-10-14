@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Field } from "formik";
 import { TextField } from "formik-material-ui";
 import {
@@ -8,24 +8,16 @@ import {
 } from "../../form.module.scss";
 import step1 from "../../../../../images/steps/step1-2.png";
 // import * as Yup from "yup";
-import { DatePicker } from "formik-material-ui-pickers";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import DatePickerInput from "../../../../Supervisor/Manage/components/Inputs/DatePickerInput"
 
 const Step1 = ({ refProp, setFieldValue, values }) => {
   const upcomingInterventionForm = (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
-          <Field
-            component={DatePicker}
-            style={{ width: "100%" }}
-            inputVariant="outlined"
-            placeholder="dd/MM/yyyy"
-            format="dd/MM/yyyy"
-            name="date"
-            label="Fecha"
-          />
+          <DatePickerInput label='Fecha' setFieldValue={setFieldValue}/>
         </div>
         <div>
           <h4 className={question_title}>Observaciones</h4>
@@ -35,7 +27,7 @@ const Step1 = ({ refProp, setFieldValue, values }) => {
             variant="outlined"
             multiline
             maxRows={4}
-            name="observaciones"
+            name="observations"
             margin="none"
             component={TextField}
           />

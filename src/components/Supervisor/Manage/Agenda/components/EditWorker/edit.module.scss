@@ -1,15 +1,16 @@
 @import "../../../../../../styles/variables.scss";
 
 .container{
+    position: relative;
     span{
         color: $gray-text;
         }
-    padding: 4rem 7rem;
-    width: 40%;
-    min-width: 550px;
+    padding: 1.5rem;
+    padding-bottom: 3rem;
+    width: 100%;
     .patient_info{
-        h2, a, p{
-        margin: 1rem 0;
+        a, p{
+            margin: 1rem 0;
         }
         p{
             line-height: 25px;
@@ -18,4 +19,9 @@
     .form{
         margin: 1rem 0;
     } 
+    .close_container{
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
 }

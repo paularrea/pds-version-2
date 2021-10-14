@@ -5,8 +5,8 @@ const FormLastNotification = () => {
   return (
     <div>
       <Notification bgColor='red'>
-        AVISO: Si acepta, la intervención se dará por finalizada y ya no podrá
-        modificar la información introducida.
+        AVISO: Si aceptas, los datos se enviarán y ya no podrás
+        modificarlos.
       </Notification>
     </div>
   );
