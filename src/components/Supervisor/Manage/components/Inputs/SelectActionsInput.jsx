@@ -21,7 +21,7 @@ const SelectActionsInput = () => {
       <p style={{ marginBottom: "1rem" }}>Indique las acciones requeridas</p>
       <Field
         name="actions"
-        style={{ width: "100%", maxWidth:'350px' }}
+        style={{ width: "350px"}}
         multiple
         freeSolo
         component={Autocomplete}

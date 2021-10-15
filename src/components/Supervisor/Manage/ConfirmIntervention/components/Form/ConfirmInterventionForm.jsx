@@ -39,7 +39,7 @@ const ConfirmInterventionForm = (props) => {
               <div>
                 <TypeInput />
                 <DatePickerInput label='Fecha' setFieldValue={setFieldValue} />
-                <SelectTimeInput label='Fecha' setFieldValue={setFieldValue} />
+                <SelectTimeInput label='Hora' setFieldValue={setFieldValue} />
               </div>
               <div>
                 <SelectActionsInput />

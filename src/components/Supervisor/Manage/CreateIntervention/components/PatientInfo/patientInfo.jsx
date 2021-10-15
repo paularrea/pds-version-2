@@ -17,7 +17,9 @@ const PatientInfo = ({ data, selected }) => {
           <p>7920 East Depot Court San Lorenzo, Puerto Rico, United States</p>
         </div>
         <div className={styles.flex_child}>
-          <CallButton prefixNumber={1} phoneNumber={1234567654}>Llamar al paciente</CallButton>
+          <CallButton prefixNumber={1} phoneNumber={1234567654}>
+            Llamar al paciente
+          </CallButton>
         </div>
       </div>
     </>

@@ -8,7 +8,6 @@ import {
   container,
   patient_info,
   form,
-  close_container,
 } from "./edit.module.scss";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
@@ -16,9 +15,8 @@ import EditInput from "../../../../../Button/EditInput";
 import CallButton from "../../../../../Button/CallButton";
 import TypeInput from "../../../components/Inputs/TypeInput";
 import { ThemeProvider } from "@material-ui/styles";
-import CloseButton from "../../../../../Button/CloseButton";
 
-const EditWorker = ({ intervention, setShowDetails }) => {
+const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
   const [editType, setEditType] = useState(false);
   const [editDate, setEditDate] = useState(false);
   const [editTime, setEditTime] = useState(false);
@@ -38,25 +36,17 @@ const EditWorker = ({ intervention, setShowDetails }) => {
   };
 
   return (
-    <div className={container}>
+    <div
+      style={
+        showDetails
+          ? { backgroundColor: "whitesmoke", borderBottom: "1px solid gray" }
+          : { backgroundColor: "white" }
+      }
+      className={container}
+    >
       {patient && (
         <>
-          <div className={patient_info}>
-            <div className={close_container} onClick={onClick}>
-              <CloseButton />
-            </div>
-            <h3>
-              {patient.patient_info.patient_first_name}{" "}
-              {patient.patient_info.patient_middle_name}{" "}
-              {patient.patient_info.patient_last_name}
-            </h3>
-            <p>
-              <span>Dirección:</span> {patient.patient_info.residence_address},{" "}
-              {patient.patient_info.residence_postal_code}{" "}
-              {patient.patient_info.residence_city_name}{" "}
-              {patient.patient_info.residence_country_name}
-            </p>
-          </div>
+          <div className={patient_info}></div>
           <CallButton
             prefixNumber={patient.patient_info.patient_phone_country_code_num}
             phoneNumber={patient.patient_info.patient_phone_num}
@@ -108,7 +98,7 @@ const EditWorker = ({ intervention, setShowDetails }) => {
                         </EditInput>
                         {editTime && (
                           <SelectTimeInput
-                            label="Nueva fecha"
+                            label="Nueva hora"
                             setFieldValue={setFieldValue}
                           />
                         )}

@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
 import { CommunityWorkerContext } from "../../../../CommunityWorkerContext";
-import { SupervisorContext } from "../../../../SupervisorContext";
-import EditWorker from "../../../Supervisor/Manage/Agenda/components/EditWorker/EditWorker";
+// import { SupervisorContext } from "../../../../SupervisorContext";
 import UserLink from "./components/UserLink";
-import SupervisorLink from "./components/SupervisorLink";
+import SupervisorLink from "./components/Supervisor/SupervisorLink";
 
 const ListOfEvents = ({ list }) => {
-  // const { pdsData } = useContext(CommunityWorkerContext);
-  // const userType = pdsData && pdsData.user_type;
-  const { contextData } = useContext(SupervisorContext);
-  const userType = contextData && contextData.user_type;
+  const { pdsData } = useContext(CommunityWorkerContext);
+  const userType = pdsData && pdsData.user_type;
+  // const { contextData } = useContext(SupervisorContext);
+  // const userType = contextData && contextData.user_type;
 
   return (
     <>
