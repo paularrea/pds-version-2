@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Formik } from "formik";
 import { blue_pds } from "../../../../../utils/InputColor";
-import DatePickerInput from "../../../components/Inputs/DatePickerInput";
+// import DatePickerInput from "../../../components/Inputs/DatePickerInput";
 import SelectTimeInput from "../../../components/Inputs/SelectTimeInput";
 import Button from "../../../../../Button/Button";
 import {
@@ -9,8 +9,8 @@ import {
   patient_info,
   form,
 } from "./edit.module.scss";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+// import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+// import DateFnsUtils from "@date-io/date-fns";
 import EditInput from "../../../../../Button/EditInput";
 import CallButton from "../../../../../Button/CallButton";
 import TypeInput from "../../../components/Inputs/TypeInput";
@@ -18,7 +18,7 @@ import { ThemeProvider } from "@material-ui/styles";
 
 const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
   const [editType, setEditType] = useState(false);
-  const [editDate, setEditDate] = useState(false);
+  // const [editDate, setEditDate] = useState(false);
   const [editTime, setEditTime] = useState(false);
 
   const patient = intervention && intervention;
@@ -69,7 +69,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                 <>
                   <Form onSubmit={handleSubmit}>
                     <ThemeProvider theme={blue_pds}>
-                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      {/* <MuiPickersUtilsProvider utils={DateFnsUtils}> */}
                         <EditInput onClick={() => setEditType(!editType)}>
                           <p>
                             <span>Tipo de intervención:</span>{" "}
@@ -79,7 +79,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                           </p>
                         </EditInput>
                         {editType && <TypeInput />}
-                        <EditInput onClick={() => setEditDate(!editDate)}>
+                        {/* <EditInput onClick={() => setEditDate(!editDate)}>
                           <p>
                             <span>Fecha de la intervención:</span> 22/09/1003
                           </p>
@@ -89,7 +89,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                             label="Nueva fecha"
                             setFieldValue={setFieldValue}
                           />
-                        )}
+                        )} */}
                         <EditInput onClick={() => setEditTime(!editTime)}>
                           <p>
                             <span>Hora de la intervención:</span>{" "}
@@ -102,7 +102,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                             setFieldValue={setFieldValue}
                           />
                         )}
-                      </MuiPickersUtilsProvider>
+                      {/* </MuiPickersUtilsProvider> */}
                       <br />
                       <Button type="submit" bgColor="green">
                         Guardar cambios
