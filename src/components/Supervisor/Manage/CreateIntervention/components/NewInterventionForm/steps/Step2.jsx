@@ -4,7 +4,7 @@ import step2 from "../../../../../../../images/steps/step2-3.png";
 // import * as Yup from "yup";
 import SelectTimeInput from "../../../../components/Inputs/SelectTimeInput";
 import TypeInput from "../../../../components/Inputs/TypeInput";
-import DatePickerInput from "../../../../components/Inputs/DatePickerInput";
+// import DatePickerInput from "../../../../components/Inputs/DatePickerInput";
 import SelectActionsInput from "../../../../components/Inputs/SelectActionsInput";
 
 const NewInterventionStep2 = ({ refProp, setFieldValue, values }) => {
@@ -12,8 +12,8 @@ const NewInterventionStep2 = ({ refProp, setFieldValue, values }) => {
     <>
       <div className={styles.swipable_component}>
         <TypeInput />
-        <DatePickerInput label='Fecha' setFieldValue={setFieldValue} />
-        <SelectTimeInput label='Fecha' setFieldValue={setFieldValue} />
+        {/* <DatePickerInput label='Fecha' setFieldValue={setFieldValue} /> */}
+        <SelectTimeInput label='Hora' setFieldValue={setFieldValue} />
         <br />
         <SelectActionsInput />
       </div>

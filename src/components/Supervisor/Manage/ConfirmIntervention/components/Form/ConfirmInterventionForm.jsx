@@ -4,7 +4,7 @@ import {flex_form} from "./confirmForm.module.scss"
 import { ThemeProvider } from "@material-ui/core";
 import { blue_pds } from "../../../../../utils/InputColor";
 import TypeInput from "../../../components/Inputs/TypeInput";
-import DatePickerInput from "../../../components/Inputs/DatePickerInput";
+// import DatePickerInput from "../../../components/Inputs/DatePickerInput";
 import SelectTimeInput from "../../../components/Inputs/SelectTimeInput";
 import SelectActionsInput from "../../../components/Inputs/SelectActionsInput";
 import Button from "../../../../../Button/Button";
@@ -38,7 +38,7 @@ const ConfirmInterventionForm = (props) => {
             <section className={flex_form}>
               <div>
                 <TypeInput />
-                <DatePickerInput label='Fecha' setFieldValue={setFieldValue} />
+                {/* <DatePickerInput label='Fecha' setFieldValue={setFieldValue} /> */}
                 <SelectTimeInput label='Hora' setFieldValue={setFieldValue} />
               </div>
               <div>

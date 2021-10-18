@@ -8,17 +8,10 @@ import {
 } from "../../form.module.scss";
 import step1 from "../../../../../images/steps/step1-2.png";
 // import * as Yup from "yup";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
-import DatePickerInput from "../../../../Supervisor/Manage/components/Inputs/DatePickerInput"
 
 const Step1 = ({ refProp, setFieldValue, values }) => {
   const upcomingInterventionForm = (
     <>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <div style={{ marginTop: "1rem", marginBottom: "2rem" }}>
-          <DatePickerInput label='Fecha' setFieldValue={setFieldValue}/>
-        </div>
         <div>
           <h4 className={question_title}>Observaciones</h4>
           <Field
@@ -32,7 +25,6 @@ const Step1 = ({ refProp, setFieldValue, values }) => {
             component={TextField}
           />
         </div>
-      </MuiPickersUtilsProvider>
     </>
   );
 
