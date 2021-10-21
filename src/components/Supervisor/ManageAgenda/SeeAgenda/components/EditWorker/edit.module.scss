@@ -1,0 +1,27 @@
+@import "../../../../../../styles/variables.scss";
+
+.container{
+    position: relative;
+    background-color: "whitesmoke";
+    border-bottom: 1px solid #c3c3c3;
+    padding:0 1rem;
+    span{
+        color: $gray-text;
+    }
+    padding: 0 1.5rem;
+    padding-bottom: 1.5rem;
+    width: auto;
+    .patient_info{
+        border-top: 1px solid #dadada;
+        padding: 1.5rem 0 0 0;
+        a, p{
+            margin: 1rem 0;
+        }
+        p{
+            line-height: 25px;
+        }
+    } 
+    .form{
+        padding: 1rem 0;
+    } 
+}

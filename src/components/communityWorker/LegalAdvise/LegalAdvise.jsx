@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../../Button/Button";
+import Button from "../../GeneralComponents/Button/Button";
 import { container } from "./legal.module.scss";
 
 const LegalAdvise = () => {

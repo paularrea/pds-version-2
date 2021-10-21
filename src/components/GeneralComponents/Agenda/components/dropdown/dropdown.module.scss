@@ -1,0 +1,29 @@
+@import "../../../../../styles/variables.scss";
+
+.container{
+    width: 100%;
+    height: auto;
+    overflow: scroll;
+    border-bottom: 1px solid white;
+    .flex_container{
+        width: 100%;
+        background-color: $pds-blue;
+        color: white;
+        padding: 1.5rem;  
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        &:hover{
+            opacity: .8;
+        }
+        .more_less_icons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            width: 15px;
+            }
+        }
+    }
+}

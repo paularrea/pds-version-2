@@ -1,0 +1,45 @@
+@import "../../../styles/variables.scss";
+
+.container{
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    p,a{
+        font-size: 14px;
+        line-height: 22px;
+        width: 90%;
+    }
+    .icon{
+        position: absolute;
+        top: -.8rem;
+        right: -.8rem;
+        width: auto;
+        height: auto;
+        img{
+        width: 32px;
+        height: auto;
+        }
+    }
+}
+.no_notifications{
+    padding: 0 1rem 2rem 1rem;
+    color: grey;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.notification_list{
+    width: auto;
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media (min-width:900px){
+    .notification_list{
+        width: 40%;
+    }
+}

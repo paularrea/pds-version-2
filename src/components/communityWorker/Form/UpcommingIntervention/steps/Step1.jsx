@@ -6,6 +6,7 @@ import {
   step_container,
   question_title,
 } from "../../form.module.scss";
+import DatePickerInput from "../../../../Supervisor/ManageAgenda/components/Inputs/DatePickerInput"
 import step1 from "../../../../../images/steps/step1-2.png";
 // import * as Yup from "yup";
 
@@ -13,6 +14,7 @@ const Step1 = ({ refProp, setFieldValue, values }) => {
   const upcomingInterventionForm = (
     <>
         <div>
+          <DatePickerInput label='Fecha' setFieldValue={setFieldValue}/>
           <h4 className={question_title}>Observaciones</h4>
           <Field
             style={{ width: "100%" }}

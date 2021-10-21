@@ -1,7 +1,7 @@
 import React from "react";
 import { step_container } from "../../form.module.scss";
 import step2 from "../../../../../images/steps/step2-2.png";
-import FormLastNotification from "../../../../Notification/FormLastNotification";
+import FormLastNotification from "../../../../GeneralComponents/Notification/FormLastNotification";
 
 const Step2 = (props) => {
   return (

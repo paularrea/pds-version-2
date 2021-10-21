@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import { success_container, close } from "./success.module.scss";
-import successIcon from "../../../../../images/icons/success.png";
+import successIcon from "../../../../../images/icons/success_icon.jpg";
 import closeIcon from "../../../../../images/icons/close.png";
 
 const SuccessPage = () => {

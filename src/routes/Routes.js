@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import DetailPage from "../components/Agenda/components/detailPage/DetailPage";
+import DetailPage from "../components/GeneralComponents/Agenda/components/detailPageTemplate/DetailPage";
 import Questionnaire from "../components/communityWorker/Form/Questionnaire/Questionnaire";
 import Autoevaluation from "../components/communityWorker/Form/Autoevaluation/Autoevaluation";
 import UpcomingIntervention from "../components/communityWorker/Form/UpcommingIntervention/UpcommingIntervention";
 import SuccessPage from "../components/communityWorker/Form/components/Success/SuccessPage";
-import LoginForm from "../components/Login/LoginForm";
-import PdsHomePage from "../pages/communityWorker/home";
+import LoginForm from "../components/GeneralComponents/Login/LoginForm";
+import CommunityWorkerHomePage from "../pages/communityWorker/CommunityWorkerHomePage";
 import LegalAdvise from "../components/communityWorker/LegalAdvise/LegalAdvise";
 
 import SupervisorNavigation from "../components/Supervisor/Navigation/Navigation";
@@ -14,15 +14,14 @@ import Inicio from "../pages/Supervisor/Inicio";
 import GestionarAgenda from "../pages/Supervisor/GestionarAgenda";
 import DashboardPDS from "../pages/Supervisor/DashboardPDS";
 import DashboardPacientes from "../pages/Supervisor/DashboardPacientes";
-import Agenda from "../components/Supervisor/Manage/Agenda/Agenda";
-import ConfirmIntervention from "../components/Supervisor/Manage/ConfirmIntervention/ConfirmIntervention";
-import CreateIntervention from "../components/Supervisor/Manage/CreateIntervention/CreateIntervention";
-import EditWorker from "../components/Supervisor/Manage/Agenda/components/EditWorker/EditWorker";
+import Agenda from "../components/Supervisor/ManageAgenda/SeeAgenda/SeeAgenda";
+import ConfirmIntervention from "../components/Supervisor/ManageAgenda/ConfirmIntervention/ConfirmIntervention";
+import CreateIntervention from "../components/Supervisor/ManageAgenda/CreateIntervention/CreateIntervention";
 import "../styles/App.scss";
 import { SupervisorContext } from "../SupervisorContext";
 import supervisorData from "../data/dynamicSupervisorData";
 import { CommunityWorkerContext } from "../CommunityWorkerContext";
-import communityWorkerData from "../data/dynamicPDSData";
+import communityWorkerData from "../data/communityWorkerData";
 
 const Routes = () => {
   const [pdsData, setPdsData] = useState();
@@ -36,7 +35,7 @@ const Routes = () => {
       <Switch>
         {/* Community Worker routes */}
         <CommunityWorkerContext.Provider value={{ pdsData, setPdsData }}>
-        <Route exact path="/" component={PdsHomePage} />
+        <Route exact path="/" component={CommunityWorkerHomePage} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/legal-advise" component={LegalAdvise} />
         <Route path="/pds-agenda/:id" component={DetailPage} />
@@ -78,11 +77,6 @@ const Routes = () => {
           <RouteWrapper
             path="/gestionar-agenda/agenda"
             component={Agenda}
-            layout={SupervisorNavigation}
-          />
-          <RouteWrapper
-            path="/gestionar-agenda/edit/:id"
-            component={EditWorker}
             layout={SupervisorNavigation}
           />
           <RouteWrapper

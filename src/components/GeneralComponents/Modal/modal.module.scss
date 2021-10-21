@@ -1,0 +1,29 @@
+
+.modal_container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    height: auto;
+    border-radius:10px;
+    box-shadow: 24;
+    .modal_text{
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 1.5rem;
+        .flex_buttons{
+            width: 80%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        p{
+            line-height: 25px;
+        }
+    }
+  };

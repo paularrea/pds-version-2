@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import agendaImg from "../../images/icons/supervisor/admin-agenda.png";
 import suggestImg from "../../images/icons/supervisor/admin-suggestions.png";
 import newImg from "../../images/icons/supervisor/admin-new.png";
-import styles from "../../components/Supervisor/styles/gestionarAgenda.module.scss";
-import Button from "../../components/Button/Button";
+import styles from "../../components/Supervisor/ManageAgenda/gestionarAgenda.module.scss";
+import Button from "../../components/GeneralComponents/Button/Button";
 
 const buttonsData = [
   {

@@ -26,12 +26,11 @@
         }
     }
 }
-
 .swipable_component{
     margin: 1rem;
 }
 .step_container{
-    margin: 180px 1rem 80px;
+    margin: 180px 1rem 100px;
     .question_title{
         font-weight: 300;
         padding-bottom: 0.5rem;
@@ -46,6 +45,10 @@
             right: 0;
             top: -1.2rem;
         }
+    }
+    section{
+        display: flex;
+        flex-direction: column;
     }
     .legal_container{
         margin: 0 auto;

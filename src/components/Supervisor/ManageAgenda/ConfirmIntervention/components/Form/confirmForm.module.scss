@@ -1,0 +1,16 @@
+.flex_form{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    div{
+        max-width: 350px;
+    }
+}
+
+.button_to_modal_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+}

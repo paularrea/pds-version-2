@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { SupervisorContext } from "../../SupervisorContext";
-import styles from "../../components/Supervisor/styles/dashboardPDS.module.scss";
-import Chart from "../../components/Supervisor/DashboardPDS/Charts/Chart";
-import PatientTableList from "../../components/Supervisor/DashboardPDS/Tables/Patients/PatientTableList";
-import Infobox from "../../components/Supervisor/DashboardPDS/infoBox/Patients/infoBox";
+import styles from "../../components/Supervisor/Dashboards/dashboardPDS.module.scss";
+import Chart from "../../components/Supervisor/Dashboards/Charts/Chart";
+import PatientTableList from "../../components/Supervisor/Dashboards/Tables/Patients/PatientTableList";
+import Infobox from "../../components/Supervisor/Dashboards/infoBox/Patients/infoBox";
 
 const DashboardPacientes = () => {
   const {contextData} = useContext(SupervisorContext);

@@ -1,5 +1,5 @@
-import Button from "../../../../Button/Button";
 import React from "react";
+import Button from "../../../../GeneralComponents/Button/Button";
 import { useHistory } from "react-router-dom";
 import arrow from "../../../../../images/icons/arrow_back.png";
 import { fixed, fixed_container, go_back } from "../../form.module.scss";
