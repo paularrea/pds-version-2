@@ -17,6 +17,7 @@ import userIcon from "../../../../../images/icons/User.png";
 import closeIcon from "../../../../../images/icons/close.png";
 import locationIcon from "../../../../../images/icons/Place.png";
 import arrow from "../../../../../images/icons/arrow-right.png";
+import start_intervention_date_time from "../../../../communityWorker/Form/Questionnaire/components/functions/start_intervention_date_time";
 
 const DetailPage = () => {
   const location = useLocation();
@@ -106,7 +107,9 @@ const DetailPage = () => {
                   pathname: "/questionnaire",
                   state: {
                     patient: patient,
+                    userId: userId,
                     patientURL: patientURL,
+                    local_utc_date_time: start_intervention_date_time(),
                   },
                 }}
               >
@@ -124,7 +127,9 @@ const DetailPage = () => {
                   pathname: "/upcomming-intervention",
                   state: {
                     patient: patient,
+                    userId: userId,
                     patientURL: patientURL,
+                    local_utc_date_time: start_intervention_date_time(),
                   },
                 }}
               >
@@ -143,7 +148,9 @@ const DetailPage = () => {
                   pathname: "/autoevaluation",
                   state: {
                     patient: patient,
+                    userId: userId,
                     patientURL: patientURL,
+                    local_utc_date_time: start_intervention_date_time(),
                   },
                 }}
               >

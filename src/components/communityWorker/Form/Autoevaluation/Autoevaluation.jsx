@@ -10,8 +10,8 @@ import { fixed_header, header, img } from "../form.module.scss";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import FormButtons from "./components/FormButtons";
-import { useGeolocation } from "../../../../hooks/useGeolocation";
 import "../mui.css";
+import subtype_POST_INTEVENTION_SURVEY from "../../../../events/type_INTERVENTION/subtype_POST_INTERVENTION_SURVEY";
 
 const steps = [Step1, Step2];
 
@@ -20,8 +20,9 @@ const Autoevaluation = () => {
   const [isSent, sendForm] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
-  const { geolocation } = useGeolocation();
   const patient = location.state.patient;
+  const userId = location.state.userId;
+  const starting_time = location.state.local_utc_date_time;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -43,43 +44,18 @@ const Autoevaluation = () => {
   const onSubmit = async (values, bag) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     bag.setSubmitting(false);
-    console.log({
-      autoevaluation: values,
-      local_date_time: new Date().toString(),
-      utc_date_time: new Date().toUTCString(),
-      position_coords_latitude: geolocation && geolocation.latitude,
-      position_coords_longitude: geolocation && geolocation.longitude,
-    });
-    console.log(
-      JSON.stringify(
-        {
-          autoevaluation: values,
-          local_date_time: new Date().toString(),
-          utc_date_time: new Date().toUTCString(),
-          position_coords_latitude: geolocation && geolocation.latitude,
-          position_coords_longitude: geolocation && geolocation.longitude,
-        },
-        null,
-        2
-      )
-    );
     if (!isLastStep()) {
       handleNext();
       return;
     } else {
-      console.log({
-        autoevaluation: values,
-        local_date_time: new Date().toString(),
-        utc_date_time: new Date().toUTCString(),
-        position_coords_latitude: geolocation && geolocation.latitude,
-        position_coords_longitude: geolocation && geolocation.longitude,
-        sent: {
-          local_date_time: new Date().toString(),
-          utc_date_time: new Date().toUTCString(),
-          position_coords_latitude: geolocation && geolocation.latitude,
-          position_coords_longitude: geolocation && geolocation.longitude,
-        },
-      });
+      console.log(
+        subtype_POST_INTEVENTION_SURVEY(
+          starting_time,
+          userId && userId,
+          patient.patient_info.patient_first_name,
+          values
+        )
+      );
       sendForm(true);
     }
   };

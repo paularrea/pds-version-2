@@ -6,6 +6,7 @@ import { theme, blue_pds } from "./components/formTheme";
 import SwipeableViews from "react-swipeable-views";
 import { Stepper } from "@material-ui/core";
 import data from "../../../../data/questionnaireData";
+import subtype_INTEVENTION_SURVEY from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY";
 import { fixed_header, header, img } from "../form.module.scss";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
@@ -13,8 +14,10 @@ import Step3 from "./steps/Step3";
 import Step4 from "./steps/Step4";
 import Step5 from "./steps/Step5";
 import FormButtons from "./components/FormButtons";
-import { useGeolocation } from "../../../../hooks/useGeolocation";
 import "../mui.css";
+import filter_patient_info_values from "./components/functions/filter_patient_info_values";
+import filter_intervention_survey_values from "./components/functions/filter_intervention_survey_values";
+
 
 const steps = [Step1, Step2, Step3, Step4, Step5];
 
@@ -27,8 +30,9 @@ const Questionnaire = () => {
   const [confirmationSign, setConfirmationSign] = useState("");
   const [isPDSSigned, setIsPDSSigned] = useState(false);
   const [isConfirmationSigned, setIsConfirmationSigned] = useState(false);
-  const { geolocation } = useGeolocation();
   const patient = location.state.patient;
+  const userId = location.state.userId;
+ const local_utc_date_time = location.state.local_utc_date_time;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,49 +54,21 @@ const Questionnaire = () => {
   const onSubmit = async (values, bag) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     bag.setSubmitting(false);
-    console.log({
-      questionnaire: values,
-      pds_program_accepted: pdsSign,
-      patient_validation: confirmationSign,
-      local_date_time: new Date().toString(),
-      utc_date_time: new Date().toUTCString(),
-      position_coords_latitude: geolocation && geolocation.latitude,
-      position_coords_longitude: geolocation && geolocation.longitude,
-    });
-    console.log(
-      JSON.stringify(
-        {
-          questionnaire: values,
-          pds_program_accepted: pdsSign,
-          patient_validation: confirmationSign,
-          local_date_time: new Date().toString(),
-          utc_date_time: new Date().toUTCString(),
-          position_coords_latitude: geolocation && geolocation.latitude,
-          position_coords_longitude: geolocation && geolocation.longitude,
-        },
-        null,
-        2
-      )
-    );
     if (!isLastStep()) {
       handleNext();
       return;
     } else {
-      console.log({
-        questionnaire: values,
-        pds_program_accepted: pdsSign,
-        patient_validation: confirmationSign,
-        local_date_time: new Date().toString(),
-        utc_date_time: new Date().toUTCString(),
-        position_coords_latitude: geolocation && geolocation.latitude,
-        position_coords_longitude: geolocation && geolocation.longitude,
-        sent: {
-          local_date_time: new Date().toString(),
-          utc_date_time: new Date().toUTCString(),
-          position_coords_latitude: geolocation && geolocation.latitude,
-          position_coords_longitude: geolocation && geolocation.longitude,
-        },
-      });
+      console.log(
+        subtype_INTEVENTION_SURVEY(
+          local_utc_date_time,
+          userId && userId,
+          patient.patient_info.patient_first_name,
+          pdsSign,
+          filter_patient_info_values(values),
+          confirmationSign,
+          filter_intervention_survey_values(values)
+        )
+      );
       sendForm(true);
     }
   };

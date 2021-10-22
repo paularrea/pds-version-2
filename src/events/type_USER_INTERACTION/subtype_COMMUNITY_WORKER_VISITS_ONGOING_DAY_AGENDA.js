@@ -1,6 +1,6 @@
 import build_event_template from "../template/build_event_template";
 
-const visit_ongoing_day_agenda = (communityWorkerId) => {
+const subtype_COMMUNITY_WORKER_VISITS_ONGOING_DAY_AGENDA = (communityWorkerId) => {
   const template_obj = build_event_template();
   const event_obj = {
     event_created_by_user_id: "",
@@ -16,4 +16,4 @@ const visit_ongoing_day_agenda = (communityWorkerId) => {
   return visit_ongoing_day_agenda_obj;
 };
 
-export default visit_ongoing_day_agenda;
+export default subtype_COMMUNITY_WORKER_VISITS_ONGOING_DAY_AGENDA;
