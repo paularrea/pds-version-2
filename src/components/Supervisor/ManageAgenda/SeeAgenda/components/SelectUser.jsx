@@ -1,5 +1,5 @@
 import React from "react";
-import {blue_pds} from "../../../../utils/InputColor"
+import { blue_pds } from "../../../../utils/InputColor";
 import {
   InputLabel,
   MenuItem,
@@ -7,8 +7,10 @@ import {
   Select,
   ThemeProvider,
 } from "@material-ui/core";
+// import TextField from "@mui/material/TextField";
+// import Autocomplete from "@mui/material/Autocomplete";
 
-const SelectUser = ({ setIsSelected, data, label, onChange, value }) => {
+const SelectUser = ({ data, label, onChange, value }) => {
   return (
     <ThemeProvider theme={blue_pds}>
       <FormControl variant="outlined" style={{ marginBottom: "2rem" }}>
@@ -28,6 +30,18 @@ const SelectUser = ({ setIsSelected, data, label, onChange, value }) => {
             ))}
         </Select>
       </FormControl>
+      {/* <Autocomplete
+        value={value}
+        onChange={onChange}
+        inputValue={inputValue}
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+        }}
+        id="autocomplete-select-pds"
+        options={data}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label={label} />}
+      /> */}
     </ThemeProvider>
   );
 };

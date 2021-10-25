@@ -6,11 +6,11 @@ const AppointmentList = ({ isSelected, worker }) => {
 
   return (
     <div className={agenda}>
-        {isSelected ? (
+        {isSelected && worker[0] ? (
           <Agenda data={worker[0].agenda} />
         ) : (
           <div className={no_user_selected}>
-            <p>Selecciona un PDS o Paciente para acceder a su agenda.</p>
+            <p>Selecciona un PDS para acceder a su agenda.</p>
           </div>
         )}
     </div>

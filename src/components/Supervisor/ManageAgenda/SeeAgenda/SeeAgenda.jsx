@@ -5,8 +5,6 @@ import BoxShadowContainer from "../components/BoxShadowContainer/ShadowContainer
 import AppointmentsList from "./components/AppointmentList";
 import SelectUser from "./components/SelectUser";
 
-const patientList = ["Lucas Calvo", "Paloma López", "Andrés Giménez"];
-
 const SeeAgenda = () => {
   const [value, setValue] = useState("");
   const { contextData } = useContext(SupervisorContext);
@@ -35,19 +33,19 @@ const SeeAgenda = () => {
     <div className={container}>
       <div className={dropdown_container}>
         <h2>Ver agenda</h2>
-        <p>Selecciona la agenda de un Protector de Salud o un Paciente</p>
+        <p>Selecciona la agenda de un Protector de Salud</p>
         <SelectUser
           value={value}
           label="Selecciona un PDS"
-          setIsSelected={setIsSelected}
+
           data={communityWorkersList}
           onChange={handleChange}
         />
-        <SelectUser
+        {/* <SelectUser
           label="Selecciona un Paciente"
           setIsSelected={setIsSelected}
           data={patientList}
-        />
+        /> */}
       </div>
       <BoxShadowContainer>
         <AppointmentsList isSelected={isSelected} worker={selectedWorker} />
