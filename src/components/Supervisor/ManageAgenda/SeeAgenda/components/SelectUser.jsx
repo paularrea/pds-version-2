@@ -24,8 +24,8 @@ const SelectUser = ({ data, label, onChange, value }) => {
         >
           {data &&
             data.map((user, key) => (
-              <MenuItem key={key} value={user}>
-                {user}
+              <MenuItem key={key} value={user.community_worker_id}>
+                {user.community_worker_name_and_email}
               </MenuItem>
             ))}
         </Select>

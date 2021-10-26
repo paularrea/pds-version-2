@@ -13,7 +13,7 @@ const Agenda = ({ data, userType, userId }) => {
               userId={userId}
               userType={userType}
               dayIndex={item.day_index}
-              date={item.date_as_text}
+              date={item.local_date_as_text}
               listOfEvents={item.list_of_events}
             />
           );

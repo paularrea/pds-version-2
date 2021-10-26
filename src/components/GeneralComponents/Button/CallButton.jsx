@@ -14,6 +14,7 @@ const CallButton = (props) => {
     <a href={`tel:${props.prefixNumber}${props.phoneNumber}`}>
       <Button
         // onClick={phoneCallEvent}
+        type="button"
         width={props.width}
         bgColor="blue"
         justifyContent="flex-start"

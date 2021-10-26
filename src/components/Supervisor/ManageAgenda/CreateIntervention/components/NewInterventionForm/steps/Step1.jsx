@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 import { error } from "../../../../components/Inputs/errorMessage.module.scss";
 import { Select } from "formik-material-ui";
@@ -8,36 +8,29 @@ import step1 from "../../../../../../../images/steps/step1-3.png";
 import PatientInfo from "../../PatientInfo/patientInfo";
 import * as Yup from "yup";
 
-const patientList = ["Lucas Calvo", "Paloma López", "Andrés Giménez"];
-
 const NewInterventionStep1 = ({
+  data,
   refProp,
   setFieldValue,
   values,
-  data,
   errors,
   touched,
+  patientId,
+  setPatientId,
+  linkPatientsInfo,
 }) => {
-  const [pdsAssigned, setPdsAssigned] = useState("Andrea Vega");
   const [patientSelected, setPatientSelected] = useState(false);
-
-  useEffect(() => {
-    setPdsAssigned(pdsAssigned);
-  }, [pdsAssigned]);
+  const patientList = data && data.agenda.list_of_linked_patients;
 
   const onChange = (e) => {
     setFieldValue(e.target.name, e.target.value);
-    setPatientSelected(!patientSelected);
+    setPatientSelected(true);
   };
 
   const patientInfoVerification = (
     <>
       <div className={styles.swipable_component}>
-          <ErrorMessage
-            name="patient_name"
-            component="div"
-            className={error}
-          />
+        <ErrorMessage name="patient_name" component="div" className={error} />
         <FormControl variant="outlined" style={{ width: "100%" }}>
           <InputLabel id="demo-simple-select-outlined-label">
             Selecciona un Paciente
@@ -58,11 +51,16 @@ const NewInterventionStep1 = ({
               },
             }}
           >
-            {patientList.map((answer, key) => (
-              <MenuItem key={key} value={answer}>
-                {answer}
-              </MenuItem>
-            ))}
+            {patientList &&
+              patientList.map((patient, key) => (
+                <MenuItem
+                  onClick={() => setPatientId(patient.patient_id)}
+                  key={patient.patient_id}
+                  value={patient.patient_name_and_email}
+                >
+                  {patient.patient_name_and_email}
+                </MenuItem>
+              ))}
           </Field>
         </FormControl>
         {patientSelected ? (
@@ -73,7 +71,10 @@ const NewInterventionStep1 = ({
               marginLeft: "1rem",
             }}
           >
-            <PatientInfo />
+            <PatientInfo
+              patientId={patientId}
+              linkPatientsInfo={linkPatientsInfo}
+            />
           </div>
         ) : null}
       </div>

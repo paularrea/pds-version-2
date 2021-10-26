@@ -1,9 +1,11 @@
-export function createData(date, patient, pds, location, phone) {
+export function createData(date, patient, pds, location, phone, patientId, linkedCommunityWorkerId, availableTimesList) {
     return {
       date,
       patient,
       pds,
       location,
-      phone
+      phone,
+      patientId,
+      linkedCommunityWorkerId,
     };
   }

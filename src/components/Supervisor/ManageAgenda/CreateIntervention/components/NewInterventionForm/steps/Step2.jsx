@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../../../../communityWorker/Form/form.module.scss";
 import step2 from "../../../../../../../images/steps/step2-3.png";
 import * as Yup from "yup";
@@ -10,16 +10,43 @@ import SelectActionsInput from "../../../../components/Inputs/SelectActionsInput
 const NewInterventionStep2 = ({
   refProp,
   setFieldValue,
+  setFieldTouched,
   values,
   errors,
   touched,
+  patientId,
+  linkPatientsInfo,
+  data,
 }) => {
+  const [listOfAvailableHours, setListOfAvailableHours] = useState([]);
+  const [clearTimeInputValue, setClearTimeInputValue] = useState(false);
+
+  const linkedCommunityWorkerId =
+    linkPatientsInfo[patientId] &&
+    linkPatientsInfo[patientId].linked_community_worker_id;
+  const availableTimesList =
+    data && data.agenda.available_times_per_community_worker;
+
   const patientInfoVerification = (
     <>
       <div className={styles.swipable_component}>
         <TypeInput />
-        <DatePickerInput label="Fecha" setFieldValue={setFieldValue} />
-        <SelectTimeInput label="Hora" setFieldValue={setFieldValue} />
+        <DatePickerInput
+          label="Fecha"
+          availableTimesList={availableTimesList}
+          setFieldValue={setFieldValue}
+          setListOfAvailableHours={setListOfAvailableHours}
+          linkedCommunityWorkerId={linkedCommunityWorkerId}
+          onClick={() => setClearTimeInputValue(true)}
+        />
+        <SelectTimeInput
+          listOfAvailableHours={listOfAvailableHours}
+          communityWorkerId={linkedCommunityWorkerId}
+          label="Hora"
+          clearTimeInputValue={clearTimeInputValue}
+          setFieldValue={setFieldValue}
+          setFieldTouched={setFieldTouched}
+        />
         <br />
         <SelectActionsInput setFieldValue={setFieldValue} />
       </div>

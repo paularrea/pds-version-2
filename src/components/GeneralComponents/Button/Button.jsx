@@ -20,6 +20,7 @@ const Button = (props) => {
   return (
     <button
       disabled={props.disabled}
+      type={props.type}
       className={button}
       style={{
         backgroundColor: changeColor(),

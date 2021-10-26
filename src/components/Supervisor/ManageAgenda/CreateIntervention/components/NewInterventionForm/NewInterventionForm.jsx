@@ -14,11 +14,14 @@ import FormButtons from "./components/FormButtons";
 
 const steps = [Step1, Step2, Step3];
 
-const NewInterventionForm = (props) => {
+const NewInterventionForm = ({ data }) => {
   const topRef = useRef(null);
   const [activeStep, setActiveStep] = useState(0);
   const [isSent, sendForm] = useState(false);
-
+  const [patientId, setPatientId] = useState("");
+  const [communityWorkerId, setCommunityWorkerId] = useState("");
+  const linkPatientsInfo = data && data.agenda.linked_patients_info;
+  
   const isLastStep = () => {
     return activeStep === steps.length - 1;
   };
@@ -76,6 +79,7 @@ const NewInterventionForm = (props) => {
           values,
           errors,
           setFieldValue,
+          setFieldTouched,
           handleChange,
         }) => (
           <>
@@ -110,12 +114,19 @@ const NewInterventionForm = (props) => {
                   return (
                     <ThemeProvider theme={blue_pds}>
                       <Component
+                        data={data}
                         errors={errors}
                         touched={touched}
                         values={values}
                         setFieldValue={setFieldValue}
+                        setFieldTouched={setFieldTouched}
                         refProp={topRef}
                         key={index}
+                        patientId={patientId}
+                        setPatientId={setPatientId}
+                        communityWorkerId={communityWorkerId}
+                        linkPatientsInfo={linkPatientsInfo}
+                        setCommunityWorkerId={setCommunityWorkerId}
                       />
                     </ThemeProvider>
                   );

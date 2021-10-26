@@ -32,10 +32,7 @@ const PatientInfoLink = ({ intervention, onClick, showDetails }) => {
               <img src={phoneIcon} alt="phone" />
             )}
             <h5>
-              {intervention.patient_info.patient_first_name}{" "}
-              {intervention.patient_info.patient_middle_name}{" "}
-              {intervention.patient_info.patient_last_name}{" "}
-              {intervention.patient_info.patient_second_last_name}
+            {intervention.patient_info.patient_concatenated_name}
             </h5>
           </div>
           <div className={arrow_container}>

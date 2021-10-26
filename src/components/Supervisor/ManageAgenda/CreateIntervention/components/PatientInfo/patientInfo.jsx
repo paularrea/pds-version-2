@@ -4,22 +4,32 @@ import locationIcon from "../../../../../../images/icons/supervisor/locationv2.p
 import styles from "./patientInfo.module.scss";
 import CallButton from "../../../../../GeneralComponents/Button/CallButton";
 
-const PatientInfo = ({ data, selected }) => {
+const PatientInfo = ({ patientId, linkPatientsInfo }) => {
+  const patientInfoValues = linkPatientsInfo[patientId];
   return (
     <>
       <div className={styles.flex_child}>
         <img className={styles.user_logo} src={userIcon} alt="" />
-        <p>PDS: Andrea Vega</p>
+        <p>
+          PDS: {patientInfoValues.linked_community_worker_concatenated_name}
+        </p>
       </div>
       <div className={styles.info_section}>
         <div className={styles.flex_child}>
           <img className={styles.info_logo} src={locationIcon} alt="" />
-          <p>7920 East Depot Court San Lorenzo, Puerto Rico, United States</p>
+          <p>
+            {patientInfoValues.patient_residence_address}{" "}
+            {patientInfoValues.patient_residence_city}{" "}
+            {patientInfoValues.patient_residence_state}{" "}
+            {patientInfoValues.patient_residence_postal_code}{" "}
+            {patientInfoValues.patient_residence_country_name}
+          </p>
         </div>
         <div className={styles.flex_child}>
-          <CallButton prefixNumber={1} phoneNumber={1234567654}>
-            Llamar al paciente
-          </CallButton>
+          <CallButton
+            prefixNumber={patientInfoValues.patient_phone_country_code_num}
+            phoneNumber={patientInfoValues.patient_phone_num}
+          />
         </div>
       </div>
     </>

@@ -19,7 +19,7 @@ import ConfirmIntervention from "../components/Supervisor/ManageAgenda/ConfirmIn
 import CreateIntervention from "../components/Supervisor/ManageAgenda/CreateIntervention/CreateIntervention";
 import "../styles/App.scss";
 import { SupervisorContext } from "../SupervisorContext";
-import supervisorData from "../data/dynamicSupervisorData";
+import supervisorData from "../data/supervisor/supervisor_dynamic_agenda";
 import { CommunityWorkerContext } from "../CommunityWorkerContext";
 import communityWorkerData from "../data/communityWorkerData";
 
@@ -34,7 +34,7 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         {/* Community Worker routes */}
-        {/* <CommunityWorkerContext.Provider value={{ pdsData, setPdsData }}> */}
+        <CommunityWorkerContext.Provider value={{ pdsData, setPdsData }}>
         <Route exact path="/" component={CommunityWorkerHomePage} />
         <Route exact path="/login" component={LoginForm} />
         <Route exact path="/legal-advise" component={LegalAdvise} />
@@ -46,7 +46,7 @@ const Routes = () => {
           component={UpcomingIntervention}
         />
         <Route path="/success" component={SuccessPage} />
-        {/* </CommunityWorkerContext.Provider> */}
+        </CommunityWorkerContext.Provider>
 
         {/* Supervisor routes */}
         <SupervisorContext.Provider value={{ contextData, setContextData }}>

@@ -23,7 +23,7 @@ const ConfirmIntervention = () => {
               <p>
                 Intervenciones pendientes <br /> (total)
               </p>
-              <h1>{data.pending_intervention_events.length}</h1>
+              <h1>{data.agenda.pending_agenda_events.length}</h1>
             </div>
           </div>
           <div className={table}><ConfirmPatientsTable data={data}/></div>

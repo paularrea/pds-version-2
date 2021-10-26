@@ -52,7 +52,7 @@ const Autoevaluation = () => {
         subtype_POST_INTEVENTION_SURVEY(
           starting_time,
           userId && userId,
-          patient.patient_info.patient_first_name,
+          patient.patient_info.patient_id,
           values
         )
       );

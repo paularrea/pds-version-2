@@ -1,5 +1,5 @@
 import React from "react";
-import Row from "./components/Row"
+import Row from "./components/Row";
 import { createData } from "./components/createData";
 import {
   Table,
@@ -7,24 +7,25 @@ import {
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
+  TableRow,
 } from "@material-ui/core";
 
-export default function ConfirmPatientsTable({data}) {
-
-  const sortedDates = data.pending_intervention_events.sort(
+export default function ConfirmPatientsTable({ data }) {
+  const sortedDates = data.agenda.pending_agenda_events.sort(
     (a, b) =>
       new Date(...a.date.split("/").reverse()) -
       new Date(...b.date.split("/").reverse())
   );
-  
+
   const rows = sortedDates.map((event) => {
     return createData(
       event.date,
-      `${event.patient_first_name} ${event.patient_middle_name} ${event.patient_last_name}`,
-      `${event.pds_first_name} ${event.pds_middle_name} ${event.pds_last_name}`,
-      `${event.patient_residence_address} ${event.patient_residence_city} ${event.patient_residence_state} ${event.patient_residence_state} ${event.patient_residence_country_name}`,
-      `(${event.patient_phone_country_code_num}) ${event.patient_phone_num}`
+      event.patient_info.concatenated_name,
+      event.community_worker_info.concatenated_name,
+      `${event.patient_info.residence_address} ${event.patient_info.residence_city} ${event.patient_info.residence_state} ${event.patient_info.residence_country_name}`,
+      `${event.patient_info.phone_country_code_num}${event.patient_info.phone_num}`,
+      event.patient_info.user_id,
+      event.community_worker_info.user_id
     );
   });
 
@@ -47,9 +48,14 @@ export default function ConfirmPatientsTable({data}) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, key) => (
-            <Row key={key} row={row} />
-          ))}
+          {rows.map((row, key) => {
+            return (
+              <Row
+                key={key}
+                row={row}
+              />
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>

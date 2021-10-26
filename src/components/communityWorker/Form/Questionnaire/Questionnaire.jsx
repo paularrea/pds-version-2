@@ -62,7 +62,7 @@ const Questionnaire = () => {
         subtype_INTEVENTION_SURVEY(
           local_utc_date_time,
           userId && userId,
-          patient.patient_info.patient_first_name,
+          patient.patient_info.patient_id,
           pdsSign,
           filter_patient_info_values(values),
           confirmationSign,

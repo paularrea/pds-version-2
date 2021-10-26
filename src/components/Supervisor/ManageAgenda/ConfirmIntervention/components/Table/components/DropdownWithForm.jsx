@@ -20,7 +20,7 @@ const DropdownWithForm = ({ row }) => {
         </section>
       </div>
       <div className={styles.child}>
-        <ConfirmInterventionForm pendingDate={row.date}/>
+        <ConfirmInterventionForm row={row}/>
       </div>
     </div>
   );

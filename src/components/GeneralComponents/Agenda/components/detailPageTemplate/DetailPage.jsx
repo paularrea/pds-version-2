@@ -55,12 +55,7 @@ const DetailPage = () => {
               <div>
                 <img src={userIcon} alt="user" />
               </div>
-              <h3>
-                {patient.patient_info.patient_first_name}{" "}
-                {patient.patient_info.patient_middle_name}{" "}
-                {patient.patient_info.patient_last_name}{" "}
-                {patient.patient_info.patient_second_last_name}
-              </h3>
+              <h3>{patient.patient_info.patient_concatenated_name}</h3>
             </div>
             {isVisit && (
               <>

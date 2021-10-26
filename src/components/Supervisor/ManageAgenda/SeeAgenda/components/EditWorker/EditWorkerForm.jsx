@@ -70,7 +70,8 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                       {editType && <TypeInput />}
                       <EditInput onClick={() => setEditDate(!editDate)}>
                         <p>
-                          <span>Fecha de la intervención:</span> 22/09/1003
+                          <span>Fecha de la intervención:</span>{" "}
+                          {patient.local_date}
                         </p>
                       </EditInput>
                       {editDate && (
