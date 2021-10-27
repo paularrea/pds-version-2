@@ -9,7 +9,7 @@ const appointmentType = ["Llamada", "Visita"];
 const TypeInput = () => {
   return (
     <>
-      <ErrorMessage name="type" component="div" className={error} />
+      <ErrorMessage name="intervention_type" component="div" className={error} />
       <FormControl
         variant="outlined"
         style={{ width: "100%", marginBottom: "1rem" }}
@@ -18,7 +18,7 @@ const TypeInput = () => {
           Tipo de cita
         </InputLabel>
         <Field
-          name="type"
+          name="intervention_type"
           type="select"
           variant="outlined"
           label="Tipo de cita"

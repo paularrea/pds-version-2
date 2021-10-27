@@ -13,21 +13,21 @@ const SelectTimeInput = ({
 }) => {
   const [time, setTime] = useState(null);
   const onChange = (e) => {
-    setTime(clearTimeInputValue ? "fucker" : e.target.value);
-    setFieldValue("time", clearTimeInputValue ? undefined : e.target.value);
-    setTimeout(() => setFieldTouched("time", e.target.value, true));
+    setTime(clearTimeInputValue ? "" : e.target.value);
+    setFieldValue("local_time", clearTimeInputValue ? undefined : e.target.value);
+    setTimeout(() => setFieldTouched("local_time", e.target.value, true));
   };
 
   return (
     <>
-      <ErrorMessage name="time" component="div" className={error} />
+      <ErrorMessage name="local_time" component="div" className={error} />
       <FormControl
         variant="outlined"
         style={{ width: "100%", marginBottom: "1rem" }}
       >
         <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
         <Field
-          name="time"
+          name="local_time"
           type="select"
           variant="outlined"
           id="time-select"

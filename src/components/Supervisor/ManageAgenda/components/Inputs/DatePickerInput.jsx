@@ -18,10 +18,15 @@ const DatePickerInput = ({
   setListOfAvailableHours,
   onClick,
 }) => {
+
+  // function disableWeekends(date) {
+  //   return date.getDay() === 0 || date.getDay() === 6;
+  // }
+
   const [date, setDate] = useState(pendingDate ? pendingDate : null);
   const onChange = (value) => {
     const formatedValue = moment(value).format("YYYY-MM-DD").toString();
-    setFieldValue("date", formatedValue);
+    setFieldValue("local_date", formatedValue);
     setDate(formatedValue);
     availableTimesList &&
       setListOfAvailableHours(
@@ -36,9 +41,9 @@ const DatePickerInput = ({
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <ErrorMessage name="date" component="div" className={error} />
+        <ErrorMessage name="local_date" component="div" className={error} />
         <Field
-          name="date"
+          name="local_date"
           component={DatePicker}
           label={label}
           style={{ width: "100%", marginBottom: "1rem" }}
@@ -46,7 +51,10 @@ const DatePickerInput = ({
           inputVariant="outlined"
           format="YYYY-MM-DD"
           value={date}
+          minDate='2021-10-28'
+          maxDate='2021-11-28'
           onChange={onChange}
+          // shouldDisableDate={disableWeekends}
           onClick={onClick}
         />
       </MuiPickersUtilsProvider>

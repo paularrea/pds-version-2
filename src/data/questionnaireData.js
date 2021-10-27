@@ -892,7 +892,7 @@ const data = [
         response_content: ["Si", "No"],
         sub_question_id: "sub-81b72509-1f23-4409-b6ad-45d1e0793f31",
         sub_question_content:
-          "En caso afirmativo, Indíquelas a continuación:",
+          "En caso afirmativo, indíquelas a continuación:",
         sub_response_type: "EDITABLE",
         sub_response_content: "NULL",
       },

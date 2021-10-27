@@ -1,4 +1,3 @@
-// {'event_type': 'POST_INTERVENTION_SURVEY', 'event_subtype': None}
 import build_event_template from "../template/build_event_template";
 import get_local_date_time from "../template/functions/get_local_date_time";
 import get_utc_date_time from "../template/functions/get_utc_date_time";

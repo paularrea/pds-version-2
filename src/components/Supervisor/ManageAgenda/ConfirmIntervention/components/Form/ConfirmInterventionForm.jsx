@@ -14,6 +14,7 @@ import SelectActionsInput from "../../../components/Inputs/SelectActionsInput";
 import { SupervisorContext } from "../../../../../../SupervisorContext";
 import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
 import { Redirect } from "react-router";
+import subtype_CONFIRMED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED";
 
 const ConfirmInterventionForm = ({ row }) => {
   const [isSent, sendForm] = useState(false);
@@ -23,16 +24,20 @@ const ConfirmInterventionForm = ({ row }) => {
 
   const availableTimesList =
     contextData && contextData.agenda.available_times_per_community_worker;
+  const userId = contextData && contextData.user_id;
+  const patientId = row.patientId;
+  const communityWorkerId = row.linkedCommunityWorkerId;
 
   const onSubmit = async (values, formikBag) => {
     const { setSubmitting } = formikBag;
-    console.log({
-      confirm_intervention_form: values,
-    });
     setTimeout(() => {
       setSubmitting(false);
     }, 1000);
-    sendForm(true)
+    console.log('hey')
+    console.log(
+      subtype_CONFIRMED(userId, patientId, communityWorkerId, values)
+    );
+    sendForm(true);
   };
 
   const validationSchema = Yup.object().shape({
@@ -46,9 +51,9 @@ const ConfirmInterventionForm = ({ row }) => {
     <>
       <Formik
         initialValues={{
-          type: "",
-          time: "",
-          date: row.date,
+          intervention_type: "",
+          local_time: "",
+          local_date: row.date,
           actions: "",
         }}
         enableReinitialize

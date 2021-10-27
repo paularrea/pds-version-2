@@ -24,7 +24,7 @@ export default function TextModal({ modalText, bgColor, formButtonText, modalBut
             <p>{modalText}</p>
             <br />
             <div className={flex_buttons}>
-              <Button type='button' bgColor={bgColor} onClick={handleSubmit}>{modalButtonText}</Button>
+              <Button type='submit' bgColor={bgColor} onClick={handleSubmit}>{modalButtonText}</Button>
               <Button type='button' onClick={handleClose} bgColor="blue">
                 Volver
               </Button>

@@ -57,9 +57,9 @@ const NewInterventionForm = ({ data }) => {
 
   const initialValues = {
     patient_name: "",
-    type: "",
-    time: "",
-    date: "",
+    intervention_type: "",
+    local_time: "",
+    local_date: "",
     actions: "",
   };
 
