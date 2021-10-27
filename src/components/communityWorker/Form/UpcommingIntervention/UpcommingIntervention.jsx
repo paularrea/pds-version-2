@@ -10,6 +10,7 @@ import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import FormButtons from "./components/FormButtons";
 import "../mui.css";
+import subtype_FUTURE_INTERVENTION_SUGGESTION from "../../../../events/type_INTERVENTION/subtype_FUTURE_INTERVENTION_SUGGESTION"
 
 const steps = [Step1, Step2];
 
@@ -19,6 +20,8 @@ const UpcommingIntervention = () => {
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
   const patient = location.state.patient;
+  const userId = location.state.userId;
+  const starting_time = location.state.local_utc_date_time;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,12 +43,18 @@ const UpcommingIntervention = () => {
   const onSubmit = async (values, bag) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     bag.setSubmitting(false);
-    console.log({ UpcommingIntervention: values });
     if (!isLastStep()) {
       handleNext();
       return;
     } else {
-      console.log({ send_UpcommingIntervention: values });
+      console.log(
+        subtype_FUTURE_INTERVENTION_SUGGESTION(
+          starting_time,
+          userId && userId,
+          patient.patient_info.patient_id,
+          values
+        )
+      );
       sendForm(true);
     }
   };

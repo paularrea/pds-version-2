@@ -56,7 +56,6 @@ const Radio = ({
               name={question_id}
               value={answer}
             />
-
             {answer}
           </label>
         ))}

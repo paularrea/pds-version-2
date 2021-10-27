@@ -16,14 +16,21 @@ const DatePickerInput = ({
   linkedCommunityWorkerId,
   availableTimesList,
   setListOfAvailableHours,
-  onClick
+  onClick,
 }) => {
   const [date, setDate] = useState(pendingDate ? pendingDate : null);
   const onChange = (value) => {
     const formatedValue = moment(value).format("YYYY-MM-DD").toString();
     setFieldValue("date", formatedValue);
     setDate(formatedValue);
-    setListOfAvailableHours(get_list_of_hours_by_day(formatedValue, linkedCommunityWorkerId, availableTimesList));
+    availableTimesList &&
+      setListOfAvailableHours(
+        get_list_of_hours_by_day(
+          formatedValue,
+          linkedCommunityWorkerId,
+          availableTimesList
+        )
+      );
   };
 
   return (

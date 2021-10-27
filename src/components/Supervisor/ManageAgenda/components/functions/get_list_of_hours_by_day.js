@@ -3,6 +3,8 @@ export const get_list_of_hours_by_day = (
   communityWorkerId,
   availableTimesList
 ) => {
-  const arr = availableTimesList[communityWorkerId][date];
+  const arr = availableTimesList
+    ? availableTimesList[communityWorkerId][date]
+    : null;
   return arr;
 };
