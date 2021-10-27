@@ -25,7 +25,8 @@ export default function ConfirmPatientsTable({ data }) {
       `${event.patient_info.residence_address} ${event.patient_info.residence_city} ${event.patient_info.residence_state} ${event.patient_info.residence_country_name}`,
       `${event.patient_info.phone_country_code_num}${event.patient_info.phone_num}`,
       event.patient_info.user_id,
-      event.community_worker_info.user_id
+      event.community_worker_info.user_id,
+      event.suggested_event_id
     );
   });
 

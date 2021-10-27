@@ -15,35 +15,44 @@ import { SupervisorContext } from "../../../../../../SupervisorContext";
 import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
 import { Redirect } from "react-router";
 import subtype_CONFIRMED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED";
+import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
 
 const ConfirmInterventionForm = ({ row }) => {
   const [isSent, sendForm] = useState(false);
   const { contextData } = useContext(SupervisorContext);
   const [clearTimeInputValue, setClearTimeInputValue] = useState(false);
-  const [listOfAvailableHours, setListOfAvailableHours] = useState([]);
-
+  
   const availableTimesList =
-    contextData && contextData.agenda.available_times_per_community_worker;
+  contextData && contextData.agenda.available_times_per_community_worker;
   const userId = contextData && contextData.user_id;
   const patientId = row.patientId;
   const communityWorkerId = row.linkedCommunityWorkerId;
+  const suggestedEventId = row.suggestedEventId;
+  console.log(row)
+  const [listOfAvailableHours, setListOfAvailableHours] = useState(
+    get_list_of_hours_by_day(
+      row.date,
+      communityWorkerId,
+      availableTimesList
+    )
+  );
 
   const onSubmit = async (values, formikBag) => {
     const { setSubmitting } = formikBag;
     setTimeout(() => {
       setSubmitting(false);
     }, 1000);
-    console.log('hey')
+    console.log("hey");
     console.log(
-      subtype_CONFIRMED(userId, patientId, communityWorkerId, values)
+      subtype_CONFIRMED(userId, patientId, communityWorkerId, suggestedEventId, values)
     );
     sendForm(true);
   };
 
   const validationSchema = Yup.object().shape({
-    type: Yup.string().required("Campo obligatorio"),
-    date: Yup.string().required("Campo obligatorio"),
-    time: Yup.string().required("Campo obligatorio"),
+    intervention_type: Yup.string().required("Campo obligatorio"),
+    local_date: Yup.date().required("Campo obligatorio"),
+    local_time: Yup.string().required("Campo obligatorio"),
     actions: Yup.array().required("Campo obligatorio"),
   });
 
@@ -74,21 +83,22 @@ const ConfirmInterventionForm = ({ row }) => {
               <ThemeProvider theme={blue_pds}>
                 <section className={flex_form}>
                   <div>
-                    <TypeInput />
+                    <TypeInput setFieldValue={setFieldValue} />
                     <DatePickerInput
                       pendingDate={row.date}
                       label="Fecha"
                       setFieldValue={setFieldValue}
                       availableTimesList={availableTimesList}
                       setListOfAvailableHours={setListOfAvailableHours}
-                      linkedCommunityWorkerId={row.linkedCommunityWorkerId}
+                      linkedCommunityWorkerId={communityWorkerId}
                       onClick={() => setClearTimeInputValue(true)}
                     />
                     <SelectTimeInput
                       label="Hora"
+                      pendingDate={row.date}
                       setFieldValue={setFieldValue}
                       listOfAvailableHours={listOfAvailableHours}
-                      communityWorkerId={row.linkedCommunityWorkerId}
+                      communityWorkerId={communityWorkerId}
                       clearTimeInputValue={clearTimeInputValue}
                       setFieldTouched={setFieldTouched}
                     />

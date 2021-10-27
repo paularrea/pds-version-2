@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import agendaImg from "../../images/icons/supervisor/admin-agenda.png";
 import suggestImg from "../../images/icons/supervisor/admin-suggestions.png";
 import newImg from "../../images/icons/supervisor/admin-new.png";
-import styles from "../../components/Supervisor/ManageAgenda/gestionarAgenda.module.scss";
+import styles from "../../components/Supervisor/ManageAgenda/agenda.module.scss";
 import Button from "../../components/GeneralComponents/Button/Button";
 
 const buttonsData = [
@@ -35,7 +35,7 @@ const GestionarAgenda = () => {
   const {contextData} = useContext(SupervisorContext);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.flex_container}>
       {contextData &&
         buttonsData.map((item) => {
           return (

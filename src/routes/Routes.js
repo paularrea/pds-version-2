@@ -35,8 +35,8 @@ const Routes = () => {
       <Switch>
         {/* Community Worker routes */}
         <CommunityWorkerContext.Provider value={{ pdsData, setPdsData }}>
-        <Route exact path="/" component={CommunityWorkerHomePage} />
-        <Route exact path="/login" component={LoginForm} />
+        <Route exact path="/" component={LoginForm} />
+        <Route exact path="/community-worker" component={CommunityWorkerHomePage} />
         <Route exact path="/legal-advise" component={LegalAdvise} />
         <Route path="/pds-agenda/:id" component={DetailPage} />
         <Route path="/questionnaire" component={Questionnaire} />

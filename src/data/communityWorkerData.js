@@ -1,6 +1,7 @@
 const data = {
   user_id: "1c299207-e70e-4058-b0af-c1621ae04396",
-  display_name: "Donald",
+  user_password: "12345",
+  display_name: "Juan",
   user_type: "COMMUNITY_WORKER",
   notifications: [
     {

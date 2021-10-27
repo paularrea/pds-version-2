@@ -10,6 +10,7 @@ const SelectTimeInput = ({
   setFieldTouched,
   clearTimeInputValue,
   listOfAvailableHours,
+  pendingDate,
 }) => {
   const [time, setTime] = useState(null);
   const onChange = (e) => {

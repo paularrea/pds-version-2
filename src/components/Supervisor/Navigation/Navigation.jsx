@@ -4,7 +4,6 @@ import styles from "./navigation.module.scss";
 import { SidebarData } from "./SidebarData";
 import arrow from "../../../images/icons/arrow-up.png";
 import logo from "../../../images/icons/logo2.png";
-import data from "../../../data/dynamicSupervisorData";
 
 const activeStyle = {
   borderRight: "2px solid #0057FF",
@@ -28,9 +27,6 @@ const Navigation = ({ children, Logout }) => {
                     activeStyle={activeStyle}
                     to={{
                       pathname: item.path,
-                      state: {
-                        data: data,
-                      },
                     }}
                   >
                     <div>

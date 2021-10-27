@@ -25,7 +25,7 @@ const DetailPage = () => {
   const patient = location.state && location.state.intervention;
   const history = useHistory();
   const handleBack = () => {
-    history.push("/");
+    history.push("/community-worker");
   };
 
   const actions =

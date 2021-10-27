@@ -39,7 +39,10 @@ const Notification = (props) => {
       )}
 
       <div className={icon}>
-        <img src={props.bgColor === "red" ? bell : alert} alt="" />
+        <img
+          src={!props.error && (props.bgColor === "red" ? bell : alert)}
+          alt=""
+        />
       </div>
     </div>
   );

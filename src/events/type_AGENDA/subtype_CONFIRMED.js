@@ -20,9 +20,9 @@ const subtype_CONFIRMED = (
       values,
     },
   };
-  const post_intervention_survey_obj = Object.assign(event_obj, template_obj);
+  const confirmed_obj = Object.assign(event_obj, template_obj);
 
-  return post_intervention_survey_obj;
+  return confirmed_obj;
 };
 
 export default subtype_CONFIRMED;

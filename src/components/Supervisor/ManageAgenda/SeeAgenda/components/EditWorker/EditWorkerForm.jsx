@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, Formik } from "formik";
 import { blue_pds } from "../../../../../utils/InputColor";
 import DatePickerInput from "../../../components/Inputs/DatePickerInput";
@@ -9,18 +9,28 @@ import CallButton from "../../../../../GeneralComponents/Button/CallButton";
 import TypeInput from "../../../components/Inputs/TypeInput";
 import { ThemeProvider } from "@material-ui/styles";
 import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
+import { SupervisorContext } from "../../../../../../SupervisorContext";
+import subtype_CONFIRMED_MODIFIED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_MODIFIED";
+import subtype_CONFIRMED_ELIMINATED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_ELIMINATED";
 
 const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
+  const { contextData } = useContext(SupervisorContext);
   const [editType, setEditType] = useState(false);
   const [editDate, setEditDate] = useState(false);
   const [editTime, setEditTime] = useState(false);
 
   const patient = intervention && intervention;
+  const userId = contextData && contextData.user_id;
+  const confirmedEventId = patient.agenda_event_id;
 
   const onSubmit = async (values, bag) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     bag.setSubmitting(false);
-    console.log({ patient_modification_values: values });
+    console.log(subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values));
+  };
+
+  const eliminateIntervention = () => {
+    console.log(subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId));
   };
 
   return (
@@ -44,7 +54,11 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
           <br />
           <div className={form}>
             <Formik
-              initialValues={{ type: "", time: "", date: "" }}
+              initialValues={{
+                intervention_type: "",
+                local_time: "",
+                local_date: "",
+              }}
               enableReinitialize
               onSubmit={onSubmit}
             >
@@ -67,7 +81,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                             : "Visita"}
                         </p>
                       </EditInput>
-                      {editType && <TypeInput />}
+                      {editType && <TypeInput setFieldValue={setFieldValue} />}
                       <EditInput onClick={() => setEditDate(!editDate)}>
                         <p>
                           <span>Fecha de la intervención:</span>{" "}
@@ -108,6 +122,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
             </Formik>
           </div>
           <ButtonToModal
+            eliminateIntervention={eliminateIntervention}
             bgColor="red"
             formButtonText="Eliminar intervención"
             modalButtonText="Eliminar"
