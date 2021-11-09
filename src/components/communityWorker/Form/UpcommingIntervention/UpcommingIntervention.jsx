@@ -10,18 +10,28 @@ import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import FormButtons from "./components/FormButtons";
 import "../mui.css";
-import subtype_FUTURE_INTERVENTION_SUGGESTION from "../../../../events/type_INTERVENTION/subtype_FUTURE_INTERVENTION_SUGGESTION"
+import { useGeolocation } from "../../../../hooks/useGeolocation";
+import subtype_SUGGESTED_BY_HUMAN from "../../../../events/type_INTERVENTION/subtype_SUGGESTED_BY_HUMAN";
+// import { build_collection_name } from "../../../../events/build_collection_name";
+import { useUserData } from "../../../../context/UserContext";
 
 const steps = [Step1, Step2];
 
 const UpcommingIntervention = () => {
+  const userData = useUserData();
   const location = useLocation();
   const [isSent, sendForm] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
   const patient = location.state.patient;
-  const userId = location.state.userId;
+  const userId = userData && userData.user_id;
   const starting_time = location.state.local_utc_date_time;
+  const { geolocation } = useGeolocation();
+
+  const geoCoords = geolocation && {
+    latitude: geolocation.latitude,
+    longitude: geolocation.longitude,
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -48,19 +58,30 @@ const UpcommingIntervention = () => {
       return;
     } else {
       console.log(
-        subtype_FUTURE_INTERVENTION_SUGGESTION(
+        subtype_SUGGESTED_BY_HUMAN(
           starting_time,
           userId && userId,
           patient.patient_info.patient_id,
-          values
+          values,
+          geoCoords
         )
       );
+      // push_new_event_doc_into_FIRESTORE_collection(
+      //   build_collection_name("INTERVENTION"),
+      //   subtype_SUGGESTED_BY_HUMAN(
+      //     starting_time,
+      //     userId && userId,
+      //     patient.patient_info.patient_id,
+      //     values,
+      //     geoCoords
+      //   )
+      // );
       sendForm(true);
     }
   };
 
   const initialValues = {
-    date: new Date(),
+    local_date: "",
     observations: "",
   };
   const ActiveStep = steps[activeStep];

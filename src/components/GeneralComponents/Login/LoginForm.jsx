@@ -7,9 +7,7 @@ import {
   InputLabel,
   IconButton,
   ThemeProvider,
-  createMuiTheme,
 } from "@material-ui/core";
-
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 import Button from "../Button/Button";
 import styles from "./login.module.scss";
@@ -17,14 +15,10 @@ import logo from "../../../images/icons/logo.png";
 import { Redirect } from "react-router";
 import { CommunityWorkerContext } from "../../../CommunityWorkerContext";
 import ErrorNotification from "../Notification/ErrorNotification";
-
-const blue_pds = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#4284F3",
-    },
-  },
-});
+import subtype_LOGIN from "../../../events/type_USER_INTERACTION/subtype_LOGIN";
+import { useGeolocation } from "../../../hooks/useGeolocation";
+import { blue_pds } from "../../utils/InputColor";
+import { build_collection_name } from "../../../events/build_collection_name";
 
 const LoginForm = () => {
   const { pdsData } = useContext(CommunityWorkerContext);
@@ -35,19 +29,32 @@ const LoginForm = () => {
     password: "",
     showPassword: false,
   });
-
+  const { geolocation } = useGeolocation();
+  const geoCoords = geolocation && {
+    latitude: geolocation.latitude,
+    longitude: geolocation.longitude,
+  };
   const username = pdsData && pdsData.display_name;
   const userPassword = pdsData && pdsData.user_password;
+  const userId = pdsData && pdsData.user_id;
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (details.username === username && details.password === userPassword) {
       setValidateUser(true);
+      console.log(
+        build_collection_name("USER_INTERACTION"),
+        subtype_LOGIN(userId, geoCoords)
+      );
+      // push_new_event_doc_into_FIRESTORE_collection(
+      //   build_collection_name("USER_INTERACTION"),
+      //   subtype_LOGIN(userId, geoCoords)
+      // );
     } else {
       setError(true);
     }
   };
-  
+
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -100,11 +107,11 @@ const LoginForm = () => {
                 }
                 labelWidth={83}
               />
-          {error && (
-            <ErrorNotification>
-              Los datos introducidos no corresponden a ningún usuario.
-            </ErrorNotification>
-          )}
+              {error && (
+                <ErrorNotification>
+                  Los datos introducidos no corresponden a ningún usuario.
+                </ErrorNotification>
+              )}
             </FormControl>
           </ThemeProvider>
           {/* <div className={styles.recuperar}>

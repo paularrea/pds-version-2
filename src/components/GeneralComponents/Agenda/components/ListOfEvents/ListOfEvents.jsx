@@ -1,16 +1,12 @@
-import React, { useContext } from "react";
-import { CommunityWorkerContext } from "../../../../../CommunityWorkerContext";
-// import { SupervisorContext } from "../../../../../SupervisorContext";
+import React from "react";
 import UserLink from "./components/UserLink";
 import SupervisorLink from "./components/Supervisor/SupervisorLink";
+import { useUserData } from "../../../../../context/UserContext";
 
 const ListOfEvents = ({ list }) => {
-  const { pdsData } = useContext(CommunityWorkerContext);
-  const userType = pdsData && pdsData.user_type;
-  const userId = pdsData && pdsData.user_id;
-  // const { contextData } = useContext(SupervisorContext);
-  // const userType = contextData && contextData.user_type;
-  // const userId = contextData && contextData.user_id;
+  const userData = useUserData();
+  const userType = userData && userData.user_type;
+  const userId = userData && userData.user_id;
   return (
     <>
       {list &&
@@ -30,6 +26,7 @@ const ListOfEvents = ({ list }) => {
               {userType === "SUPERVISOR" && (
                 <>
                   <SupervisorLink
+                    communityWorkerId={userId}
                     intervention={intervention}
                     path={`/gestionar-agenda/agenda`}
                   />

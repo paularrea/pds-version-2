@@ -6,6 +6,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/moment";
 import moment from "moment";
 import { get_list_of_hours_by_day } from "../functions/get_list_of_hours_by_day";
+import { useUserData } from "../../../../../context/UserContext";
 
 const DatePickerInput = ({
   setFieldValue,
@@ -18,11 +19,8 @@ const DatePickerInput = ({
   setListOfAvailableHours,
   onClick,
 }) => {
-
-  // function disableWeekends(date) {
-  //   return date.getDay() === 0 || date.getDay() === 6;
-  // }
-
+  const userData = useUserData();
+  
   const [date, setDate] = useState(pendingDate ? pendingDate : null);
   const onChange = (value) => {
     const formatedValue = moment(value).format("YYYY-MM-DD").toString();
@@ -38,6 +36,11 @@ const DatePickerInput = ({
       );
   };
 
+  const get_first_available_date =
+    userData && userData.future_available_dates.first_available_date;
+  const get_last_available_date =
+    userData && userData.future_available_dates.last_available_date;
+
   return (
     <>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -51,8 +54,8 @@ const DatePickerInput = ({
           inputVariant="outlined"
           format="YYYY-MM-DD"
           value={date}
-          minDate='2021-10-28'
-          maxDate='2021-11-28'
+          minDate={get_first_available_date}
+          maxDate={get_last_available_date}
           onChange={onChange}
           // shouldDisableDate={disableWeekends}
           onClick={onClick}

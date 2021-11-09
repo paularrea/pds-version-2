@@ -24,9 +24,6 @@ const TypeInput = ({ setFieldValue }) => {
         variant="outlined"
         style={{ width: "100%", marginBottom: "1rem" }}
       >
-        <InputLabel id="demo-simple-select-outlined-label">
-          Tipo de cita
-        </InputLabel>
         <Field
           name="intervention_type"
           type="select"

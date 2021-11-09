@@ -1,10 +1,25 @@
 import React from "react";
 import Button from "../../GeneralComponents/Button/Button";
 import { container } from "./legal.module.scss";
+import subtype_LEGAL_TEXT_ACCEPTED from "../../../events/type_USER_INTERACTION/subtype_LEGAL_TEXT_ACCEPTED";
+import { useGeolocation } from "../../../hooks/useGeolocation";
+import { CommunityWorkerContext } from "../../../CommunityWorkerContext";
+import { build_collection_name } from "../../../events/build_collection_name";
 
 const LegalAdvise = ({ legalAdviceAccepted, setLegalAdviceAccepted }) => {
+
+  // const { geolocation } = useGeolocation();
+  // const geoCoords = geolocation && {
+  //   latitude: geolocation.latitude,
+  //   longitude: geolocation.longitude,
+  // };
+
   const handleAccept = () => {
     setLegalAdviceAccepted(true);
+    // push_new_event_doc_into_FIRESTORE_collection(
+    //   build_collection_name("USER_INTERACTION"),
+    //   subtype_LEGAL_TEXT_ACCEPTED(userId, geoCoords)
+    // );
     sessionStorage.setItem("LEGAL_DISCLAIMER_ACCEPTANCE", "ACCEPTED");
   };
 

@@ -7,10 +7,12 @@ import { Stepper } from "@material-ui/core";
 import SwipeableViews from "react-swipeable-views";
 import { ThemeProvider } from "@material-ui/core";
 import { blue_pds } from "../../../../../utils/InputColor.js";
+import subtype_CONFIRMED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import FormButtons from "./components/FormButtons";
+import { useGeolocation } from "../../../../../../hooks/useGeolocation";
 
 const steps = [Step1, Step2, Step3];
 
@@ -20,8 +22,15 @@ const NewInterventionForm = ({ data }) => {
   const [isSent, sendForm] = useState(false);
   const [patientId, setPatientId] = useState("");
   const [communityWorkerId, setCommunityWorkerId] = useState("");
-  const linkPatientsInfo = data && data.agenda.linked_patients_info;
+  const linkPatientsInfo = data && data.linked_patients_info;
+  const { geolocation } = useGeolocation();
   
+  const geoCoords = geolocation && {
+    latitude: geolocation.latitude,
+    longitude: geolocation.longitude,
+  };
+
+  const userId = data && data.user_id;
   const isLastStep = () => {
     return activeStep === steps.length - 1;
   };
@@ -39,20 +48,24 @@ const NewInterventionForm = ({ data }) => {
     setActiveStep(Math.min(activeStep + 1, steps.length - 1));
   };
 
-  const onSubmit = async (values, formikBag) => {
-    const { setSubmitting } = formikBag;
-    console.log({
-      evaluation_form: values,
-    });
-    isLastStep() && sendForm(true);
+  const onSubmit = async (values, bag) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    bag.setSubmitting(false);
     if (!isLastStep()) {
       handleNext();
-      setSubmitting(false);
       return;
+    } else {
+      console.log(
+        subtype_CONFIRMED(
+          userId,
+          patientId,
+          communityWorkerId,
+          values,
+          geoCoords
+        )
+      );
+      sendForm(true);
     }
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 1000);
   };
 
   const initialValues = {

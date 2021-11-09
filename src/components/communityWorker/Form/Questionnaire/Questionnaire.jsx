@@ -6,7 +6,6 @@ import { theme, blue_pds } from "./components/formTheme";
 import SwipeableViews from "react-swipeable-views";
 import { Stepper } from "@material-ui/core";
 import data from "../../../../data/questionnaireData";
-import subtype_INTEVENTION_SURVEY from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY";
 import { fixed_header, header, img } from "../form.module.scss";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
@@ -15,13 +14,20 @@ import Step4 from "./steps/Step4";
 import Step5 from "./steps/Step5";
 import FormButtons from "./components/FormButtons";
 import "../mui.css";
+import { useGeolocation } from "../../../../hooks/useGeolocation";
 import filter_patient_info_values from "./components/functions/filter_patient_info_values";
 import filter_intervention_survey_values from "./components/functions/filter_intervention_survey_values";
-
+import subtype_INTERVENTION_SURVEY_A from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_A";
+import subtype_INTERVENTION_SURVEY_B from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_B";
+import subtype_INTERVENTION_SURVEY_C from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_C";
+import subtype_INTERVENTION_SURVEY_D from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_D";
+// import { build_collection_name } from "../../../../events/build_collection_name";
+import { useUserData } from "../../../../context/UserContext";
 
 const steps = [Step1, Step2, Step3, Step4, Step5];
 
 const Questionnaire = () => {
+    const userData = useUserData();
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
   const location = useLocation();
@@ -31,8 +37,14 @@ const Questionnaire = () => {
   const [isPDSSigned, setIsPDSSigned] = useState(false);
   const [isConfirmationSigned, setIsConfirmationSigned] = useState(false);
   const patient = location.state.patient;
-  const userId = location.state.userId;
- const local_utc_date_time = location.state.local_utc_date_time;
+  const userId = userData && userData.user_id;
+  const local_utc_date_time = location.state.local_utc_date_time;
+  const { geolocation } = useGeolocation();
+
+  const geoCoords = geolocation && {
+    latitude: geolocation.latitude,
+    longitude: geolocation.longitude,
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -58,18 +70,83 @@ const Questionnaire = () => {
       handleNext();
       return;
     } else {
+      sendForm(true);
       console.log(
-        subtype_INTEVENTION_SURVEY(
+        subtype_INTERVENTION_SURVEY_A(
+          local_utc_date_time,
+          userId && userId,
+          patient.patient_info.patient_id,
+          filter_patient_info_values(values),
+          geoCoords
+        )
+      );
+      console.log(
+        subtype_INTERVENTION_SURVEY_B(
           local_utc_date_time,
           userId && userId,
           patient.patient_info.patient_id,
           pdsSign,
-          filter_patient_info_values(values),
-          confirmationSign,
-          filter_intervention_survey_values(values)
+          geoCoords
         )
       );
-      sendForm(true);
+      console.log(
+        subtype_INTERVENTION_SURVEY_C(
+          local_utc_date_time,
+          userId && userId,
+          patient.patient_info.patient_id,
+          filter_intervention_survey_values(values),
+          geoCoords
+        )
+      );
+      console.log(
+        subtype_INTERVENTION_SURVEY_D(
+          local_utc_date_time,
+          userId && userId,
+          patient.patient_info.patient_id,
+          confirmationSign,
+          geoCoords
+        )
+      );
+      // push_new_event_doc_into_FIRESTORE_collection(
+      //   build_collection_name("INTERVENTION"),
+      //   subtype_INTERVENTION_SURVEY_A(
+      //     local_utc_date_time,
+      //     userId && userId,
+      //     patient.patient_info.patient_id,
+      //     filter_patient_info_values(values),
+      //     geoCoords
+      //   )
+      // );
+      // push_new_event_doc_into_FIRESTORE_collection(
+      //   build_collection_name("INTERVENTION"),
+      //   subtype_INTERVENTION_SURVEY_B(
+      //     local_utc_date_time,
+      //     userId && userId,
+      //     patient.patient_info.patient_id,
+      //     pdsSign,
+      //     geoCoords
+      //   )
+      // );
+      // push_new_event_doc_into_FIRESTORE_collection(
+      //   build_collection_name("INTERVENTION"),
+      //   subtype_INTERVENTION_SURVEY_C(
+      //     local_utc_date_time,
+      //     userId && userId,
+      //     patient.patient_info.patient_id,
+      //     filter_intervention_survey_values(values),
+      //     geoCoords
+      //   )
+      // );
+      // push_new_event_doc_into_FIRESTORE_collection(
+      //   build_collection_name("INTERVENTION"),
+      //   subtype_INTERVENTION_SURVEY_D(
+      //     local_utc_date_time,
+      //     userId && userId,
+      //     patient.patient_info.patient_id,
+      //     confirmationSign,
+      //     geoCoords
+      //   )
+      // );
     }
   };
 

@@ -1,11 +1,12 @@
 import build_event_template from "../template/build_event_template";
 
-const subtype_LEGAL_TEXT_ACCEPTED = (userId, patientId) => {
+const subtype_LEGAL_TEXT_ACCEPTED = (userId, geoCoords, patientId) => {
   const template_obj = build_event_template();
   const event_obj = {
     event_created_by_user_id: userId,
     event_type: "USER_INTERACTION",
-    event_subtype: "LEGAL_TEXT_ACCEPTED",
+    event_subtype: "LEGAL",
+    device_geolocation_coords: geoCoords,
     content: {
       list_of_supervisor_ids: ["", ""],
       community_worker_id: userId,

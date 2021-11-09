@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import userIcon from "../../../../../../images/icons/User.png";
 import locationIcon from "../../../../../../images/icons/supervisor/locationv2.png";
 import styles from "./patientInfo.module.scss";
 import CallButton from "../../../../../GeneralComponents/Button/CallButton";
 
-const PatientInfo = ({ patientId, linkPatientsInfo }) => {
+const PatientInfo = ({ patientId, linkPatientsInfo, setCommunityWorkerId }) => {
   const patientInfoValues = linkPatientsInfo[patientId];
+  useEffect(() => {
+    setCommunityWorkerId(patientInfoValues.linked_community_worker_id);
+  }, [setCommunityWorkerId, patientInfoValues.linked_community_worker_id]);
   return (
     <>
       <div className={styles.flex_child}>

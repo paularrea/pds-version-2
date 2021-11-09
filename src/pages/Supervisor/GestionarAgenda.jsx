@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { SupervisorContext } from "../../SupervisorContext";
+import React from "react";
 import { Link } from "react-router-dom";
 import agendaImg from "../../images/icons/supervisor/admin-agenda.png";
 import suggestImg from "../../images/icons/supervisor/admin-suggestions.png";
 import newImg from "../../images/icons/supervisor/admin-new.png";
 import styles from "../../components/Supervisor/ManageAgenda/agenda.module.scss";
 import Button from "../../components/GeneralComponents/Button/Button";
+import { useUserData } from "../../context/UserContext";
 
 const buttonsData = [
   {
@@ -32,11 +32,10 @@ const buttonsData = [
 ];
 
 const GestionarAgenda = () => {
-  const {contextData} = useContext(SupervisorContext);
-
+const userData = useUserData();
   return (
     <div className={styles.flex_container}>
-      {contextData &&
+      {userData &&
         buttonsData.map((item) => {
           return (
             <div>
@@ -48,7 +47,7 @@ const GestionarAgenda = () => {
                   to={{
                     pathname: item.path,
                     state: {
-                      data: contextData,
+                      data: userData,
                     },
                   }}
                 >

@@ -24,8 +24,9 @@ const DetailPage = () => {
   const userId = location.state.communityWorkerInfo;
   const patient = location.state && location.state.intervention;
   const history = useHistory();
+  
   const handleBack = () => {
-    history.push("/community-worker");
+    history.push("/");
   };
 
   const actions =
@@ -40,7 +41,8 @@ const DetailPage = () => {
   const patientURL = window.location.pathname;
   const isVisit = patient && patient.intervention_type === "VISIT";
   const agendaEventId = patient && patient.agenda_event_id;
-
+  const patientId = patient && patient.patient_info.patient_id;
+  
   return (
     <div className={container}>
       {patient ? (
@@ -84,7 +86,7 @@ const DetailPage = () => {
             )}
             <CallButton
               agendaEventId={agendaEventId}
-              userId={userId}
+              patientId={patientId}
               width="100%"
               prefixNumber={patient.patient_info.patient_phone_country_code_num}
               phoneNumber={patient.patient_info.patient_phone_num}

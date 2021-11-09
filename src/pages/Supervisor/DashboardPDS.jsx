@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import { SupervisorContext } from "../../SupervisorContext";
+import React from "react";
 import styles from "../../components/Supervisor/Dashboards/dashboardPDS.module.scss";
 import Chart from "../../components/Supervisor/Dashboards/Charts/Chart";
 import Infobox from "../../components/Supervisor/Dashboards/infoBox/PDS/Infobox";
 import PdsTableList from "../../components/Supervisor/Dashboards/Tables/PDS/PdsTableList";
+import { useUserData } from "../../context/UserContext";
 
 const DashboardPDS = () => {
-  const {contextData} = useContext(SupervisorContext);
-  const data = contextData && contextData.dashboard_all_community_workers
+  const userData = useUserData()
+  const data = userData && userData.dashboard_all_community_workers
   return (
     <div className={styles.container}>
       {data && (

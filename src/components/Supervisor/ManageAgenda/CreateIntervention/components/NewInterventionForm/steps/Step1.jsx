@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 import { error } from "../../../../components/Inputs/errorMessage.module.scss";
 import { Select } from "formik-material-ui";
-import { MenuItem, FormControl, InputLabel } from "@material-ui/core";
+import { MenuItem, FormControl } from "@material-ui/core";
 import styles from "../../../../../../communityWorker/Form/form.module.scss";
 import step1 from "../../../../../../../images/steps/step1-3.png";
 import PatientInfo from "../../PatientInfo/patientInfo";
@@ -12,6 +12,7 @@ const NewInterventionStep1 = ({
   data,
   refProp,
   setFieldValue,
+  setCommunityWorkerId,
   values,
   errors,
   touched,
@@ -20,7 +21,7 @@ const NewInterventionStep1 = ({
   linkPatientsInfo,
 }) => {
   const [patientSelected, setPatientSelected] = useState(false);
-  const patientList = data && data.agenda.list_of_linked_patients;
+  const patientList = data && data.list_of_linked_patients;
 
   const onChange = (e) => {
     setFieldValue(e.target.name, e.target.value);
@@ -32,14 +33,11 @@ const NewInterventionStep1 = ({
       <div className={styles.swipable_component}>
         <ErrorMessage name="patient_name" component="div" className={error} />
         <FormControl variant="outlined" style={{ width: "100%" }}>
-          <InputLabel id="demo-simple-select-outlined-label">
-            Selecciona un Paciente
-          </InputLabel>
           <Field
             name="patient_name"
             type="select"
             variant="outlined"
-            label="Selecciona un Paciente"
+            label={"Selecciona un Paciente"}
             style={{ width: "100%" }}
             component={Select}
             onChange={onChange}
@@ -74,6 +72,7 @@ const NewInterventionStep1 = ({
             <PatientInfo
               patientId={patientId}
               linkPatientsInfo={linkPatientsInfo}
+              setCommunityWorkerId={setCommunityWorkerId}
             />
           </div>
         ) : null}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EditWorkerForm from "../../../../../../Supervisor/ManageAgenda/SeeAgenda/components/EditWorker/EditWorkerForm";
 import PatientInfoLink from "./components/PatientInfoLink";
 
-const UserLink = ({ intervention }) => {
+const UserLink = ({ intervention, communityWorkerId }) => {
   const [showDetails, setShowDetails] = useState(false);
   const onClick = () => {
     setShowDetails(!showDetails);
@@ -17,6 +17,7 @@ const UserLink = ({ intervention }) => {
       />
       {showDetails ? (
         <EditWorkerForm
+        communityWorkerId={communityWorkerId}
           showDetails={showDetails}
           setShowDetails={setShowDetails}
           intervention={intervention}

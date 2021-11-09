@@ -1,28 +1,35 @@
 import React from "react";
 import { container, icon } from "./notification.module.scss";
-// import notification_aknowledged from "../../../events/type_USER_INTERACTION/subtype_NOTIFICATION_ACKNOWLEDGED";
 import bell from "../../../images/icons/bell.png";
 import alert from "../../../images/icons/alert.png";
+import { useGeolocation } from "../../../hooks/useGeolocation";
+import subtype_NOTIFICATION_ACKNOWLEDGED from "../../../events/type_USER_INTERACTION/subtype_NOTIFICATION_ACKNOWLEDGED";
+// import { build_collection_name } from "../../../events/build_collection_name";
 
 const Notification = (props) => {
-  // const userId = props.data.user_id ? props.data.user_id : undefined;
+  // const { geolocation } = useGeolocation();
+  // const geoCoords = geolocation && {
+  //   latitude: geolocation.latitude,
+  //   longitude: geolocation.longitude,
+  // };
+  // const userId = props.data && props.data.user_id;
   // const notificationId = props.notificationId;
 
-  // const notificationAknowledgedEvent = () => {
-  //   console.log(
-  //     notification_aknowledged(userId, notificationId),
-  //     "notification_aknowledged_event"
-  //   );
-  // };
+  const notificationAknowledgedEvent = () => {
+    props.onRemove(props.notification.notification_id);
+    // push_new_event_doc_into_FIRESTORE_collection(
+    //   build_collection_name("USER_INTERACTION"),
+    //   subtype_NOTIFICATION_ACKNOWLEDGED(userId, notificationId, geoCoords)
+    // );
+  };
 
   return (
     <div
-      // onClick={userId !== undefined && notificationAknowledgedEvent}
       className={container}
       style={{
-        backgroundColor: props.bgColor === "red" ? "#FFF2F7" : "#F3F8FF",
+        backgroundColor: props.priority === "HIGH" ? "#FFF2F7" : "#F3F8FF",
         borderLeft: `2px solid ${
-          props.bgColor === "red" ? "#FF2E79" : "#2E83F8"
+          props.priority === "HIGH" ? "#FF2E79" : "#2E83F8"
         }`,
       }}
     >
@@ -32,7 +39,7 @@ const Notification = (props) => {
           style={{ marginTop: ".5rem" }}
           className="link"
           type="button"
-          onClick={() => props.onRemove(props.notification.order)}
+          onClick={notificationAknowledgedEvent}
         >
           {props.response}
         </button>
@@ -40,7 +47,7 @@ const Notification = (props) => {
 
       <div className={icon}>
         <img
-          src={!props.error && (props.bgColor === "red" ? bell : alert)}
+          src={!props.error && (props.priority === "HIGH" ? bell : alert)}
           alt=""
         />
       </div>

@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 
 export default function ConfirmPatientsTable({ data }) {
-  const sortedDates = data.agenda.pending_agenda_events.sort(
+  const sortedDates = data.pending_agenda_events.sort(
     (a, b) =>
       new Date(...a.date.split("/").reverse()) -
       new Date(...b.date.split("/").reverse())

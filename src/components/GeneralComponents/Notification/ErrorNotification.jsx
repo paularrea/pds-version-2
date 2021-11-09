@@ -4,7 +4,9 @@ import Notification from "./Notification";
 const ErrorNotification = (props) => {
   return (
     <div>
-      <Notification error={true} bgColor="red">{props.children}</Notification>
+      <Notification error={true} priority="HIGH">
+        {props.children}
+      </Notification>
     </div>
   );
 };

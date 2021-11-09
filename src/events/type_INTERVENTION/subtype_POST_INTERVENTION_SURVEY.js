@@ -7,13 +7,15 @@ const subtype_POST_INTERVENTION_SURVEY = (
   starting_time,
   userId,
   patientId,
-  values
+  values,
+  geoCoords
 ) => {
   const template_obj = build_event_template();
   const event_obj = {
     event_created_by_user_id: userId,
     event_type: "INTERVENTION",
     event_subtype: "POST_INTERVENTION_SURVEY",
+    device_geolocation_coords: geoCoords,
     content: {
       list_of_supervisor_ids: ["f6aadf78-c5cf-4ae1-a527-f97ba206071a"],
       community_worker_id: userId,
@@ -23,7 +25,7 @@ const subtype_POST_INTERVENTION_SURVEY = (
       sent: {
         utc_date_time: get_utc_date_time(),
         local_date_time: get_local_date_time(),
-        geolocation_coords: { latitude: 41.390205, longitude: 2.154007 },
+        geolocation_coords: geoCoords,
       },
     },
   };

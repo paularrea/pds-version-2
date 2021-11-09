@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 import { error } from "../../components/Inputs/errorMessage.module.scss";
-import TextField from "@mui/material/TextField";
-import { Autocomplete } from "formik-material-ui-lab";
+import { Autocomplete, TextField } from "@mui/material";
 
 const actions = [
   "Verificar datos personales",
@@ -24,7 +23,7 @@ const SelectActionsInput = ({ errors, touched, setFieldValue }) => {
       <ErrorMessage name="actions" component="div" className={error} />
       <Field
         name="actions"
-        style={{ width: "350px" }}
+        style={{ maxWidth: "350px" }}
         multiple
         freeSolo
         onChange={onChange}

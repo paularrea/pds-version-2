@@ -9,28 +9,45 @@ import CallButton from "../../../../../GeneralComponents/Button/CallButton";
 import TypeInput from "../../../components/Inputs/TypeInput";
 import { ThemeProvider } from "@material-ui/styles";
 import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
-import { SupervisorContext } from "../../../../../../SupervisorContext";
 import subtype_CONFIRMED_MODIFIED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_MODIFIED";
 import subtype_CONFIRMED_ELIMINATED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_ELIMINATED";
+import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
+import { useGeolocation } from "../../../../../../hooks/useGeolocation";
+import { useUserData } from "../../../../../../context/UserContext";
 
-const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
-  const { contextData } = useContext(SupervisorContext);
+const EditWorker = ({ intervention, setShowDetails, showDetails, communityWorkerId }) => {
+  const userData = useUserData()
   const [editType, setEditType] = useState(false);
   const [editDate, setEditDate] = useState(false);
   const [editTime, setEditTime] = useState(false);
+  const [clearTimeInputValue, setClearTimeInputValue] = useState(false);
+  const { geolocation } = useGeolocation();
+  
+  const geoCoords = geolocation && {
+    latitude: geolocation.latitude,
+    longitude: geolocation.longitude,
+  };
 
   const patient = intervention && intervention;
-  const userId = contextData && contextData.user_id;
+  const userId = userData && userData.user_id;
   const confirmedEventId = patient.agenda_event_id;
+
+  const availableTimesList =
+    userData && userData.agenda.available_times_per_community_worker;
+  const dateSavedInJson = patient.local_date;
+
+  const [listOfAvailableHours, setListOfAvailableHours] = useState(
+    get_list_of_hours_by_day(dateSavedInJson, communityWorkerId, availableTimesList)
+  );
 
   const onSubmit = async (values, bag) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     bag.setSubmitting(false);
-    console.log(subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values));
+    console.log(subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values, geoCoords));
   };
 
   const eliminateIntervention = () => {
-    console.log(subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId));
+    console.log(subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId, geoCoords));
   };
 
   return (
@@ -69,6 +86,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                 values,
                 errors,
                 setFieldValue,
+                setFieldTouched,
               }) => (
                 <>
                   <Form onSubmit={handleSubmit}>
@@ -92,6 +110,10 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                         <DatePickerInput
                           label="Nueva fecha"
                           setFieldValue={setFieldValue}
+                          availableTimesList={availableTimesList}
+                          setListOfAvailableHours={setListOfAvailableHours}
+                          linkedCommunityWorkerId={communityWorkerId}
+                          onClick={() => setClearTimeInputValue(true)}
                         />
                       )}
                       <EditInput onClick={() => setEditTime(!editTime)}>
@@ -104,6 +126,10 @@ const EditWorker = ({ intervention, setShowDetails, showDetails }) => {
                         <SelectTimeInput
                           label="Nueva hora"
                           setFieldValue={setFieldValue}
+                          listOfAvailableHours={listOfAvailableHours}
+                          communityWorkerId={communityWorkerId}
+                          clearTimeInputValue={clearTimeInputValue}
+                          setFieldTouched={setFieldTouched}
                         />
                       )}
                       <br />

@@ -71,14 +71,11 @@
             }
         }
         .logout{
+            cursor: pointer;
             justify-content: flex-start;
             p{
-                color: gray;
+                color: #2E83F8;
                 margin-right: 2rem;
-            }
-            img{
-                height:18px;
-                filter: grayscale(100%) opacity(80%);
             }
         }
     }

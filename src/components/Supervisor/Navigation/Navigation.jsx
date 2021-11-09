@@ -1,9 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import styles from "./navigation.module.scss";
 import { SidebarData } from "./SidebarData";
 import arrow from "../../../images/icons/arrow-up.png";
 import logo from "../../../images/icons/logo2.png";
+import { useAuth } from "../../../user_auth_with_FIREBASE/AuthContext";
+import { getAutoHeightDuration } from "@mui/material/styles/createTransitions";
 
 const activeStyle = {
   borderRight: "2px solid #0057FF",
@@ -11,44 +13,61 @@ const activeStyle = {
   backgroundColor: "rgba(0, 85, 255, 0.2)",
 };
 
-const Navigation = ({ children, Logout }) => {
+const Navigation = ({ children }) => {
+  const auth = useAuth();
+
+  const logOutHandleClick = async () => {
+    // await push_new_event_doc_into_FIRESTORE_collection(
+    //   build_collection_name("USER_INTERACTION"),
+    //   subtype_LOGOUT(userId, geoCoords)
+    // );
+    window.localStorage.removeItem("user_data_from_FIRESTORE");
+    await auth.logout();
+  };
+
   return (
-    <div className={styles.navbar}>
-      <div className={styles.logo}>
-        <img src={logo} alt="" />
-      </div>
-      <div className={styles.nav_menu}>
-        <nav>
-          <ul className={styles.nav_menu_items}>
-            {SidebarData.map((item, index) => {
-              return (
-                <li key={index} className={styles.nav_text}>
-                  <NavLink
-                    activeStyle={activeStyle}
-                    to={{
-                      pathname: item.path,
-                    }}
-                  >
-                    <div>
-                      <p>{item.title}</p>
-                      <img src={arrow} alt="flecha" />
+    <>
+      {auth.user ? (
+        <div className={styles.navbar}>
+          <div className={styles.logo}>
+            <img src={logo} alt="" />
+          </div>
+          <div className={styles.nav_menu}>
+            <nav>
+              <ul className={styles.nav_menu_items}>
+                {SidebarData.map((item, index) => {
+                  return (
+                    <li key={index} className={styles.nav_text}>
+                      <NavLink
+                        activeStyle={activeStyle}
+                        to={{
+                          pathname: item.path,
+                        }}
+                      >
+                        <div>
+                          <p>{item.title}</p>
+                          <img src={arrow} alt="flecha" />
+                        </div>
+                      </NavLink>
+                    </li>
+                  );
+                })}
+                <li className={styles.nav_text}>
+                  <button onClick={logOutHandleClick}>
+                    <div className={styles.logout}>
+                      <p>Logout</p>
                     </div>
-                  </NavLink>
+                  </button>
                 </li>
-              );
-            })}
-            <li className={styles.nav_text}>
-              <button onClick={Logout}>
-                <div className={styles.logout}>
-                  <p>Logout</p>
-                </div>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div className={styles.page}>{children}</div>
-    </div>
+              </ul>
+            </nav>
+          </div>
+          <div className={styles.page}>{children}</div>
+        </div>
+      ) : (
+        <Redirect to="/login" />
+      )}
+    </>
   );
 };
 

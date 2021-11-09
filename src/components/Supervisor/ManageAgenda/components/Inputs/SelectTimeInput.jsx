@@ -26,7 +26,6 @@ const SelectTimeInput = ({
         variant="outlined"
         style={{ width: "100%", marginBottom: "1rem" }}
       >
-        <InputLabel id="demo-simple-select-outlined-label">{label}</InputLabel>
         <Field
           name="local_time"
           type="select"

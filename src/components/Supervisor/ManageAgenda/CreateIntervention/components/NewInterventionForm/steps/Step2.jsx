@@ -25,12 +25,12 @@ const NewInterventionStep2 = ({
     linkPatientsInfo[patientId] &&
     linkPatientsInfo[patientId].linked_community_worker_id;
   const availableTimesList =
-    data && data.agenda.available_times_per_community_worker;
+    data && data.available_times_per_community_worker;
 
   const patientInfoVerification = (
     <>
       <div className={styles.swipable_component}>
-        <TypeInput />
+        <TypeInput setFieldValue={setFieldValue} />
         <DatePickerInput
           label="Fecha"
           availableTimesList={availableTimesList}
@@ -67,9 +67,9 @@ const NewInterventionStep2 = ({
 NewInterventionStep2.label = "Características de la intervención";
 
 NewInterventionStep2.validationSchema = Yup.object().shape({
-  type: Yup.string().required("Campo obligatorio"),
-  date: Yup.string().required("Campo obligatorio"),
-  time: Yup.string().required("Campo obligatorio"),
+  intervention_type: Yup.string().required("Campo obligatorio"),
+  local_date: Yup.string().required("Campo obligatorio"),
+  local_time: Yup.string().required("Campo obligatorio"),
   actions: Yup.array().required("Campo obligatorio"),
 });
 

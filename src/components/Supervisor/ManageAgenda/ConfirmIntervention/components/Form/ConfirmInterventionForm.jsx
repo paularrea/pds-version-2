@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState} from "react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import {
@@ -11,30 +11,32 @@ import TypeInput from "../../../components/Inputs/TypeInput";
 import DatePickerInput from "../../../components/Inputs/DatePickerInput";
 import SelectTimeInput from "../../../components/Inputs/SelectTimeInput";
 import SelectActionsInput from "../../../components/Inputs/SelectActionsInput";
-import { SupervisorContext } from "../../../../../../SupervisorContext";
 import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
 import { Redirect } from "react-router";
 import subtype_CONFIRMED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED";
 import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
+import { useGeolocation } from "../../../../../../hooks/useGeolocation";
+import { useUserData } from "../../../../../../context/UserContext";
 
 const ConfirmInterventionForm = ({ row }) => {
+  const userData = useUserData();
   const [isSent, sendForm] = useState(false);
-  const { contextData } = useContext(SupervisorContext);
   const [clearTimeInputValue, setClearTimeInputValue] = useState(false);
-  
+  const { geolocation } = useGeolocation();
+
+  const geoCoords = geolocation && {
+    latitude: geolocation.latitude,
+    longitude: geolocation.longitude,
+  };
+
   const availableTimesList =
-  contextData && contextData.agenda.available_times_per_community_worker;
-  const userId = contextData && contextData.user_id;
+    userData && userData.available_times_per_community_worker;
+  const userId = userData && userData.user_id;
   const patientId = row.patientId;
   const communityWorkerId = row.linkedCommunityWorkerId;
   const suggestedEventId = row.suggestedEventId;
-  console.log(row)
   const [listOfAvailableHours, setListOfAvailableHours] = useState(
-    get_list_of_hours_by_day(
-      row.date,
-      communityWorkerId,
-      availableTimesList
-    )
+    get_list_of_hours_by_day(row.date, communityWorkerId, availableTimesList)
   );
 
   const onSubmit = async (values, formikBag) => {
@@ -42,9 +44,15 @@ const ConfirmInterventionForm = ({ row }) => {
     setTimeout(() => {
       setSubmitting(false);
     }, 1000);
-    console.log("hey");
     console.log(
-      subtype_CONFIRMED(userId, patientId, communityWorkerId, suggestedEventId, values)
+      subtype_CONFIRMED(
+        userId,
+        patientId,
+        communityWorkerId,
+        values,
+        geoCoords,
+        suggestedEventId
+      )
     );
     sendForm(true);
   };
@@ -85,8 +93,8 @@ const ConfirmInterventionForm = ({ row }) => {
                   <div>
                     <TypeInput setFieldValue={setFieldValue} />
                     <DatePickerInput
-                      pendingDate={row.date}
                       label="Fecha"
+                      pendingDate={row.date}
                       setFieldValue={setFieldValue}
                       availableTimesList={availableTimesList}
                       setListOfAvailableHours={setListOfAvailableHours}

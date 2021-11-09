@@ -9,7 +9,7 @@ const NotificationsList = ({ data }) => {
   const [list, setList] = useState(data.notifications);
 
   function handleRemove(id) {
-    const newList = list.filter((notification) => notification.order !== id);
+    const newList = list.filter((notification) => notification.notification_id !== id);
     setList(newList);
   }
 
@@ -20,12 +20,12 @@ const NotificationsList = ({ data }) => {
           return (
             <Notification
               data={data}
-              key={notification.order}
+              key={notification.notification_id}
               onRemove={onRemove}
               notification={notification}
               notificationId={notification.notification_id}
-              bgColor={notification.background_color}
-              response={notification.response_text}
+              priority={notification.priority}
+              response={notification.list_of_responses[0].text}
             >
               {notification.main_text}
             </Notification>
