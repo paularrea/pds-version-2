@@ -10,6 +10,8 @@ const WelcomeMessage = ({ data }) => {
         return "o";
       case "OTHER":
         return "o/a";
+        case undefined:
+          return "o/a";
       default:
         break;
     }

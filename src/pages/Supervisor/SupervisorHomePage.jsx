@@ -4,13 +4,13 @@ import WelcomeMessage from "../../components/GeneralComponents/HomeComponents/We
 import { useUserData } from "../../context/UserContext";
 
 const SupervisorHomePage = () => {
-  const userData = useUserData();
+  const context = useUserData();
   return (
     <>
-      {userData ? (
+      {context.data ? (
         <>
-          <WelcomeMessage data={userData} />
-          <NotificationsList data={userData} />
+          <WelcomeMessage data={context.data} />
+          <NotificationsList data={context.data} />
         </>
       ) : (
         "data not loaded..."

@@ -19,7 +19,7 @@ const DatePickerInput = ({
   setListOfAvailableHours,
   onClick,
 }) => {
-  const userData = useUserData();
+  const context = useUserData();
   
   const [date, setDate] = useState(pendingDate ? pendingDate : null);
   const onChange = (value) => {
@@ -37,9 +37,9 @@ const DatePickerInput = ({
   };
 
   const get_first_available_date =
-    userData && userData.future_available_dates.first_available_date;
+    context.data && context.data.future_available_dates.first_available_date;
   const get_last_available_date =
-    userData && userData.future_available_dates.last_available_date;
+    context.data && context.data.future_available_dates.last_available_date;
 
   return (
     <>

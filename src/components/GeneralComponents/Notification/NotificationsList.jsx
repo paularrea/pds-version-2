@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Notification from "./Notification";
 import {
   no_notifications,
@@ -8,8 +8,14 @@ import {
 const NotificationsList = ({ data }) => {
   const [list, setList] = useState(data.notifications);
 
+  useEffect(() => {
+    setList(data.notifications);
+  }, [data]);
+
   function handleRemove(id) {
-    const newList = list.filter((notification) => notification.notification_id !== id);
+    const newList = list.filter(
+      (notification) => notification.notification_id !== id
+    );
     setList(newList);
   }
 

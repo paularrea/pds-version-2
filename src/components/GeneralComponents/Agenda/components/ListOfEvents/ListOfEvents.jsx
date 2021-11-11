@@ -4,9 +4,9 @@ import SupervisorLink from "./components/Supervisor/SupervisorLink";
 import { useUserData } from "../../../../../context/UserContext";
 
 const ListOfEvents = ({ list }) => {
-  const userData = useUserData();
-  const userType = userData && userData.user_type;
-  const userId = userData && userData.user_id;
+  const context = useUserData();
+  const userType = context && context.data.user_type;
+  const userId = context && context.data.user_id;
   return (
     <>
       {list &&

@@ -32,10 +32,10 @@ const buttonsData = [
 ];
 
 const GestionarAgenda = () => {
-const userData = useUserData();
+  const context = useUserData();
   return (
     <div className={styles.flex_container}>
-      {userData &&
+      {context &&
         buttonsData.map((item) => {
           return (
             <div>
@@ -46,9 +46,6 @@ const userData = useUserData();
                 <Link
                   to={{
                     pathname: item.path,
-                    state: {
-                      data: userData,
-                    },
                   }}
                 >
                   <Button bgColor="blue">{item.button}</Button>

@@ -6,24 +6,24 @@ import Infobox from "../../components/Supervisor/Dashboards/infoBox/Patients/inf
 import { useUserData } from "../../context/UserContext";
 
 const DashboardPacientes = () => {
-  const userData = useUserData();
-  const data = userData && userData.dashboard_all_patients;
+  const context = useUserData();
+  const dashboard = context.data && context.data.dashboard_all_patients;
   return (
     <div className={styles.container}>
-      {data && (
+      {context && (
         <>
           <div className={styles.flex}>
             <div>
               <p>Dashboard</p>
               <h1>Pacientes</h1>
               <p className={styles.date}>
-                Último día completado: {data.last_date}
+                Último día completado: {dashboard.last_date}
               </p>
             </div>
-            <Infobox data={data} />
+            <Infobox data={dashboard} />
           </div>
 
-          {data.plots.map((graph) => {
+          {dashboard.plots.map((graph) => {
             return (
               <Chart
                 values={graph.values}
@@ -34,7 +34,7 @@ const DashboardPacientes = () => {
               />
             );
           })}
-          <PatientTableList data={data.blackboard} />
+          <PatientTableList data={dashboard.blackboard} />
         </>
       )}
     </div>

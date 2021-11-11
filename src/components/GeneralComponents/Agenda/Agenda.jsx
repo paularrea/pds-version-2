@@ -3,6 +3,7 @@ import { title } from "./agenda.module.scss";
 import Dropdown from "./components/dropdown/Dropdown";
 
 const Agenda = ({ data, userType, userId }) => {
+
   return (
     <div>
       <h3 className={title}>Próximas intervenciones</h3>

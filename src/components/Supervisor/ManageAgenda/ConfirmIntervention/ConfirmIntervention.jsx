@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import { container, title, total, table } from "./confirm.module.scss";
 import ConfirmPatientsTable from "./components/Table/ConfirmPatientsTable"
+import { useUserData } from "../../../../context/UserContext";
 
 const ConfirmIntervention = () => {
-  const location = useLocation();
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    setData(location.state.data);
-  }, [location, data]);
+  const context = useUserData();
 
   return (
     <div className={container}>
-      {data && (
+      {context.data && (
         <>
           <div className={title}>
             <h2>
@@ -23,10 +18,10 @@ const ConfirmIntervention = () => {
               <p>
                 Intervenciones pendientes <br /> (total)
               </p>
-              <h1>{data.pending_agenda_events.length}</h1>
+              <h1>{context.data.pending_agenda_events.length}</h1>
             </div>
           </div>
-          <div className={table}><ConfirmPatientsTable data={data}/></div>
+          <div className={table}><ConfirmPatientsTable data={context.data}/></div>
         </>
       )}
     </div>

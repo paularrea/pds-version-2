@@ -18,6 +18,7 @@ import ConfirmIntervention from "../components/Supervisor/ManageAgenda/ConfirmIn
 import Agenda from "../components/GeneralComponents/Agenda/Agenda";
 import DashboardPacientes from "../pages/Supervisor/DashboardPacientes";
 import DashboardPDS from "../pages/Supervisor/DashboardPDS";
+import SeeAgenda from "../components/Supervisor/ManageAgenda/SeeAgenda/SeeAgenda";
 
 const Routes = () => {
   return (
@@ -64,7 +65,7 @@ const Routes = () => {
             />
             <RouteWrapper
               path="/gestionar-agenda/agenda"
-              component={Agenda}
+              component={SeeAgenda}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
