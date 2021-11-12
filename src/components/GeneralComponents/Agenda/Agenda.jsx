@@ -3,12 +3,12 @@ import { title } from "./agenda.module.scss";
 import Dropdown from "./components/dropdown/Dropdown";
 
 const Agenda = ({ data, userType, userId }) => {
-
+  console.log(data, "SELECTED WORKER AGENDA");
   return (
     <div>
       <h3 className={title}>Próximas intervenciones</h3>
-      {data &&
-        data.map((item) => {
+      {data.confirmed_agenda_events ?
+        data.confirmed_agenda_events.map((item) => {
           return (
             <Dropdown
               userId={userId}
@@ -18,7 +18,7 @@ const Agenda = ({ data, userType, userId }) => {
               listOfEvents={item.list_of_events}
             />
           );
-        })}
+        }) : 'no agenda events loaded'}
     </div>
   );
 };

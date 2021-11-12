@@ -16,7 +16,7 @@ import { useGeolocation } from "../../../../../../hooks/useGeolocation";
 import { useUserData } from "../../../../../../context/UserContext";
 
 const EditWorker = ({ intervention, setShowDetails, showDetails, communityWorkerId }) => {
-  const userData = useUserData()
+  const context = useUserData()
   const [editType, setEditType] = useState(false);
   const [editDate, setEditDate] = useState(false);
   const [editTime, setEditTime] = useState(false);
@@ -29,11 +29,11 @@ const EditWorker = ({ intervention, setShowDetails, showDetails, communityWorker
   };
 
   const patient = intervention && intervention;
-  const userId = userData && userData.user_id;
+  const userId = context && context.data.user_id;
   const confirmedEventId = patient.agenda_event_id;
 
   const availableTimesList =
-    userData && userData.agenda.available_times_per_community_worker;
+    context && context.data.available_times_per_day;
   const dateSavedInJson = patient.local_date;
 
   const [listOfAvailableHours, setListOfAvailableHours] = useState(

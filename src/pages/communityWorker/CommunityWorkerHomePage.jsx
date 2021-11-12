@@ -7,6 +7,7 @@ import LegalAdvise from "../../components/communityWorker/LegalAdvise/LegalAdvis
 
 const CommunityWorkerHomePage = ({ data }) => {
   const [legalAdviseAccepted, setLegalAdviceAccepted] = useState(false);
+  console.log(data, 'HOME')
   return (
     <>
       {data ? (
@@ -26,7 +27,7 @@ const CommunityWorkerHomePage = ({ data }) => {
               <NotificationsList data={data} />
               <Agenda
                 userId={data.user_id}
-                data={data.confirmed_agenda_events}
+                data={data}
                 userType={data.user_type}
               />
             </>

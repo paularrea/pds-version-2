@@ -56,7 +56,6 @@ const UserDataProvider = ({ children }) => {
             }
           )
         )
-
         .then(() => setLoaded(true))
         .catch(() => setError("context get fail"));
     }
