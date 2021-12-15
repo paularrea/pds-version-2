@@ -15,7 +15,6 @@ import GestionarAgenda from "../pages/Supervisor/GestionarAgenda";
 import SupervisorNavigation from "../components/Supervisor/Navigation/Navigation";
 import CreateIntervention from "../components/Supervisor/ManageAgenda/CreateIntervention/CreateIntervention";
 import ConfirmIntervention from "../components/Supervisor/ManageAgenda/ConfirmIntervention/ConfirmIntervention";
-import Agenda from "../components/GeneralComponents/Agenda/Agenda";
 import DashboardPacientes from "../pages/Supervisor/DashboardPacientes";
 import DashboardPDS from "../pages/Supervisor/DashboardPDS";
 import SeeAgenda from "../components/Supervisor/ManageAgenda/SeeAgenda/SeeAgenda";

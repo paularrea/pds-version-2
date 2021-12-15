@@ -2,24 +2,42 @@ import React from "react";
 import { container, icon } from "./notification.module.scss";
 import bell from "../../../images/icons/bell.png";
 import alert from "../../../images/icons/alert.png";
-import { useGeolocation } from "../../../hooks/useGeolocation";
+import { useUserData } from "../../../context/UserContext";
+import useGeolocation from "react-hook-geolocation";
 import subtype_NOTIFICATION_ACKNOWLEDGED from "../../../events/type_USER_INTERACTION/subtype_NOTIFICATION_ACKNOWLEDGED";
-// import { build_collection_name } from "../../../events/build_collection_name";
+import { build_collection_name } from "../../../events/build_collection_name";
+// import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const Notification = (props) => {
-  // const { geolocation } = useGeolocation();
-  // const geoCoords = geolocation && {
-  //   latitude: geolocation.latitude,
-  //   longitude: geolocation.longitude,
-  // };
-  // const userId = props.data && props.data.user_id;
-  // const notificationId = props.notificationId;
+  const context = useUserData();
+  const geolocation = useGeolocation();
+  const geoCoords = geolocation && {
+    latitude: geolocation.latitude,
+    longitude: geolocation.longitude,
+  };
+
+  const notificationId =
+    props.notification && props.notification.notification_id;
+
+  console.log(geoCoords);
 
   const notificationAknowledgedEvent = () => {
-    props.onRemove(props.notification.notification_id);
-    // push_new_event_doc_into_FIRESTORE_collection(
+    props.onRemove(notificationId);
+    console.log(
+      build_collection_name("USER_INTERACTION"),
+      subtype_NOTIFICATION_ACKNOWLEDGED(
+        context.data.user_id,
+        notificationId,
+        geoCoords
+      )
+    );
+    // push_new_document_into_FIRESTORE(
     //   build_collection_name("USER_INTERACTION"),
-    //   subtype_NOTIFICATION_ACKNOWLEDGED(userId, notificationId, geoCoords)
+    //   subtype_NOTIFICATION_ACKNOWLEDGED(
+    //     context.data.user_id,
+    //     notificationId,
+    //     geoCoords
+    //   )
     // );
   };
 

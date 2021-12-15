@@ -25,6 +25,7 @@ const SelectActionsInput = ({ errors, touched, setFieldValue }) => {
         name="actions"
         style={{ maxWidth: "350px" }}
         multiple
+        helperText=""
         freeSolo
         onChange={onChange}
         component={Autocomplete}

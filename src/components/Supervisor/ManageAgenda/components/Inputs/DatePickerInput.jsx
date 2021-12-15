@@ -12,16 +12,14 @@ const DatePickerInput = ({
   setFieldValue,
   label,
   pendingDate,
-  errors,
-  touched,
-  linkedCommunityWorkerId,
+  communityWorkerId,
   availableTimesList,
   setListOfAvailableHours,
   onClick,
 }) => {
   const context = useUserData();
-  
   const [date, setDate] = useState(pendingDate ? pendingDate : null);
+
   const onChange = (value) => {
     const formatedValue = moment(value).format("YYYY-MM-DD").toString();
     setFieldValue("local_date", formatedValue);
@@ -30,7 +28,7 @@ const DatePickerInput = ({
       setListOfAvailableHours(
         get_list_of_hours_by_day(
           formatedValue,
-          linkedCommunityWorkerId,
+          communityWorkerId,
           availableTimesList
         )
       );
@@ -48,6 +46,7 @@ const DatePickerInput = ({
         <Field
           name="local_date"
           component={DatePicker}
+          helperText=""
           label={label}
           style={{ width: "100%", marginBottom: "1rem" }}
           id="date-picker"
@@ -57,7 +56,6 @@ const DatePickerInput = ({
           minDate={get_first_available_date}
           maxDate={get_last_available_date}
           onChange={onChange}
-          // shouldDisableDate={disableWeekends}
           onClick={onClick}
         />
       </MuiPickersUtilsProvider>

@@ -5,10 +5,11 @@ import { useUserData } from "../../../../../context/UserContext";
 
 const AppointmentList = ({ isSelected, loadedWorker }) => {
   const context = useUserData();
+
   return (
     <div className={agenda}>
       {isSelected ? (
-        <Agenda data={loadedWorker && context.data.selectedWorker} userType='SUPERVISOR' />
+        <Agenda data={loadedWorker && context.data.selected_worker} userType='SUPERVISOR' />
       ) : (
         <div className={no_user_selected}>
           <p>Selecciona un PDS para acceder a su agenda.</p>

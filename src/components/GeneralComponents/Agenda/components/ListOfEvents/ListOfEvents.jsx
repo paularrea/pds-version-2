@@ -7,6 +7,7 @@ const ListOfEvents = ({ list }) => {
   const context = useUserData();
   const userType = context && context.data.user_type;
   const userId = context && context.data.user_id;
+
   return (
     <>
       {list &&

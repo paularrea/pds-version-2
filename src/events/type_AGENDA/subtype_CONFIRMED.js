@@ -18,7 +18,7 @@ const subtype_CONFIRMED = (
       list_of_supervisor_ids: ["f6aadf78-c5cf-4ae1-a527-f97ba206071a"],
       community_worker_id: communityWorkerId,
       patient_id: patientId,
-      suggested_event_id: suggestedEventId ? suggestedEventId : null,
+      suggested_event_id: suggestedEventId ? suggestedEventId : 'None',
       values,
     },
   };

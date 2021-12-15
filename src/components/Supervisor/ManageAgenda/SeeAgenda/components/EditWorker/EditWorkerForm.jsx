@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Form, Formik } from "formik";
 import { blue_pds } from "../../../../../utils/InputColor";
 import DatePickerInput from "../../../components/Inputs/DatePickerInput";
@@ -12,42 +12,64 @@ import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
 import subtype_CONFIRMED_MODIFIED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_MODIFIED";
 import subtype_CONFIRMED_ELIMINATED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_ELIMINATED";
 import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
-import { useGeolocation } from "../../../../../../hooks/useGeolocation";
+import useGeolocation from "react-hook-geolocation";
 import { useUserData } from "../../../../../../context/UserContext";
+import { useHistory } from "react-router-dom";
+// import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+// import { build_collection_name } from "../../../../../../events/build_collection_name";
 
-const EditWorker = ({ intervention, setShowDetails, showDetails, communityWorkerId }) => {
-  const context = useUserData()
+const EditWorker = ({ intervention, showDetails }) => {
+  const history = useHistory();
+  const context = useUserData();
   const [editType, setEditType] = useState(false);
   const [editDate, setEditDate] = useState(false);
   const [editTime, setEditTime] = useState(false);
   const [clearTimeInputValue, setClearTimeInputValue] = useState(false);
-  const { geolocation } = useGeolocation();
-  
+  const geolocation = useGeolocation();
+
   const geoCoords = geolocation && {
     latitude: geolocation.latitude,
     longitude: geolocation.longitude,
   };
-
   const patient = intervention && intervention;
   const userId = context && context.data.user_id;
   const confirmedEventId = patient.agenda_event_id;
-
   const availableTimesList =
-    context && context.data.available_times_per_day;
+    context && context.data.available_times_per_community_worker;
   const dateSavedInJson = patient.local_date;
+  const communityWorkerId =
+    context && context.data.selected_worker.selected_community_worker_id;
 
   const [listOfAvailableHours, setListOfAvailableHours] = useState(
-    get_list_of_hours_by_day(dateSavedInJson, communityWorkerId, availableTimesList)
+    get_list_of_hours_by_day(
+      dateSavedInJson,
+      communityWorkerId,
+      availableTimesList
+    )
   );
 
   const onSubmit = async (values, bag) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     bag.setSubmitting(false);
-    console.log(subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values, geoCoords));
+    console.log(
+      subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values, geoCoords)
+    );
+    // push_new_document_into_FIRESTORE(
+    //   build_collection_name("USER_INTERACTION"),
+    //   subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values, geoCoords)
+    // );
+    history.push("/gestionar-agenda");
   };
 
   const eliminateIntervention = () => {
-    console.log(subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId, geoCoords));
+    console.log(
+      subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId, geoCoords)
+    );
+    // push_new_document_into_FIRESTORE(
+    //   build_collection_name("USER_INTERACTION"),
+    //   subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId, geoCoords)
+    // );
+    history.push("/gestionar-agenda");
   };
 
   return (
@@ -61,12 +83,13 @@ const EditWorker = ({ intervention, setShowDetails, showDetails, communityWorker
       }
       className={container}
     >
-      {patient && (
+      {patient.patient_info && (
         <>
           <div className={patient_info}></div>
           <CallButton
-            prefixNumber={patient.patient_info.patient_phone_country_code_num}
-            phoneNumber={patient.patient_info.patient_phone_num}
+            patientId={patient.patient_info.user_id}
+            prefixNumber={patient.patient_info.phone_country_code_num}
+            phoneNumber={patient.patient_info.phone_num}
           />
           <br />
           <div className={form}>
@@ -79,22 +102,14 @@ const EditWorker = ({ intervention, setShowDetails, showDetails, communityWorker
               enableReinitialize
               onSubmit={onSubmit}
             >
-              {({
-                isSubmitting,
-                handleSubmit,
-                touched,
-                values,
-                errors,
-                setFieldValue,
-                setFieldTouched,
-              }) => (
+              {({ handleSubmit, setFieldValue, setFieldTouched }) => (
                 <>
                   <Form onSubmit={handleSubmit}>
                     <ThemeProvider theme={blue_pds}>
                       <EditInput onClick={() => setEditType(!editType)}>
                         <p>
                           <span>Tipo de intervención:</span>{" "}
-                          {patient.intervention_type === "CALL"
+                          {patient.intervention_type === "PHONE_CALL"
                             ? "Llamada"
                             : "Visita"}
                         </p>
@@ -112,7 +127,7 @@ const EditWorker = ({ intervention, setShowDetails, showDetails, communityWorker
                           setFieldValue={setFieldValue}
                           availableTimesList={availableTimesList}
                           setListOfAvailableHours={setListOfAvailableHours}
-                          linkedCommunityWorkerId={communityWorkerId}
+                          communityWorkerId={communityWorkerId}
                           onClick={() => setClearTimeInputValue(true)}
                         />
                       )}

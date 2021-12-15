@@ -11,19 +11,12 @@ const NewInterventionStep2 = ({
   refProp,
   setFieldValue,
   setFieldTouched,
-  values,
-  errors,
-  touched,
-  patientId,
-  linkPatientsInfo,
+  communityWorkerId,
   data,
 }) => {
-  const [listOfAvailableHours, setListOfAvailableHours] = useState([]);
+  const [listOfAvailableHours, setListOfAvailableHours] = useState();
   const [clearTimeInputValue, setClearTimeInputValue] = useState(false);
 
-  const linkedCommunityWorkerId =
-    linkPatientsInfo[patientId] &&
-    linkPatientsInfo[patientId].linked_community_worker_id;
   const availableTimesList =
     data && data.available_times_per_community_worker;
 
@@ -36,12 +29,12 @@ const NewInterventionStep2 = ({
           availableTimesList={availableTimesList}
           setFieldValue={setFieldValue}
           setListOfAvailableHours={setListOfAvailableHours}
-          linkedCommunityWorkerId={linkedCommunityWorkerId}
+          communityWorkerId={communityWorkerId}
           onClick={() => setClearTimeInputValue(true)}
         />
         <SelectTimeInput
           listOfAvailableHours={listOfAvailableHours}
-          communityWorkerId={linkedCommunityWorkerId}
+          communityWorkerId={communityWorkerId}
           label="Hora"
           clearTimeInputValue={clearTimeInputValue}
           setFieldValue={setFieldValue}

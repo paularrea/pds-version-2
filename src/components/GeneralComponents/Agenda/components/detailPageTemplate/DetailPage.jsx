@@ -39,9 +39,9 @@ const DetailPage = () => {
     ));
 
   const patientURL = window.location.pathname;
-  const isVisit = patient && patient.intervention_type === "VISIT";
+  const isVisit = patient && patient.intervention_type === "VISIT_AT_HOME";
   const agendaEventId = patient && patient.agenda_event_id;
-  const patientId = patient && patient.patient_info.patient_id;
+  const patientId = patient && patient.patient_info.user_id;
   
   return (
     <div className={container}>
@@ -57,7 +57,7 @@ const DetailPage = () => {
               <div>
                 <img src={userIcon} alt="user" />
               </div>
-              <h3>{patient.patient_info.patient_concatenated_name}</h3>
+              <h3>{patient.patient_info.concatenated_name}</h3>
             </div>
             {isVisit && (
               <>
@@ -88,8 +88,8 @@ const DetailPage = () => {
               agendaEventId={agendaEventId}
               patientId={patientId}
               width="100%"
-              prefixNumber={patient.patient_info.patient_phone_country_code_num}
-              phoneNumber={patient.patient_info.patient_phone_num}
+              prefixNumber={patient.patient_info.phone_country_code_num}
+              phoneNumber={patient.patient_info.phone_num}
             />
             <hr style={{ margin: "2rem 0", opacity: 0.2 }} />
 

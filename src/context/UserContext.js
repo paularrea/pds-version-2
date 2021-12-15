@@ -13,68 +13,74 @@ const UserDataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState(null);
+  const [localStorageData, setLocalStorageData] = useState(null);
 
   useEffect(() => {
     if (auth.user) {
-      get_document_from_FIRESTORE("frontend_USER_PROFILES", auth.user.uid)
-        .then((contextUser) => {
+      const getCollections = async () => {
+        await get_document_from_FIRESTORE(
+          "frontend_USER_CONFIDENTIAL",
+          auth.user.uid
+        ).then((contextUser) => {
           if (contextUser.exists) {
             setError(null);
             let data = contextUser.data();
             setData((prevState) => ({ ...prevState, ...data }));
           } else {
-            setError("context not found");
+            setError("couldn't find frontend_USER_CONFIDENTIAL in user context");
+            console.log(error)
             setData();
           }
-        })
-        .then(
-          get_document_from_FIRESTORE(
-            "frontend_NOTIFICATIONS",
-            auth.user.uid
-          ).then((contextUser) => {
-            if (contextUser.exists) {
-              setError(null);
-              let data = contextUser.data();
-              setData((prevState) => ({ ...prevState, ...data }));
-            } else {
-              setError("context not found");
-              setData();
-            }
-          })
-        )
-        .then(
-          get_document_from_FIRESTORE("frontend_AGENDAS", auth.user.uid).then(
-            (contextUser) => {
-              if (contextUser.exists) {
-                setError(null);
-                let data = contextUser.data();
-                setData((prevState) => ({ ...prevState, ...data }));
-              } else {
-                setError("context not found");
-                setData();
-              }
-            }
-          )
-        )
-        .then(() => setLoaded(true))
-        .catch(() => setError("context get fail"));
+        });
+        await get_document_from_FIRESTORE(
+          "frontend_NOTIFICATIONS",
+          auth.user.uid
+        ).then((contextUser) => {
+          if (contextUser.exists) {
+            setError(null);
+            let data = contextUser.data();
+            setData((prevState) => ({ ...prevState, ...data }));
+          } else {
+            setError("couldn't find frontend_NOTIFICATIONS in user context");
+            console.log(error)
+            setData();
+          }
+        });
+        await get_document_from_FIRESTORE(
+          "frontend_AGENDAS",
+          auth.user.uid
+        ).then((contextUser) => {
+          if (contextUser.exists) {
+            setError(null);
+            let data = contextUser.data();
+            setData((prevState) => ({ ...prevState, ...data }));
+          } else {
+            setError("couldn't find frontend_AGENDAS in user context");
+            console.log(error)
+            setData();
+          }
+        });
+      };
+      getCollections();
+      setLoaded(true);
     }
     auth.logout && setData(null);
-  }, [auth]);
+  }, [auth, error]);
 
   useEffect(() => {
     data &&
-      localStorage.setItem(
-        "user_data_from_FIRESTORE",
-        JSON.stringify(data)
-      );
-    }, [data]);
+      localStorage.setItem("user_data_from_FIRESTORE", JSON.stringify(data));
+  }, [data]);
 
-    const savedInLocalStorage = localStorage.getItem("user_data_from_FIRESTORE");
-    const localStorageData = JSON.parse(savedInLocalStorage);
+  useEffect(() => {
+    data &&
+    setLocalStorageData(JSON.parse(localStorage.getItem("user_data_from_FIRESTORE")));
+  }, [data]);
 
   return (
-    <UserDataContext.Provider value={loaded && { data, setData, localStorageData }}>
+    <UserDataContext.Provider
+      value={loaded && { data, setData, localStorageData, loaded }}
+    >
       {children}
     </UserDataContext.Provider>
   );

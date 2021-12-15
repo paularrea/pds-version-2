@@ -5,7 +5,6 @@ import { SidebarData } from "./SidebarData";
 import arrow from "../../../images/icons/arrow-up.png";
 import logo from "../../../images/icons/logo2.png";
 import { useAuth } from "../../../user_auth_with_FIREBASE/AuthContext";
-import { getAutoHeightDuration } from "@mui/material/styles/createTransitions";
 
 const activeStyle = {
   borderRight: "2px solid #0057FF",
@@ -17,10 +16,6 @@ const Navigation = ({ children }) => {
   const auth = useAuth();
 
   const logOutHandleClick = async () => {
-    // await push_new_event_doc_into_FIRESTORE_collection(
-    //   build_collection_name("USER_INTERACTION"),
-    //   subtype_LOGOUT(userId, geoCoords)
-    // );
     window.localStorage.removeItem("user_data_from_FIRESTORE");
     await auth.logout();
   };

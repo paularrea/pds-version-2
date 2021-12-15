@@ -15,15 +15,11 @@ import Button from "../Button/Button";
 import styles from "./login.module.scss";
 import logo from "../../../images/icons/logo.png";
 import ErrorNotification from "../Notification/ErrorNotification";
-import subtype_LOGIN from "../../../events/type_USER_INTERACTION/subtype_LOGIN";
-import { useGeolocation } from "../../../hooks/useGeolocation";
 import { blue_pds } from "../../utils/InputColor";
-import { build_collection_name } from "../../../events/build_collection_name";
 
 const Login = () => {
   const history = useHistory();
   const location = useLocation();
-
   const [creds, setCreds] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -42,7 +38,7 @@ const Login = () => {
 
   useEffect(() => {
     if (auth.user) history.replace(location.state ? location.state.from : "/");
-  }, [auth.user]);
+  }, [auth.user, history, location]);
 
   const onChange = (e) => {
     setCreds((prevCreds) => ({

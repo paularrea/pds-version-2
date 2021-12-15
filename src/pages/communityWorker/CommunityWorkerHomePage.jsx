@@ -7,7 +7,6 @@ import LegalAdvise from "../../components/communityWorker/LegalAdvise/LegalAdvis
 
 const CommunityWorkerHomePage = ({ data }) => {
   const [legalAdviseAccepted, setLegalAdviceAccepted] = useState(false);
-  console.log(data, 'HOME')
   return (
     <>
       {data ? (

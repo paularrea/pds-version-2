@@ -12,7 +12,9 @@ import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import FormButtons from "./components/FormButtons";
-import { useGeolocation } from "../../../../../../hooks/useGeolocation";
+import useGeolocation from "react-hook-geolocation";
+// import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+// import { build_collection_name } from "../../../../../../events/build_collection_name";
 
 const steps = [Step1, Step2, Step3];
 
@@ -22,9 +24,9 @@ const NewInterventionForm = ({ data }) => {
   const [isSent, sendForm] = useState(false);
   const [patientId, setPatientId] = useState("");
   const [communityWorkerId, setCommunityWorkerId] = useState("");
-  const linkPatientsInfo = data && data.linked_patients_info;
-  const { geolocation } = useGeolocation();
-  
+  const linkPatientsInfo = data && data.linked_patient_info;
+  const geolocation = useGeolocation();
+
   const geoCoords = geolocation && {
     latitude: geolocation.latitude,
     longitude: geolocation.longitude,
@@ -64,6 +66,16 @@ const NewInterventionForm = ({ data }) => {
           geoCoords
         )
       );
+      // push_new_document_into_FIRESTORE(
+      //   build_collection_name("USER_INTERACTION"),
+      //   subtype_CONFIRMED(
+      //     userId,
+      //     patientId,
+      //     communityWorkerId,
+      //     values,
+      //     geoCoords
+      //   )
+      // );
       sendForm(true);
     }
   };
@@ -135,11 +147,12 @@ const NewInterventionForm = ({ data }) => {
                         setFieldTouched={setFieldTouched}
                         refProp={topRef}
                         key={index}
+                        handleChange={handleChange}
                         patientId={patientId}
                         setPatientId={setPatientId}
                         communityWorkerId={communityWorkerId}
-                        linkPatientsInfo={linkPatientsInfo}
                         setCommunityWorkerId={setCommunityWorkerId}
+                        linkPatientsInfo={linkPatientsInfo}
                       />
                     </ThemeProvider>
                   );

@@ -10,11 +10,12 @@ import { fixed_header, header, img } from "../form.module.scss";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import FormButtons from "./components/FormButtons";
-import { useGeolocation } from "../../../../hooks/useGeolocation";
+import useGeolocation from "react-hook-geolocation";
 import "../mui.css";
-import subtype_POST_INTEVENTION_SURVEY from "../../../../events/type_INTERVENTION/subtype_POST_INTERVENTION_SURVEY";
-// import { build_collection_name } from "../../../../events/build_collection_name";
 import { useUserData } from "../../../../context/UserContext";
+import subtype_POST_INTERVENTION from "../../../../events/type_SURVEY/subtype_POST_INTERVENTION";
+// import { build_collection_name } from "../../../../events/build_collection_name";
+// import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const steps = [Step1, Step2];
 
@@ -25,9 +26,9 @@ const Autoevaluation = () => {
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
   const patient = location.state.patient;
-  const userId = userData && userData.user_id;
+  const userId = userData && userData.data.user_id;
   const starting_time = location.state.local_utc_date_time;
-  const { geolocation } = useGeolocation();
+  const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
     latitude: geolocation.latitude,
@@ -59,22 +60,22 @@ const Autoevaluation = () => {
       return;
     } else {
       console.log(
-        subtype_POST_INTEVENTION_SURVEY(
-          starting_time,
+        subtype_POST_INTERVENTION(
           userId && userId,
-          patient.patient_info.patient_id,
-          values,
-          geoCoords
+          geoCoords,
+          patient.patient_info.user_id,
+          starting_time,
+          values
         )
       );
-      // push_new_event_doc_into_FIRESTORE_collection(
-      //   build_collection_name("INTERVENTION"),
-      //   subtype_POST_INTEVENTION_SURVEY(
-      //     starting_time,
+      // push_new_document_into_FIRESTORE(
+      //   build_collection_name("SURVEY"),
+      //   subtype_POST_INTERVENTION(
       //     userId && userId,
-      //     patient.patient_info.patient_id,
-      //     values,
-      //     geoCoords
+      //     geoCoords,
+      //     patient.patient_info.user_id,
+      //     starting_time,
+      //     values
       //   )
       // );
       sendForm(true);

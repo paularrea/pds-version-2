@@ -14,46 +14,48 @@ import {
 
 const UserLink = ({ intervention, path, userId }) => {
   return (
-    <Link
-      key={intervention.agenda_event_id}
-      to={{
-        pathname: path,
-        state: {
-          communityWorkerInfo: userId,
-          intervention: intervention,
-        },
-      }}
-    >
-      <section className={intervention_section}>
-        <div className={time}>{intervention.local_time_12h}</div>
-        <div className={direction}>
-          <div className={flex_container_direction}>
-            <div className={name}>
-              {intervention.intervention_type === "VISIT" ? (
-                <img src={locationIcon} alt="location" />
-              ) : (
-                <img src={phoneIcon} alt="phone" />
+    <>
+      {intervention.patient_info && (
+        <Link
+          key={intervention.agenda_event_id}
+          to={{
+            pathname: path,
+            state: {
+              communityWorkerInfo: userId,
+              intervention: intervention,
+            },
+          }}
+        >
+          <section className={intervention_section}>
+            <div className={time}>{intervention.local_time_12h}</div>
+            <div className={direction}>
+              <div className={flex_container_direction}>
+                <div className={name}>
+                  {intervention.intervention_type === "VISIT_AT_HOME" ? (
+                    <img src={locationIcon} alt="location" />
+                  ) : (
+                    <img src={phoneIcon} alt="phone" />
+                  )}
+                  <h5>{intervention.patient_info.concatenated_name}</h5>
+                </div>
+                <div className={arrow_container}>
+                  <img src={arrow} alt="see intervention details" />
+                </div>
+              </div>
+              {intervention.intervention_type === "VISIT_AT_HOME" && (
+                <p>
+                  {intervention.patient_info.residence_address},{" "}
+                  {intervention.patient_info.residence_postal_code}{" "}
+                  {intervention.patient_info.residence_city}{" "}
+                  {intervention.patient_info.residence_state},{" "}
+                  {intervention.patient_info.residence_country_name}
+                </p>
               )}
-              <h5>
-                {intervention.patient_info.patient_concatenated_name}
-              </h5>
             </div>
-            <div className={arrow_container}>
-              <img src={arrow} alt="see intervention details" />
-            </div>
-          </div>
-          {intervention.intervention_type === "VISIT" && (
-            <p>
-              {intervention.patient_info.residence_address},{" "}
-              {intervention.patient_info.residence_postal_code}{" "}
-              {intervention.patient_info.residence_city}{" "}
-              {intervention.patient_info.residence_state},{" "}
-              {intervention.patient_info.residence_country_name}
-            </p>
-          )}
-        </div>
-      </section>
-    </Link>
+          </section>
+        </Link>
+      )}
+    </>
   );
 };
 

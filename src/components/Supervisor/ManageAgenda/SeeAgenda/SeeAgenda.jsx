@@ -12,15 +12,33 @@ const SeeAgenda = () => {
   const [value, setValue] = useState("");
   const [isSelected, setIsSelected] = useState(false);
   const [loadedWorker, setLoadedWorker] = useState(false);
-  const [selectedWorker, setSelectedWorker] = useState({});
+  const [workers, setWorkers] = useState([]);
 
   const communityWorkersList =
-    context.data && context.data.list_of_linked_community_workers;
+    context.data && context.data.linked_community_worker_ids;
 
   const handleChange = (event) => {
     setValue(event.target.value);
     setIsSelected(true);
   };
+
+  useEffect(() => {
+    let newArray = [];
+    communityWorkersList.forEach((community_worker_id) => {
+      get_document_from_FIRESTORE(
+        "frontend_USER_CONFIDENTIAL",
+        community_worker_id
+      ).then((contextUser) => {
+        if (contextUser.exists) {
+          setError(null);
+          error && console.log(error);
+          let data = contextUser.data();
+          newArray.push(data);
+          setWorkers(() => [...newArray]);
+        }
+      });
+    });
+  }, [communityWorkersList, error]);
 
   useEffect(() => {
     if (isSelected) {
@@ -31,9 +49,8 @@ const SeeAgenda = () => {
             let data = contextUser.data();
             context.setData((prevState) => ({
               ...prevState,
-              selectedWorker: { ...data, selected_community_worker_id: value },
+              selected_worker: { ...data, selected_community_worker_id: value },
             }));
-            // setSelectedWorker((prevState) => ({ ...prevState, ...data }));
           } else {
             setError("selected user not found");
             context.setData((prevState) => ({ ...prevState }));
@@ -44,8 +61,6 @@ const SeeAgenda = () => {
     }
   }, [isSelected, value]);
 
-  console.log(context.data, "selected user in context");
-
   return (
     <div className={container}>
       <div className={dropdown_container}>
@@ -54,15 +69,12 @@ const SeeAgenda = () => {
         <SelectUser
           value={value}
           label="Selecciona un PDS"
-          data={communityWorkersList}
+          data={workers}
           onChange={handleChange}
         />
       </div>
       <BoxShadowContainer>
-        <AppointmentsList
-          isSelected={isSelected}
-          loadedWorker={loadedWorker}
-        />
+        <AppointmentsList isSelected={isSelected} loadedWorker={loadedWorker} />
       </BoxShadowContainer>
     </div>
   );

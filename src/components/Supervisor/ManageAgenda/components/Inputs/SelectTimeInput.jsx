@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Field, ErrorMessage } from "formik";
 import { error } from "../../components/Inputs/errorMessage.module.scss";
 import { Select } from "formik-material-ui";
-import { MenuItem, FormControl, InputLabel } from "@material-ui/core";
+import { MenuItem, FormControl } from "@material-ui/core";
 
 const SelectTimeInput = ({
   label,
@@ -10,12 +10,15 @@ const SelectTimeInput = ({
   setFieldTouched,
   clearTimeInputValue,
   listOfAvailableHours,
-  pendingDate,
 }) => {
   const [time, setTime] = useState(null);
+  // const [formatedListOfHours, setFormatedListOfHours] = useState(null);
   const onChange = (e) => {
     setTime(clearTimeInputValue ? "" : e.target.value);
-    setFieldValue("local_time", clearTimeInputValue ? undefined : e.target.value);
+    setFieldValue(
+      "local_time",
+      clearTimeInputValue ? undefined : e.target.value
+    );
     setTimeout(() => setFieldTouched("local_time", e.target.value, true));
   };
 
@@ -29,6 +32,7 @@ const SelectTimeInput = ({
         <Field
           name="local_time"
           type="select"
+          helperText=""
           variant="outlined"
           id="time-select"
           label={label}
@@ -44,7 +48,7 @@ const SelectTimeInput = ({
           }}
         >
           {listOfAvailableHours ? (
-            listOfAvailableHours.map((answer, key) => (
+            listOfAvailableHours.split("_").map((answer, key) => (
               <MenuItem key={key} value={answer}>
                 {answer}
               </MenuItem>

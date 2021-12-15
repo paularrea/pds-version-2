@@ -10,10 +10,11 @@ import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import FormButtons from "./components/FormButtons";
 import "../mui.css";
-import { useGeolocation } from "../../../../hooks/useGeolocation";
-import subtype_SUGGESTED_BY_HUMAN from "../../../../events/type_INTERVENTION/subtype_SUGGESTED_BY_HUMAN";
-// import { build_collection_name } from "../../../../events/build_collection_name";
+import useGeolocation from "react-hook-geolocation";
+import subtype_SUGGESTED_BY_HUMAN from "../../../../events/type_AGENDA/subtype_SUGGESTED_BY_HUMAN";
 import { useUserData } from "../../../../context/UserContext";
+// import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+// import { build_collection_name } from "../../../../events/build_collection_name";
 
 const steps = [Step1, Step2];
 
@@ -24,9 +25,8 @@ const UpcommingIntervention = () => {
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
   const patient = location.state.patient;
-  const userId = userData && userData.user_id;
-  const starting_time = location.state.local_utc_date_time;
-  const { geolocation } = useGeolocation();
+  const userId = userData && userData.data.user_id;
+  const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
     latitude: geolocation.latitude,
@@ -59,21 +59,19 @@ const UpcommingIntervention = () => {
     } else {
       console.log(
         subtype_SUGGESTED_BY_HUMAN(
-          starting_time,
           userId && userId,
-          patient.patient_info.patient_id,
-          values,
-          geoCoords
+          patient.patient_info.user_id,
+          geoCoords,
+          values
         )
       );
-      // push_new_event_doc_into_FIRESTORE_collection(
-      //   build_collection_name("INTERVENTION"),
+      // push_new_document_into_FIRESTORE(
+      //   build_collection_name("AGENDA"),
       //   subtype_SUGGESTED_BY_HUMAN(
-      //     starting_time,
       //     userId && userId,
-      //     patient.patient_info.patient_id,
-      //     values,
-      //     geoCoords
+      //     patient.patient_info.user_id,
+      //     geoCoords,
+      //     values
       //   )
       // );
       sendForm(true);

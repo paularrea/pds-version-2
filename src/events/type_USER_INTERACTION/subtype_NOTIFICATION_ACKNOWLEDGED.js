@@ -1,6 +1,10 @@
 import build_event_template from "../template/build_event_template";
 
-const subtype_NOTIFICATION_ACKNOWLEDGED = (userId, notificationId, geoCoords) => {
+const subtype_NOTIFICATION_ACKNOWLEDGED = (
+  userId,
+  notificationId,
+  geoCoords
+) => {
   const template_obj = build_event_template();
   const event_obj = {
     event_created_by_user_id: userId,
@@ -8,10 +12,8 @@ const subtype_NOTIFICATION_ACKNOWLEDGED = (userId, notificationId, geoCoords) =>
     event_subtype: "NOTIFICATION_ACKNOWLEDGED",
     device_geolocation_coords: geoCoords,
     content: {
-      list_of_supervisor_ids: ["", ""],
-      community_worker_id: userId,
       notification_id: notificationId,
-      response_text: "Ok, entendido",
+      notification_response: { text: "Ok, entendido", link: "None" },
     },
   };
   const notification_aknowledged_obj = Object.assign(event_obj, template_obj);

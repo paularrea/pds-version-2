@@ -7,7 +7,6 @@ const UserLink = ({ intervention, communityWorkerId }) => {
   const onClick = () => {
     setShowDetails(!showDetails);
   };
-
   return (
     <>
       <PatientInfoLink

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import {
@@ -15,23 +15,25 @@ import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
 import { Redirect } from "react-router";
 import subtype_CONFIRMED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED";
 import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
-import { useGeolocation } from "../../../../../../hooks/useGeolocation";
+import useGeolocation from "react-hook-geolocation";
 import { useUserData } from "../../../../../../context/UserContext";
+// import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+// import { build_collection_name } from "../../../../../../events/build_collection_name";
 
 const ConfirmInterventionForm = ({ row }) => {
   const userData = useUserData();
   const [isSent, sendForm] = useState(false);
   const [clearTimeInputValue, setClearTimeInputValue] = useState(false);
-  const { geolocation } = useGeolocation();
+  const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
     latitude: geolocation.latitude,
     longitude: geolocation.longitude,
   };
-
+  
   const availableTimesList =
-    userData && userData.available_times_per_community_worker;
-  const userId = userData && userData.user_id;
+    userData && userData.data.available_times_per_community_worker;
+  const userId = userData && userData.data.user_id;
   const patientId = row.patientId;
   const communityWorkerId = row.linkedCommunityWorkerId;
   const suggestedEventId = row.suggestedEventId;
@@ -54,6 +56,17 @@ const ConfirmInterventionForm = ({ row }) => {
         suggestedEventId
       )
     );
+    // push_new_document_into_FIRESTORE(
+    //   build_collection_name("USER_INTERACTION"),
+    //   subtype_CONFIRMED(
+    //     userId,
+    //     patientId,
+    //     communityWorkerId,
+    //     values,
+    //     geoCoords,
+    //     suggestedEventId
+    //   )
+    // );
     sendForm(true);
   };
 
@@ -98,7 +111,7 @@ const ConfirmInterventionForm = ({ row }) => {
                       setFieldValue={setFieldValue}
                       availableTimesList={availableTimesList}
                       setListOfAvailableHours={setListOfAvailableHours}
-                      linkedCommunityWorkerId={communityWorkerId}
+                      communityWorkerId={communityWorkerId}
                       onClick={() => setClearTimeInputValue(true)}
                     />
                     <SelectTimeInput

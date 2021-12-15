@@ -14,20 +14,21 @@ import Step4 from "./steps/Step4";
 import Step5 from "./steps/Step5";
 import FormButtons from "./components/FormButtons";
 import "../mui.css";
-import { useGeolocation } from "../../../../hooks/useGeolocation";
+import useGeolocation from "react-hook-geolocation";
 import filter_patient_info_values from "./components/functions/filter_patient_info_values";
 import filter_intervention_survey_values from "./components/functions/filter_intervention_survey_values";
-import subtype_INTERVENTION_SURVEY_A from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_A";
-import subtype_INTERVENTION_SURVEY_B from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_B";
-import subtype_INTERVENTION_SURVEY_C from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_C";
-import subtype_INTERVENTION_SURVEY_D from "../../../../events/type_INTERVENTION/subtype_INTERVENTION_SURVEY/subtype_INTERVENTION_SURVEY_D";
-// import { build_collection_name } from "../../../../events/build_collection_name";
 import { useUserData } from "../../../../context/UserContext";
+import subtype_PDS_PROGRAM from "../../../../events/type_LEGAL/subtype_PDS_PROGRAM";
+import subtype_PATIENT_VALIDATION_OF_INTERVENTION from "../../../../events/type_LEGAL/subtype_PATIENT_VALIDATION_OF_INTERVENTION";
+import subtype_INTERVENTION from "../../../../events/type_SURVEY/subtype_INTERVENTION";
+import subtype_EDIT_EXISTING_PROFILE from "../../../../events/type_USER_PROFILE/subtype_EDIT_EXISTING_PROFILE";
+// import { build_collection_name } from "../../../../events/build_collection_name";
+// import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const steps = [Step1, Step2, Step3, Step4, Step5];
 
 const Questionnaire = () => {
-    const userData = useUserData();
+  const userData = useUserData();
   const [activeStep, setActiveStep] = useState(0);
   const topRef = useRef(null);
   const location = useLocation();
@@ -37,9 +38,10 @@ const Questionnaire = () => {
   const [isPDSSigned, setIsPDSSigned] = useState(false);
   const [isConfirmationSigned, setIsConfirmationSigned] = useState(false);
   const patient = location.state.patient;
-  const userId = userData && userData.user_id;
+  const userId = userData && userData.data.user_id;
   const local_utc_date_time = location.state.local_utc_date_time;
-  const { geolocation } = useGeolocation();
+  const geolocation = useGeolocation();
+  const surveyType = patient && patient.intervention_type;
 
   const geoCoords = geolocation && {
     latitude: geolocation.latitude,
@@ -72,79 +74,59 @@ const Questionnaire = () => {
     } else {
       sendForm(true);
       console.log(
-        subtype_INTERVENTION_SURVEY_A(
-          local_utc_date_time,
+        subtype_EDIT_EXISTING_PROFILE(
           userId && userId,
-          patient.patient_info.patient_id,
-          filter_patient_info_values(values),
-          geoCoords
+          geoCoords,
+          filter_patient_info_values(values)
+        )
+      );
+      console.log(subtype_PDS_PROGRAM(userId, geoCoords, pdsSign));
+      console.log(
+        subtype_INTERVENTION(
+          userId && userId,
+          geoCoords,
+          patient.patient_info.user_id,
+          surveyType,
+          local_utc_date_time,
+          filter_intervention_survey_values(values)
         )
       );
       console.log(
-        subtype_INTERVENTION_SURVEY_B(
-          local_utc_date_time,
-          userId && userId,
-          patient.patient_info.patient_id,
-          pdsSign,
-          geoCoords
+        subtype_PATIENT_VALIDATION_OF_INTERVENTION(
+          userId,
+          geoCoords,
+          confirmationSign
         )
       );
-      console.log(
-        subtype_INTERVENTION_SURVEY_C(
-          local_utc_date_time,
-          userId && userId,
-          patient.patient_info.patient_id,
-          filter_intervention_survey_values(values),
-          geoCoords
-        )
-      );
-      console.log(
-        subtype_INTERVENTION_SURVEY_D(
-          local_utc_date_time,
-          userId && userId,
-          patient.patient_info.patient_id,
-          confirmationSign,
-          geoCoords
-        )
-      );
-      // push_new_event_doc_into_FIRESTORE_collection(
-      //   build_collection_name("INTERVENTION"),
-      //   subtype_INTERVENTION_SURVEY_A(
-      //     local_utc_date_time,
+      // push_new_document_into_FIRESTORE(
+      //   build_collection_name("USER_PROFILE"),
+      //   subtype_EDIT_EXISTING_PROFILE(
       //     userId && userId,
-      //     patient.patient_info.patient_id,
-      //     filter_patient_info_values(values),
-      //     geoCoords
+      //     geoCoords,
+      //     filter_patient_info_values(values)
       //   )
       // );
-      // push_new_event_doc_into_FIRESTORE_collection(
-      //   build_collection_name("INTERVENTION"),
-      //   subtype_INTERVENTION_SURVEY_B(
-      //     local_utc_date_time,
+      // push_new_document_into_FIRESTORE(
+      //   build_collection_name("LEGAL"),
+      //   subtype_PDS_PROGRAM(userId, geoCoords, pdsSign)
+      // );
+      // push_new_document_into_FIRESTORE(
+      //   build_collection_name("SURVEY"),
+      //   subtype_INTERVENTION(
       //     userId && userId,
-      //     patient.patient_info.patient_id,
-      //     pdsSign,
-      //     geoCoords
+      //     geoCoords,
+      //     patient.patient_info.user_id,
+      //     surveyType,
+      //     local_utc_date_time,
+      //     filter_intervention_survey_values(values)
       //   )
       // );
-      // push_new_event_doc_into_FIRESTORE_collection(
-      //   build_collection_name("INTERVENTION"),
-      //   subtype_INTERVENTION_SURVEY_C(
-      //     local_utc_date_time,
-      //     userId && userId,
-      //     patient.patient_info.patient_id,
-      //     filter_intervention_survey_values(values),
-      //     geoCoords
-      //   )
-      // );
-      // push_new_event_doc_into_FIRESTORE_collection(
-      //   build_collection_name("INTERVENTION"),
-      //   subtype_INTERVENTION_SURVEY_D(
-      //     local_utc_date_time,
-      //     userId && userId,
-      //     patient.patient_info.patient_id,
-      //     confirmationSign,
-      //     geoCoords
+      // push_new_document_into_FIRESTORE(
+      //   build_collection_name("LEGAL"),
+      //   subtype_PATIENT_VALIDATION_OF_INTERVENTION(
+      //     userId,
+      //     geoCoords,
+      //     confirmationSign
       //   )
       // );
     }

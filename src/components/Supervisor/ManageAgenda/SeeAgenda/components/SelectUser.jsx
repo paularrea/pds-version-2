@@ -11,6 +11,7 @@ import {
 // import Autocomplete from "@mui/material/Autocomplete";
 
 const SelectUser = ({ data, label, onChange, value }) => {
+
   return (
     <ThemeProvider theme={blue_pds}>
       <FormControl variant="outlined" style={{ marginBottom: "2rem" }}>
@@ -24,8 +25,8 @@ const SelectUser = ({ data, label, onChange, value }) => {
         >
           {data &&
             data.map((user, key) => (
-              <MenuItem key={key} value={user.community_worker_id}>
-                {user.community_worker_name_and_email}
+              <MenuItem key={key} value={user.user_id}>
+                {user.concatenated_name}
               </MenuItem>
             ))}
         </Select>

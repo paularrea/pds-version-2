@@ -7,15 +7,11 @@ const subtype_LOGIN = (userId, geoCoords) => {
     event_type: "USER_INTERACTION",
     event_subtype: "LOGIN",
     device_geolocation_coords: geoCoords,
-    content: {
-      list_of_supervisor_ids: ["", ""],
-      community_worker_id: userId,
-      patient_id: null,
-    },
+    content: "None",
   };
-  const login_event_obj = Object.assign(event_obj, template_obj);
+  const login_obj = Object.assign(event_obj, template_obj);
 
-  return login_event_obj;
+  return login_obj;
 };
 
 export default subtype_LOGIN;

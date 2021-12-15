@@ -7,10 +7,10 @@ const SupervisorHomePage = () => {
   const context = useUserData();
   return (
     <>
-      {context.data ? (
+      {context.localStorageData ? (
         <>
-          <WelcomeMessage data={context.data} />
-          <NotificationsList data={context.data} />
+          <WelcomeMessage data={context.localStorageData} />
+          <NotificationsList data={context.localStorageData} />
         </>
       ) : (
         "data not loaded..."
