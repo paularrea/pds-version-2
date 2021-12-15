@@ -1,5 +1,5 @@
 import React from "react";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import phoneIcon from "../../../images/icons/phone.png";
 import Button from "./Button";
 import subtype_PHONE_CALL from "../../../events/type_USER_INTERACTION/subtype_PHONE_CALL";
@@ -11,8 +11,8 @@ const CallButton = (props) => {
   const context = useUserData();
   const geolocation = useGeolocation();
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
 
   const userId = context.data && context.data.user_id;
@@ -27,8 +27,7 @@ const CallButton = (props) => {
         props.prefixNumber,
         props.phoneNumber,
         geoCoords
-      ),
-      props
+      )
     );
     // push_new_document_into_FIRESTORE(
     //   build_collection_name("USER_INTERACTION"),

@@ -10,7 +10,7 @@ import { fixed_header, header, img } from "../form.module.scss";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import FormButtons from "./components/FormButtons";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import "../mui.css";
 import { useUserData } from "../../../../context/UserContext";
 import subtype_POST_INTERVENTION from "../../../../events/type_SURVEY/subtype_POST_INTERVENTION";
@@ -31,8 +31,8 @@ const Autoevaluation = () => {
   const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
 
   useEffect(() => {

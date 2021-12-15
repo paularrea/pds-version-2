@@ -14,7 +14,7 @@ import Step4 from "./steps/Step4";
 import Step5 from "./steps/Step5";
 import FormButtons from "./components/FormButtons";
 import "../mui.css";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import filter_patient_info_values from "./components/functions/filter_patient_info_values";
 import filter_intervention_survey_values from "./components/functions/filter_intervention_survey_values";
 import { useUserData } from "../../../../context/UserContext";
@@ -44,8 +44,8 @@ const Questionnaire = () => {
   const surveyType = patient && patient.intervention_type;
 
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
 
   useEffect(() => {

@@ -15,7 +15,7 @@ import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
 import { Redirect } from "react-router";
 import subtype_CONFIRMED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED";
 import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import { useUserData } from "../../../../../../context/UserContext";
 // import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 // import { build_collection_name } from "../../../../../../events/build_collection_name";
@@ -27,8 +27,8 @@ const ConfirmInterventionForm = ({ row }) => {
   const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
   
   const availableTimesList =

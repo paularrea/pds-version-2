@@ -12,7 +12,7 @@ import subtype_USER_VISITS_FRONTEND_SECTION from "../../../../../events/type_USE
 import { build_collection_name } from "../../../../../events/build_collection_name";
 // import push_new_document_into_FIRESTORE from "../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 import { useUserData } from "../../../../../context/UserContext";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 
 const Dropdown = ({ date, listOfEvents, userType, dayIndex }) => {
   const [error, setError] = useState(null);
@@ -22,8 +22,8 @@ const Dropdown = ({ date, listOfEvents, userType, dayIndex }) => {
 
   const geolocation = useGeolocation();
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
 
   const openClose = () => {

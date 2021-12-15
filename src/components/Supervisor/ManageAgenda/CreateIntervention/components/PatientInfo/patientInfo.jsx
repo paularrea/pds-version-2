@@ -5,9 +5,9 @@ import styles from "./patientInfo.module.scss";
 import CallButton from "../../../../../GeneralComponents/Button/CallButton";
 
 const PatientInfo = ({ patientId, linkPatientsInfo, setCommunityWorkerId }) => {
-  const patientInfoValues = linkPatientsInfo && linkPatientsInfo.filter(
-    (item) => item.user_id === patientId
-  )[0];
+  const patientInfoValues =
+    linkPatientsInfo &&
+    linkPatientsInfo.filter((item) => item.user_id === patientId)[0];
 
   useEffect(() => {
     setCommunityWorkerId(patientInfoValues.linked_community_workers[0].user_id);
@@ -39,6 +39,7 @@ const PatientInfo = ({ patientId, linkPatientsInfo, setCommunityWorkerId }) => {
           <CallButton
             prefixNumber={patientInfoValues.phone_country_code_num}
             phoneNumber={patientInfoValues.phone_num}
+            patientId={patientId}
           />
         </div>
       </div>

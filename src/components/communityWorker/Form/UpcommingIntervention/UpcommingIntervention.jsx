@@ -10,7 +10,7 @@ import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import FormButtons from "./components/FormButtons";
 import "../mui.css";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import subtype_SUGGESTED_BY_HUMAN from "../../../../events/type_AGENDA/subtype_SUGGESTED_BY_HUMAN";
 import { useUserData } from "../../../../context/UserContext";
 // import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
@@ -29,8 +29,8 @@ const UpcommingIntervention = () => {
   const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
 
   useEffect(() => {

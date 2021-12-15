@@ -12,7 +12,7 @@ import ButtonToModal from "../../../../../GeneralComponents/Modal/Modal";
 import subtype_CONFIRMED_MODIFIED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_MODIFIED";
 import subtype_CONFIRMED_ELIMINATED from "../../../../../../events/type_AGENDA/subtype_CONFIRMED_ELIMINATED";
 import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import { useUserData } from "../../../../../../context/UserContext";
 import { useHistory } from "react-router-dom";
 // import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
@@ -28,8 +28,8 @@ const EditWorker = ({ intervention, showDetails }) => {
   const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
   const patient = intervention && intervention;
   const userId = context && context.data.user_id;

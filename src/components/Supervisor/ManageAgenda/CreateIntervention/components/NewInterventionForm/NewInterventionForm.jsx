@@ -12,7 +12,7 @@ import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import FormButtons from "./components/FormButtons";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 // import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 // import { build_collection_name } from "../../../../../../events/build_collection_name";
 
@@ -28,8 +28,8 @@ const NewInterventionForm = ({ data }) => {
   const geolocation = useGeolocation();
 
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
 
   const userId = data && data.user_id;

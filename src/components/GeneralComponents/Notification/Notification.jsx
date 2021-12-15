@@ -3,7 +3,7 @@ import { container, icon } from "./notification.module.scss";
 import bell from "../../../images/icons/bell.png";
 import alert from "../../../images/icons/alert.png";
 import { useUserData } from "../../../context/UserContext";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import subtype_NOTIFICATION_ACKNOWLEDGED from "../../../events/type_USER_INTERACTION/subtype_NOTIFICATION_ACKNOWLEDGED";
 import { build_collection_name } from "../../../events/build_collection_name";
 // import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
@@ -12,14 +12,13 @@ const Notification = (props) => {
   const context = useUserData();
   const geolocation = useGeolocation();
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
 
   const notificationId =
     props.notification && props.notification.notification_id;
 
-  console.log(geoCoords);
 
   const notificationAknowledgedEvent = () => {
     props.onRemove(notificationId);

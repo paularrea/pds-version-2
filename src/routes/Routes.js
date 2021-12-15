@@ -26,60 +26,60 @@ const Routes = () => {
         <Router>
           <Switch>
             <Route path="/login" component={Login} />
-            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/" comp={Home} />
             {/* COMMUNITY WORKER ROUTES */}
-            <PrivateRoute path="/pds-agenda/:id" component={DetailPage} />
-            <PrivateRoute path="/questionnaire" component={Questionnaire} />
-            <PrivateRoute path="/autoevaluation" component={Autoevaluation} />
+            <PrivateRoute path="/pds-agenda/:id" comp={DetailPage} />
+            <PrivateRoute path="/questionnaire" comp={Questionnaire} />
+            <PrivateRoute path="/autoevaluation" comp={Autoevaluation} />
             <PrivateRoute
               path="/upcomming-intervention"
-              component={UpcommingIntervention}
+              comp={UpcommingIntervention}
             />
-            <PrivateRoute path="/success" component={SuccessPage} />
+            <PrivateRoute path="/success" comp={SuccessPage} />
 
             {/* SUPERVISOR ROUTES */}
             <RouteWrapper
               exact
               path="/supervisor"
-              component={SupervisorHomePage}
+              comp={SupervisorHomePage}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
               exact
               path="/gestionar-agenda"
-              component={GestionarAgenda}
+              comp={GestionarAgenda}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
               exact
               path="/dashboard-pds"
-              component={DashboardPDS}
+              comp={DashboardPDS}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
               exact
               path="/dashboard-pacientes"
-              component={DashboardPacientes}
+              comp={DashboardPacientes}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
               path="/gestionar-agenda/agenda"
-              component={SeeAgenda}
+              comp={SeeAgenda}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
               path="/gestionar-agenda/intervenciones-pendientes"
-              component={ConfirmIntervention}
+              comp={ConfirmIntervention}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
               path="/gestionar-agenda/nueva-intervencion"
-              component={CreateIntervention}
+              comp={CreateIntervention}
               layout={SupervisorNavigation}
             />
             <RouteWrapper
               path="/gestionar-agenda/create-form-success"
-              component={SuccessPage}
+              comp={SuccessPage}
               layout={SupervisorNavigation}
             />
           </Switch>
@@ -89,7 +89,7 @@ const Routes = () => {
   );
 };
 
-function RouteWrapper({ component: Component, layout: Layout, ...rest }) {
+function RouteWrapper({ comp: Component, layout: Layout, ...rest }) {
   return (
     <Route
       {...rest}

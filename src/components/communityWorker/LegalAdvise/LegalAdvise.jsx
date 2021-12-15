@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../GeneralComponents/Button/Button";
 import { container } from "./legal.module.scss";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
 import { useUserData } from "../../../context/UserContext";
 import subtype_LEGAL_DISCLAIMER from "../../../events/type_LEGAL/subtype_LEGAL_DISCLAIMER";
 import { build_collection_name } from "../../../events/build_collection_name";
@@ -11,8 +11,8 @@ const LegalAdvise = ({ legalAdviceAccepted, setLegalAdviceAccepted }) => {
   const context = useUserData();
   const geolocation = useGeolocation();
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
   const handleAccept = () => {
     setLegalAdviceAccepted(true);

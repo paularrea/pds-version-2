@@ -35,7 +35,7 @@ const CreateIntervention = () => {
     error && console.log(error);
     getPatientFunction();
     setLoaded(true);
-  }, [linkedPatientsIds, context, error]);
+  }, [linkedPatientsIds, error]);
 
   console.log(context.data);
 

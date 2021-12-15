@@ -3,7 +3,8 @@ import subtype_LOGIN from "../events/type_USER_INTERACTION/subtype_LOGIN";
 import subtype_LOGOUT from "../events/type_USER_INTERACTION/subtype_LOGOUT";
 import { build_collection_name } from "../events/build_collection_name";
 import { firebase } from "./FIREBASE_credentials";
-import useGeolocation from "react-hook-geolocation";
+import { useGeolocation } from "rooks";
+// import useGeolocation from "react-hook-geolocation";
 // import push_new_document_into_FIRESTORE from "../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const authContext = createContext();
@@ -15,13 +16,12 @@ const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
   const geolocation = useGeolocation();
   const geoCoords = geolocation && {
-    latitude: geolocation.latitude,
-    longitude: geolocation.longitude,
+    latitude: geolocation.lat,
+    longitude: geolocation.lng,
   };
-
-  console.log(geoCoords)
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
