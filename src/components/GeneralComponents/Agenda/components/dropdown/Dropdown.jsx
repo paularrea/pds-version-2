@@ -10,7 +10,7 @@ import {
 } from "./dropdown.module.scss";
 import subtype_USER_VISITS_FRONTEND_SECTION from "../../../../../events/type_USER_INTERACTION/subtype_USER_VISITS_FRONTEND_SECTION";
 import { build_collection_name } from "../../../../../events/build_collection_name";
-// import push_new_document_into_FIRESTORE from "../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import push_new_document_into_FIRESTORE from "../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 import { useUserData } from "../../../../../context/UserContext";
 import { useGeolocation } from "rooks";
 
@@ -38,14 +38,14 @@ const Dropdown = ({ date, listOfEvents, userType, dayIndex }) => {
           geoCoords
         ))
     );
-    // push_new_document_into_FIRESTORE(
-    //   build_collection_name("USER_INTERACTION"),
-    //   subtype_USER_VISITS_FRONTEND_SECTION(
-    //     context.data.user_id,
-    //     dayIndex,
-    //     geoCoords
-    //   )
-    // );
+    push_new_document_into_FIRESTORE(
+      build_collection_name("USER_INTERACTION"),
+      subtype_USER_VISITS_FRONTEND_SECTION(
+        context.data.user_id,
+        dayIndex,
+        geoCoords
+      )
+    );
   };
 
   useEffect(() => {

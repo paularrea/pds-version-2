@@ -13,8 +13,8 @@ import Step2 from "./steps/Step2";
 import Step3 from "./steps/Step3";
 import FormButtons from "./components/FormButtons";
 import { useGeolocation } from "rooks";
-// import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
-// import { build_collection_name } from "../../../../../../events/build_collection_name";
+import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import { build_collection_name } from "../../../../../../events/build_collection_name";
 
 const steps = [Step1, Step2, Step3];
 
@@ -66,16 +66,16 @@ const NewInterventionForm = ({ data }) => {
           geoCoords
         )
       );
-      // push_new_document_into_FIRESTORE(
-      //   build_collection_name("USER_INTERACTION"),
-      //   subtype_CONFIRMED(
-      //     userId,
-      //     patientId,
-      //     communityWorkerId,
-      //     values,
-      //     geoCoords
-      //   )
-      // );
+      push_new_document_into_FIRESTORE(
+        build_collection_name("USER_INTERACTION"),
+        subtype_CONFIRMED(
+          userId,
+          patientId,
+          communityWorkerId,
+          values,
+          geoCoords
+        )
+      );
       sendForm(true);
     }
   };

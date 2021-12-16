@@ -15,8 +15,8 @@ import { get_list_of_hours_by_day } from "../../../components/functions/get_list
 import { useGeolocation } from "rooks";
 import { useUserData } from "../../../../../../context/UserContext";
 import { useHistory } from "react-router-dom";
-// import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
-// import { build_collection_name } from "../../../../../../events/build_collection_name";
+import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import { build_collection_name } from "../../../../../../events/build_collection_name";
 
 const EditWorker = ({ intervention, showDetails }) => {
   const history = useHistory();
@@ -54,10 +54,10 @@ const EditWorker = ({ intervention, showDetails }) => {
     console.log(
       subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values, geoCoords)
     );
-    // push_new_document_into_FIRESTORE(
-    //   build_collection_name("USER_INTERACTION"),
-    //   subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values, geoCoords)
-    // );
+    push_new_document_into_FIRESTORE(
+      build_collection_name("USER_INTERACTION"),
+      subtype_CONFIRMED_MODIFIED(userId, confirmedEventId, values, geoCoords)
+    );
     history.push("/gestionar-agenda");
   };
 
@@ -65,10 +65,10 @@ const EditWorker = ({ intervention, showDetails }) => {
     console.log(
       subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId, geoCoords)
     );
-    // push_new_document_into_FIRESTORE(
-    //   build_collection_name("USER_INTERACTION"),
-    //   subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId, geoCoords)
-    // );
+    push_new_document_into_FIRESTORE(
+      build_collection_name("USER_INTERACTION"),
+      subtype_CONFIRMED_ELIMINATED(userId, confirmedEventId, geoCoords)
+    );
     history.push("/gestionar-agenda");
   };
 

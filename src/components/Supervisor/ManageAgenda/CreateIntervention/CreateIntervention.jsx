@@ -37,8 +37,6 @@ const CreateIntervention = () => {
     setLoaded(true);
   }, [linkedPatientsIds, error]);
 
-  console.log(context.data);
-
   return (
     <div className={container}>
       <div className={dropdown_container}>

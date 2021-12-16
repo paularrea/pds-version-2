@@ -14,8 +14,8 @@ import { useGeolocation } from "rooks";
 import "../mui.css";
 import { useUserData } from "../../../../context/UserContext";
 import subtype_POST_INTERVENTION from "../../../../events/type_SURVEY/subtype_POST_INTERVENTION";
-// import { build_collection_name } from "../../../../events/build_collection_name";
-// import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import { build_collection_name } from "../../../../events/build_collection_name";
+import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const steps = [Step1, Step2];
 
@@ -68,16 +68,16 @@ const Autoevaluation = () => {
           values
         )
       );
-      // push_new_document_into_FIRESTORE(
-      //   build_collection_name("SURVEY"),
-      //   subtype_POST_INTERVENTION(
-      //     userId && userId,
-      //     geoCoords,
-      //     patient.patient_info.user_id,
-      //     starting_time,
-      //     values
-      //   )
-      // );
+      push_new_document_into_FIRESTORE(
+        build_collection_name("SURVEY"),
+        subtype_POST_INTERVENTION(
+          userId && userId,
+          geoCoords,
+          patient.patient_info.user_id,
+          starting_time,
+          values
+        )
+      );
       sendForm(true);
     }
   };

@@ -5,7 +5,7 @@ import { useGeolocation } from "rooks";
 import { useUserData } from "../../../context/UserContext";
 import subtype_LEGAL_DISCLAIMER from "../../../events/type_LEGAL/subtype_LEGAL_DISCLAIMER";
 import { build_collection_name } from "../../../events/build_collection_name";
-// import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const LegalAdvise = ({ legalAdviceAccepted, setLegalAdviceAccepted }) => {
   const context = useUserData();

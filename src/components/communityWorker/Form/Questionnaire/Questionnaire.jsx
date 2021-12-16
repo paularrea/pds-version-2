@@ -22,8 +22,8 @@ import subtype_PDS_PROGRAM from "../../../../events/type_LEGAL/subtype_PDS_PROGR
 import subtype_PATIENT_VALIDATION_OF_INTERVENTION from "../../../../events/type_LEGAL/subtype_PATIENT_VALIDATION_OF_INTERVENTION";
 import subtype_INTERVENTION from "../../../../events/type_SURVEY/subtype_INTERVENTION";
 import subtype_EDIT_EXISTING_PROFILE from "../../../../events/type_USER_PROFILE/subtype_EDIT_EXISTING_PROFILE";
-// import { build_collection_name } from "../../../../events/build_collection_name";
-// import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import { build_collection_name } from "../../../../events/build_collection_name";
+import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const steps = [Step1, Step2, Step3, Step4, Step5];
 
@@ -98,37 +98,37 @@ const Questionnaire = () => {
           confirmationSign
         )
       );
-      // push_new_document_into_FIRESTORE(
-      //   build_collection_name("USER_PROFILE"),
-      //   subtype_EDIT_EXISTING_PROFILE(
-      //     userId && userId,
-      //     geoCoords,
-      //     filter_patient_info_values(values)
-      //   )
-      // );
-      // push_new_document_into_FIRESTORE(
-      //   build_collection_name("LEGAL"),
-      //   subtype_PDS_PROGRAM(userId, geoCoords, pdsSign)
-      // );
-      // push_new_document_into_FIRESTORE(
-      //   build_collection_name("SURVEY"),
-      //   subtype_INTERVENTION(
-      //     userId && userId,
-      //     geoCoords,
-      //     patient.patient_info.user_id,
-      //     surveyType,
-      //     local_utc_date_time,
-      //     filter_intervention_survey_values(values)
-      //   )
-      // );
-      // push_new_document_into_FIRESTORE(
-      //   build_collection_name("LEGAL"),
-      //   subtype_PATIENT_VALIDATION_OF_INTERVENTION(
-      //     userId,
-      //     geoCoords,
-      //     confirmationSign
-      //   )
-      // );
+      push_new_document_into_FIRESTORE(
+        build_collection_name("USER_PROFILE"),
+        subtype_EDIT_EXISTING_PROFILE(
+          userId && userId,
+          geoCoords,
+          filter_patient_info_values(values)
+        )
+      );
+      push_new_document_into_FIRESTORE(
+        build_collection_name("LEGAL"),
+        subtype_PDS_PROGRAM(userId, geoCoords, pdsSign)
+      );
+      push_new_document_into_FIRESTORE(
+        build_collection_name("SURVEY"),
+        subtype_INTERVENTION(
+          userId && userId,
+          geoCoords,
+          patient.patient_info.user_id,
+          surveyType,
+          local_utc_date_time,
+          filter_intervention_survey_values(values)
+        )
+      );
+      push_new_document_into_FIRESTORE(
+        build_collection_name("LEGAL"),
+        subtype_PATIENT_VALIDATION_OF_INTERVENTION(
+          userId,
+          geoCoords,
+          confirmationSign
+        )
+      );
     }
   };
 

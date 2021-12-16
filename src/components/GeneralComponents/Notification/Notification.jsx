@@ -6,7 +6,7 @@ import { useUserData } from "../../../context/UserContext";
 import { useGeolocation } from "rooks";
 import subtype_NOTIFICATION_ACKNOWLEDGED from "../../../events/type_USER_INTERACTION/subtype_NOTIFICATION_ACKNOWLEDGED";
 import { build_collection_name } from "../../../events/build_collection_name";
-// import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const Notification = (props) => {
   const context = useUserData();
@@ -30,14 +30,14 @@ const Notification = (props) => {
         geoCoords
       )
     );
-    // push_new_document_into_FIRESTORE(
-    //   build_collection_name("USER_INTERACTION"),
-    //   subtype_NOTIFICATION_ACKNOWLEDGED(
-    //     context.data.user_id,
-    //     notificationId,
-    //     geoCoords
-    //   )
-    // );
+    push_new_document_into_FIRESTORE(
+      build_collection_name("USER_INTERACTION"),
+      subtype_NOTIFICATION_ACKNOWLEDGED(
+        context.data.user_id,
+        notificationId,
+        geoCoords
+      )
+    );
   };
 
   return (

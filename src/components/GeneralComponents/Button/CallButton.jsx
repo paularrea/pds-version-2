@@ -5,7 +5,7 @@ import Button from "./Button";
 import subtype_PHONE_CALL from "../../../events/type_USER_INTERACTION/subtype_PHONE_CALL";
 import { build_collection_name } from "../../../events/build_collection_name";
 import { useUserData } from "../../../context/UserContext";
-// import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import push_new_document_into_FIRESTORE from "../../../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const CallButton = (props) => {
   const context = useUserData();
@@ -29,16 +29,16 @@ const CallButton = (props) => {
         geoCoords
       )
     );
-    // push_new_document_into_FIRESTORE(
-    //   build_collection_name("USER_INTERACTION"),
-    //   subtype_PHONE_CALL(
-    //     userId,
-    //     patientId,
-    //     props.prefixNumber,
-    //     props.phoneNumber,
-    //     geoCoords
-    //   )
-    // );
+    push_new_document_into_FIRESTORE(
+      build_collection_name("USER_INTERACTION"),
+      subtype_PHONE_CALL(
+        userId,
+        patientId,
+        props.prefixNumber,
+        props.phoneNumber,
+        geoCoords
+      )
+    );
   };
 
   return (

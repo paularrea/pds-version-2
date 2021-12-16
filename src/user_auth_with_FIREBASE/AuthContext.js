@@ -4,8 +4,7 @@ import subtype_LOGOUT from "../events/type_USER_INTERACTION/subtype_LOGOUT";
 import { build_collection_name } from "../events/build_collection_name";
 import { firebase } from "./FIREBASE_credentials";
 import { useGeolocation } from "rooks";
-// import useGeolocation from "react-hook-geolocation";
-// import push_new_document_into_FIRESTORE from "../FIRESTORE/push_new_document_into_FIRESTORE";
+import push_new_document_into_FIRESTORE from "../FIRESTORE/push_new_document_into_FIRESTORE";
 
 const authContext = createContext();
 

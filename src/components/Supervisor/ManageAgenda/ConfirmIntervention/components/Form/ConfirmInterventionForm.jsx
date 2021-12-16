@@ -17,8 +17,8 @@ import subtype_CONFIRMED from "../../../../../../events/type_AGENDA/subtype_CONF
 import { get_list_of_hours_by_day } from "../../../components/functions/get_list_of_hours_by_day";
 import { useGeolocation } from "rooks";
 import { useUserData } from "../../../../../../context/UserContext";
-// import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
-// import { build_collection_name } from "../../../../../../events/build_collection_name";
+import push_new_document_into_FIRESTORE from "../../../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import { build_collection_name } from "../../../../../../events/build_collection_name";
 
 const ConfirmInterventionForm = ({ row }) => {
   const userData = useUserData();
@@ -56,17 +56,17 @@ const ConfirmInterventionForm = ({ row }) => {
         suggestedEventId
       )
     );
-    // push_new_document_into_FIRESTORE(
-    //   build_collection_name("USER_INTERACTION"),
-    //   subtype_CONFIRMED(
-    //     userId,
-    //     patientId,
-    //     communityWorkerId,
-    //     values,
-    //     geoCoords,
-    //     suggestedEventId
-    //   )
-    // );
+    push_new_document_into_FIRESTORE(
+      build_collection_name("USER_INTERACTION"),
+      subtype_CONFIRMED(
+        userId,
+        patientId,
+        communityWorkerId,
+        values,
+        geoCoords,
+        suggestedEventId
+      )
+    );
     sendForm(true);
   };
 

@@ -13,8 +13,8 @@ import "../mui.css";
 import { useGeolocation } from "rooks";
 import subtype_SUGGESTED_BY_HUMAN from "../../../../events/type_AGENDA/subtype_SUGGESTED_BY_HUMAN";
 import { useUserData } from "../../../../context/UserContext";
-// import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
-// import { build_collection_name } from "../../../../events/build_collection_name";
+import push_new_document_into_FIRESTORE from "../../../../FIRESTORE/push_new_document_into_FIRESTORE";
+import { build_collection_name } from "../../../../events/build_collection_name";
 
 const steps = [Step1, Step2];
 
@@ -65,15 +65,15 @@ const UpcommingIntervention = () => {
           values
         )
       );
-      // push_new_document_into_FIRESTORE(
-      //   build_collection_name("AGENDA"),
-      //   subtype_SUGGESTED_BY_HUMAN(
-      //     userId && userId,
-      //     patient.patient_info.user_id,
-      //     geoCoords,
-      //     values
-      //   )
-      // );
+      push_new_document_into_FIRESTORE(
+        build_collection_name("AGENDA"),
+        subtype_SUGGESTED_BY_HUMAN(
+          userId && userId,
+          patient.patient_info.user_id,
+          geoCoords,
+          values
+        )
+      );
       sendForm(true);
     }
   };
