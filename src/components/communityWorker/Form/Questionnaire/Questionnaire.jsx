@@ -133,11 +133,11 @@ const Questionnaire = () => {
   };
 
   const initialValues = {
-    patientFirstName: patient.patient_info.patient_first_name,
-    patientMiddleName: patient.patient_info.patient_middle_name,
-    patientLastName: patient.patient_info.patient_last_name,
-    patientSecondLastName: patient.patient_info.patient_second_last_name,
-    patientPhone: patient.patient_info.patient_phone_num,
+    patientFirstName: patient.patient_info.first_name,
+    patientMiddleName: patient.patient_info.middle_name,
+    patientLastName: patient.patient_info.last_name,
+    patientSecondLastName: patient.patient_info.second_last_name,
+    patientPhone: patient.patient_info.phone_num,
     patientCountry: patient.patient_info.residence_country_name,
     patientCity: patient.patient_info.residence_city,
     patientAddress: patient.patient_info.residence_address,
